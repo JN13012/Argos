@@ -1,8 +1,8 @@
 # ARGOS — Statut du projet
 
-**Version :** 1.0  
+**Version :** 1.1  
 **Statut :** canonique  
-**Date de situation :** 27 juillet 2026  
+**Date de situation :** 28 juillet 2026  
 **Phase :** préparation de la documentation canonique avant développement
 
 ---
@@ -45,13 +45,24 @@ Argos Arena est un projet séparé et n’est pas une dépendance d’Argos.
 - dépendance à TryHackMe et Hack The Box écartée pour l’automatisation et les  
     benchmarks sans autorisation spécifique ;
     
-- Product Brief mis à jour en version 2.4 ;
+- V0 interne simplifiée et découpée en cinq incréments ;
     
-- manifeste canonique créé ;
+- chaînes Web/API, réseau/Linux et Windows/Active Directory rendues obligatoires  
+    dans la V0 avec une profondeur limitée ;
     
-- présent statut créé ;
+- audit de code limité intégré à la chaîne Web/API de la V0 et AppSec approfondi  
+    reporté à la V1 ;
     
-- ancien guide de travail classé comme archive non canonique.
+- autonomie complète de la V0 réservée aux environnements contrôlés et  
+    préautorisés ;
+    
+- Product Brief mis à jour en version 2.5 ;
+    
+- manifeste canonique mis à jour en version 1.1 ;
+    
+- présent statut mis à jour en version 1.1 ;
+    
+- ancien guide de travail déclaré retiré du corpus et absent du dépôt.
     
 
 ---
@@ -64,7 +75,10 @@ Argos Arena est un projet séparé et n’est pas une dépendance d’Argos.
     
 - deux expériences : Guidée et Experte ;
     
-- mêmes capacités, preuves et exigences de qualité dans les deux expériences ;
+- même moteur et même registre de capacités dans les deux expériences ;
+    
+- mêmes exigences de preuve et de qualité, avec davantage de protections et  
+    moins de réglages exposés dans l’expérience Guidée ;
     
 - possibilité de changer d’expérience pendant une mission ;
     
@@ -96,9 +110,35 @@ Argos Arena est un projet séparé et n’est pas une dépendance d’Argos.
 - registre des modifications et rollback.
     
 
+### V0 interne
+
+- fonctionnement local et mono-utilisateur ;
+    
+- réalisation ordonnée en cinq incréments : noyau sécurisé, Web/API,  
+    réseau/Linux, Windows/Active Directory, puis qualification ;
+    
+- trois chaînes verticales obligatoires, représentatives et volontairement  
+    étroites ;
+    
+- audit de code limité à la chaîne Web/API : lecture seule, secrets, dépendances,  
+    règles SAST ciblées et rapprochement avec une validation dynamique ;
+    
+- Copilote et Supervisée utilisables sur les trois chaînes ;
+    
+- Autonome dans le scope limité aux environnements contrôlés, isolés et  
+    préautorisés ;
+    
+- bug bounty limité à l’import des règles, au scope compilé, à l’exécution  
+    supervisée et à la préparation d’un rapport soumis par un humain ;
+    
+- OSINT technique, référentiel minimal, catalogue d’outils réduit et interface  
+    générique de benchmark.
+    
+
 ### Sécurité
 
-- mandat, exclusions, plafonds et conditions d’arrêt non contournables ;
+- contrôle déterministe et fermé par défaut du mandat, des exclusions, des  
+    plafonds et des conditions d’arrêt, indépendant des agents et des modèles ;
     
 - A4 explicitement autorisé et borné en mission professionnelle ;
     
@@ -152,7 +192,7 @@ Argos Arena est un projet séparé et n’est pas une dépendance d’Argos.
 |---|---|---|
 |Vision produit|Positionnement et décisions fondatrices|Terminé|
 |Corpus canonique|Scope, sécurité, architecture, agents, outils, benchmark et tests|En cours|
-|V0 interne|Noyau local mono-utilisateur et scénarios verticaux|Non commencé|
+|V0 interne|Noyau local et trois chaînes verticales réalisées en cinq incréments|Non commencé|
 |Pilote professionnel|Missions supervisées à faible risque|Non commencé|
 |MVP commercial|Utilisateurs externes et multi-client|Différé|
 |V1|Couverture offensive approfondie|Différé|
@@ -164,10 +204,10 @@ Argos Arena est un projet séparé et n’est pas une dépendance d’Argos.
 |   |   |   |
 |---|---|---|
 |Document|Version|État|
-|`00_PRODUCT_BRIEF_ET_PLAN_GLOBAL_ARGOS.md`|2.4|Canonique|
-|`CANONICAL_MANIFEST_ARGOS.md`|1.0|Canonique|
-|`PROJECT_STATUS_ARGOS.md`|1.0|Canonique|
-|`GUIDE_TRAVAIL_ARGOS_AVEC_CHATGPT.md`|2.0|Archivé, non canonique|
+|`00_PRODUCT_BRIEF_ET_PLAN_GLOBAL_ARGOS.md`|2.5|Canonique|
+|`CANONICAL_MANIFEST_ARGOS.md`|1.1|Canonique|
+|`PROJECT_STATUS_ARGOS.md`|1.1|Canonique|
+|`GUIDE_TRAVAIL_ARGOS_AVEC_CHATGPT.md`|—|Retiré du corpus et absent du dépôt|
 |`01_SCOPE_V0_ARGOS.md`|—|Prochaine création|
 |`02` à `15`|—|Planifiés|
 |`AGENTS.md`|—|À créer avant le développement, après les spécifications structurantes|
@@ -186,7 +226,10 @@ Ces questions seront décidées dans les documents spécialisés :
     
 - seuils chiffrés de réussite ;
     
-- profondeur Windows/AD obligatoire dans la V0 ;
+- vulnérabilités représentatives et profondeur exacte des chaînes Web/API,  
+    réseau/Linux et Windows/Active Directory ;
+    
+- langages, règles et outils exacts de l’audit de code limité ;
     
 - stack technique ;
     
@@ -215,28 +258,31 @@ Créer `01_SCOPE_V0_ARGOS.md`.
 
 Le document doit fixer :
 
-1. les scénarios verticaux obligatoires ;
+1. les cinq incréments et leurs portes de validation ;
     
-2. les capacités incluses et différées ;
+2. les trois scénarios verticaux obligatoires ;
     
-3. les entrées, sorties et états ;
+3. les capacités incluses, optionnelles et différées ;
     
-4. les parcours Guidé et Expert ;
+4. les entrées, sorties et états ;
     
-5. les niveaux d’autonomie ;
+5. les parcours Guidé et Expert ;
     
-6. les règles A0-A4 et E0-E2 ;
+6. les niveaux d’autonomie et la restriction du mode Autonome ;
     
-7. les outils minimaux ;
+7. les règles A0-A4 et E0-E2 ;
     
-8. les exigences du Scope Compiler, du modèle de cible et de l’Evidence  
+8. les outils minimaux et l’audit de code limité ;
+    
+9. les exigences du Scope Compiler, du modèle de cible et de l’Evidence  
     Ledger ;
     
-9. les exigences de sécurité prioritaires ;
+10. les exigences de sécurité prioritaires ;
     
-10. les benchmarks et critères d’acceptation chiffrés ;
+11. les benchmarks et critères d’acceptation chiffrés ;
     
-11. la définition de terminé de la V0 interne.
+12. la définition de terminé de la V0 interne et la frontière explicite avec la  
+    V1.
     
 
 Ne pas commencer le code ni créer `AGENTS.md` avant d’avoir les décisions  
@@ -246,9 +292,10 @@ structurantes nécessaires.
 
 ## 8. Risque principal
 
-Le risque principal n’est plus un manque de vision, mais une V0 trop large.
+Le risque principal n’est plus un manque de vision, mais la dérive du périmètre  
+pendant la rédaction du scope et l’implémentation.
 
-Chaque capacité devra donc être reliée à :
+La réduction de la V0 est désormais actée. Chaque capacité devra rester reliée à :
 
 - un scénario vertical ;
     
@@ -259,3 +306,7 @@ Chaque capacité devra donc être reliée à :
 - un benchmark ;
     
 - une décision claire : obligatoire, optionnelle ou différée.
+    
+
+Aucune capacité V1 ne doit être réintroduite dans la V0 sans une décision  
+canonique explicite et une analyse de son coût.

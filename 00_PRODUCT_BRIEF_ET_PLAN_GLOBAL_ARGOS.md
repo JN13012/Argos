@@ -1,8 +1,8 @@
 # ARGOS — Product Brief et plan global
 
-**Version :** 2.4  
+**Version :** 2.5  
 **Statut :** vision approuvée — spécification V0 en cours  
-**Date :** 27 juillet 2026  
+**Date :** 28 juillet 2026  
 **Prochaine étape :** `01_SCOPE_V0_ARGOS.md`
 
 ---
@@ -16,32 +16,27 @@ Il constitue la référence produit de plus haut niveau. Les documents spéciali
 préciseront le scope, les parcours, l’autorisation, la sécurité, l’architecture,  
 les agents, les outils, les benchmarks, les tests et l’implémentation.
 
-La version 2.4 :
+La version 2.5 conserve les décisions fondatrices de la version 2.4 et :
 
-- recentre Argos sur la cybersécurité offensive professionnelle ;
+- définit une V0 interne volontairement resserrée, réalisée en cinq incréments ;
     
-- sépare définitivement Argos d’Argos Arena ;
+- rend obligatoires trois chaînes verticales limitées : Web/API, réseau/Linux et  
+    Windows/Active Directory ;
     
-- remplace les anciens modes Learn, Lab et Operator par deux expériences  
-    d’interface, Guidée et Experte ;
+- introduit un audit de code limité dans la chaîne Web/API de la V0 et reporte  
+    l’AppSec approfondi à la V1 ;
     
-- distingue l’expérience, le cadre de mission, l’autonomie, la méthodologie et  
-    l’intensité ;
+- réserve l’autonomie complète de la V0 aux environnements contrôlés et  
+    préautorisés ;
     
-- ajoute le bug bounty et les VDP comme cadre de mission ;
+- limite le bug bounty de la V0 à l’import des règles, à la compilation du scope,  
+    à l’exécution supervisée et à la préparation d’un rapport soumis par un  
+    humain ;
     
-- interdit toute dépendance aux plateformes qui n’autorisent pas les bots ou  
-    agents IA ;
+- précise les méthodologies black box, grey box et white box ;
     
-- introduit le Scope Compiler, le modèle vivant de la cible, la matrice de  
-    couverture, l’Evidence Ledger et la validation indépendante ;
-    
-- distingue V0 interne, pilote professionnel, MVP commercial et V1 ;
-    
-- rend le respect du mandat et du scope techniquement non contournable ;
-    
-- renforce dès le socle la sécurité des agents, de la mémoire, des outils et de  
-    la chaîne d’approvisionnement.
+- corrige le statut de l’ancien guide de travail, retiré du corpus actif et  
+    absent du dépôt.
     
 
 Le statut « vision approuvée » signifie que la direction générale est figée.  
@@ -151,7 +146,8 @@ La supériorité recherchée devra être démontrée sur :
     
 - la qualité des preuves et des rapports ;
     
-- le respect absolu du scope ;
+- l’absence de violation du scope observée pendant les campagnes de  
+    qualification ;
     
 - la capacité à fonctionner localement et à changer de modèle ou d’outil.
     
@@ -226,8 +222,10 @@ Argos :
 - produit le même niveau de preuve et de rapport qu’en expérience Experte.
     
 
-L’expérience Guidée n’est pas un moteur simplifié. Elle masque la complexité  
-sans diminuer les capacités ou les exigences de qualité.
+L’expérience Guidée utilise le même moteur et le même registre de capacités que  
+l’expérience Experte. Elle conserve les mêmes exigences de preuve et de qualité,  
+mais applique des valeurs sûres, davantage d’approbations et une exposition plus  
+limitée des paramètres avancés.
 
 ### 5.2 Expérience Experte
 
@@ -316,11 +314,18 @@ kill switch restent toujours actifs.
 
 ### 6.4 Méthodologie
 
-- black box ;
+- **black box** : Argos reçoit uniquement les cibles et informations accessibles  
+    à un attaquant externe autorisé, sans compte ni connaissance interne ;
     
-- grey box ;
+- **grey box** : Argos reçoit des comptes, rôles, informations ou documents  
+    partiels afin de tester un point de vue utilisateur, partenaire ou employé ;
     
-- white box.
+- **white box** : Argos reçoit les éléments internes autorisés, tels que code  
+    source, architecture, configurations, comptes et documentation, afin  
+    d’effectuer une analyse plus profonde.
+
+Une mission peut combiner ces méthodologies selon les actifs. Elles décrivent le  
+niveau d’information fourni, pas l’autonomie d’Argos.
     
 
 ### 6.5 Intensité
@@ -506,6 +511,8 @@ Argos enregistre :
     
 - applications ;
     
+- dépôts de code, configurations et manifestes de dépendances autorisés ;
+    
 - systèmes Linux et Windows ;
     
 - domaines Active Directory ;
@@ -539,6 +546,8 @@ L’utilisateur choisit ce qu’Argos doit démontrer :
     
 - tester une logique métier ;
     
+- auditer du code source et relier les constats à la surface exposée ;
+    
 - produire des preuves et un rapport ;
     
 - retester des corrections.
@@ -555,6 +564,8 @@ Les techniques sont sélectionnées séparément des outils :
 - crawling et fuzzing ;
     
 - tests d’authentification et d’autorisation ;
+    
+- analyse statique, dépendances, secrets et configurations ;
     
 - injections ;
     
@@ -777,7 +788,37 @@ Argos :
 - chaînage et preuve d’impact.
     
 
-### 9.4 Linux, Windows et Active Directory
+### 9.4 Audit de code et sécurité applicative
+
+Dans sa vision complète, Argos peut :
+
+- importer un dépôt autorisé en lecture seule ;
+    
+- cartographier l’architecture, les routes, les contrôleurs, les autorisations et  
+    les flux de données ;
+    
+- rechercher les secrets, dépendances vulnérables et configurations dangereuses ;
+    
+- orchestrer des analyses SAST, SCA et Infrastructure as Code ;
+    
+- examiner les défauts de logique métier et de contrôle d’accès ;
+    
+- relier un constat statique à une route, un actif et une validation dynamique ;
+    
+- réduire les faux positifs par analyse contradictoire ;
+    
+- proposer des correctifs et des tests de non-régression ;
+    
+- retester les corrections.
+    
+
+La V0 limite cette capacité à la chaîne Web/API : lecture seule, recherche de  
+secrets, analyse de dépendances, règles SAST sur un petit nombre de langages et  
+rapprochement avec une validation dynamique lorsque celle-ci est sûre et  
+autorisée. L’AppSec multi-langage approfondi, l’IaC, le CI/CD et la génération de  
+correctifs sont reportés à la V1.
+
+### 9.5 Linux, Windows et Active Directory
 
 - énumération locale et distante ;
     
@@ -796,7 +837,7 @@ Argos :
 - preuves et nettoyage.
     
 
-### 9.5 Mots de passe et secrets
+### 9.6 Mots de passe et secrets
 
 - audit en ligne contrôlé ;
     
@@ -811,7 +852,7 @@ Argos :
 - utilisation temporaire et protégée des identifiants autorisés.
     
 
-### 9.6 Exploitation et post-exploitation
+### 9.7 Exploitation et post-exploitation
 
 - recherche et sélection d’exploits ;
     
@@ -836,7 +877,7 @@ Argos :
 - arrêt dès que l’impact autorisé est suffisamment démontré.
     
 
-### 9.7 Rapport, remédiation et retest
+### 9.8 Rapport, remédiation et retest
 
 - classification CWE, OWASP et MITRE ATT&CK ;
     
@@ -867,6 +908,7 @@ réécrit que lorsqu’un manque ou un avantage mesurable le justifie.
 |Réseau|Nmap, Naabu ou Masscan, Netcat, Socat|
 |Web/API|Katana, ffuf, Gobuster ou Feroxbuster, Nuclei, Nikto, sqlmap, curl, jq|
 |Proxy et analyse|OWASP ZAP, mitmproxy, Burp Suite selon licence|
+|Audit de code|Semgrep, Gitleaks, OSV-Scanner ou Trivy, analyseurs spécifiques aux langages|
 |Mots de passe|Hydra, Ncrack, Hashcat, John the Ripper|
 |Exploitation|Metasploit, Searchsploit, PoC contrôlés|
 |Linux|PEASS-ng et outils spécialisés|
@@ -1254,10 +1296,10 @@ Toute modification de cible produite par Argos est enregistrée avec :
 
 ## 14. Autorisation et sécurité
 
-### 14.1 Règles non contournables
+### 14.1 Application déterministe et fermée par défaut
 
-Dans toute mission professionnelle ou de bug bounty, Argos ne peut jamais  
-dépasser :
+Dans toute mission professionnelle ou de bug bounty, les limites suivantes sont  
+appliquées par un contrôle déterministe indépendant des agents et des modèles :
 
 - le mandat ou le règlement ;
     
@@ -1276,7 +1318,13 @@ dépasser :
 - les conditions d’arrêt.
     
 
-Une expérience Experte ou une autonomie élevée ne désactive pas ces limites.
+Une expérience Experte, un agent, un modèle ou une autonomie élevée ne peut pas  
+désactiver ces limites. Si une cible, une règle ou une autorisation ne peut pas  
+être résolue sans ambiguïté, l’action est refusée et la mission est suspendue si  
+nécessaire.
+
+Cette exigence est un objectif de sécurité vérifié en continu, pas l’affirmation  
+qu’Argos ne pourrait jamais contenir de défaut.
 
 ### 14.2 Classes d’action
 
@@ -1581,42 +1629,82 @@ sans consentement explicite et traitement adapté.
 ### 17.1 V0 interne
 
 Objectif : démontrer un noyau offensif de bout en bout, local, mono-utilisateur  
-et mesurable.
+et mesurable, sans prétendre couvrir exhaustivement chaque domaine.
 
-La V0 interne doit couvrir au minimum :
+La V0 conserve obligatoirement les fondations qui différencient Argos d’un  
+assemblage de scanners :
 
-- création d’une mission et compilation du scope ;
+- mission, autorisation, Scope Compiler et Scope Guard ;
     
-- expériences Guidée et Experte ;
+- politique déterministe, classes A0 à A4 et expositions E0 à E2 ;
     
-- autonomies Copilote, Supervisée et Autonome dans le scope ;
+- runners isolés, journal d’audit, pause et kill switch ;
     
-- modèle vivant de la cible et matrice de couverture ;
+- modèle vivant minimal de la cible et matrice de couverture minimale ;
     
-- une chaîne verticale Web/API ;
+- Evidence Ledger et validation indépendante ;
     
-- une chaîne verticale réseau/Linux ;
+- registre des modifications, nettoyage, rollback et retest ;
     
-- OSINT et reconnaissance nécessaires à ces chaînes ;
-    
-- validation indépendante ;
-    
-- Evidence Ledger ;
-    
-- rapport, nettoyage et retest ;
-    
-- import d’un programme de bug bounty en exécution supervisée ;
-    
-- interface de benchmark ;
-    
-- protections prioritaires d’Argos ;
-    
-- intégrité minimale des outils.
+- rapport professionnel et résultats reproductibles.
     
 
-Windows et Active Directory doivent être pris en compte dans l’architecture et  
-le registre de capacités, mais leur profondeur obligatoire pour la V0 sera  
-tranchée dans `01_SCOPE_V0_ARGOS.md` selon le coût des scénarios verticaux.
+Elle doit démontrer trois chaînes verticales obligatoires, volontairement  
+étroites :
+
+1. **Web/API** : cartographie, tests authentifiés simples, détection et validation  
+   d’au moins une vulnérabilité représentative, preuve, rapport et retest. Une  
+   analyse de code assistée limitée recherche secrets, dépendances et  
+   motifs SAST, puis relie le constat à une validation dynamique autorisée.
+2. **Réseau/Linux** : découverte, énumération, accès initial contrôlé, une  
+   élévation locale représentative, preuve, nettoyage et retest.
+3. **Windows/Active Directory** : énumération d’un petit domaine contrôlé,  
+   détection d’une faiblesse, puis une chaîne représentative d’élévation ou de  
+   mouvement latéral avec preuve minimale, nettoyage et retest.
+
+Les simplifications suivantes s’appliquent :
+
+- les expériences Guidée et Experte partagent une interface et un moteur ;  
+    l’expérience Experte révèle les paramètres avancés ;
+    
+- Copilote et Supervisée sont utilisables sur les trois chaînes ;
+    
+- Autonome dans le scope est limité aux environnements contrôlés, isolés et  
+    préautorisés pendant toute la V0 ;
+    
+- l’OSINT couvre uniquement la reconnaissance technique nécessaire aux scénarios ;
+    
+- le bug bounty couvre l’import des règles, la compilation du scope, l’exécution  
+    supervisée de la chaîne Web/API et la préparation d’un rapport ; la validation  
+    et la soumission finales restent humaines ;
+    
+- l’interface de benchmark est générique et validée sur les trois scénarios  
+    locaux, sans imposer de connecteur externe ;
+    
+- le référentiel est local, minimal et mis à jour manuellement ou par une  
+    synchronisation contrôlée ;
+    
+- une passerelle de modèles indépendante du fournisseur est prévue, sans routage  
+    multi-modèles avancé ;
+    
+- le catalogue d’outils est réduit, épinglé et limité aux besoins des trois  
+    scénarios.
+    
+
+La V0 est réalisée dans l’ordre suivant :
+
+1. **V0-I1 — Noyau sécurisé** : mission, scope, politique, runners, journal,  
+   Evidence Ledger, pause et kill switch.
+2. **V0-I2 — Web/API** : première chaîne complète et audit de code limité.
+3. **V0-I3 — Réseau/Linux** : deuxième chaîne complète.
+4. **V0-I4 — Windows/Active Directory** : troisième chaîne représentative dans  
+   un laboratoire contrôlé.
+5. **V0-I5 — Qualification** : expériences Guidée et Experte, rapports,  
+   benchmark, nettoyage, retest et critères chiffrés.
+
+Chaque incrément doit être fonctionnel, vérifiable et accepté avant le suivant.  
+Les scénarios exacts, preuves et seuils seront fixés dans  
+`01_SCOPE_V0_ARGOS.md`.
 
 ### 17.2 Pilote professionnel
 
@@ -1625,11 +1713,15 @@ humaine forte.
 
 Exigences supplémentaires :
 
-- Windows/Active Directory validé ;
+- qualification professionnelle des trois chaînes de la V0 sur des scénarios plus  
+    variés ;
+    
+- approfondissement ciblé de Windows/Active Directory sans prétendre à une  
+    couverture exhaustive ;
     
 - tests Web/API authentifiés multi-rôles ;
     
-- black, grey et white box ;
+- validation des parcours black, grey et white box dans les limites annoncées ;
     
 - gestion robuste des changements de règlement ;
     
@@ -1681,19 +1773,32 @@ Objectif : élargir la profondeur et la continuité opérationnelle.
 
 Capacités candidates :
 
-- couverture offensive réseau/AD plus profonde ;
+- couverture Web/API avancée, notamment GraphQL, WebSocket et logique métier  
+    complexe ;
+    
+- couverture réseau, Linux et Active Directory plus profonde, incluant des  
+    chaînes multi-étapes et des environnements plus grands ;
+    
+- audit de code multi-langage approfondi, SAST, SCA, Infrastructure as Code,  
+    CI/CD, correctifs assistés et tests de non-régression ;
+    
+- OSINT étendu aux personnes, organisations et fuites publiques ;
+    
+- Knowledge Sync complet ;
+    
+- SDK d’outils, playbooks et packs personnalisés ;
+    
+- routage multi-modèles avancé ;
+    
+- connecteurs vers des benchmarks externes autorisés ;
     
 - cloud, conteneurs et Kubernetes ;
     
 - mobile ;
     
-- AppSec et revue de code ;
-    
 - wireless et IoT ;
     
 - évaluation offensive continue ;
-    
-- génération et validation de correctifs ;
     
 - packs spécialisés.
     
@@ -1718,6 +1823,25 @@ l’excellence offensive d’Argos.
 - accès autonome à TryHackMe ou Hack The Box ;
     
 - soumission automatique de rapports bug bounty ;
+    
+- autonomie complète sur des cibles professionnelles réelles ;
+    
+- couverture Web/API exhaustive, logique métier complexe, GraphQL et WebSocket  
+    avancés ;
+    
+- grands environnements Active Directory, chaînes multi-étapes et mouvements  
+    latéraux complexes ;
+    
+- audit de code multi-langage approfondi, SCA et IaC complets, intégration CI/CD  
+    et génération automatique de correctifs ;
+    
+- OSINT approfondi sur les personnes, organisations et fuites ;
+    
+- Knowledge Sync complet et collecte massive de sources ;
+    
+- routage multi-modèles avancé, SDK public et packs personnalisés ;
+    
+- connecteurs complets vers les benchmarks externes ;
     
 - phishing et ingénierie sociale ;
     
@@ -1819,7 +1943,8 @@ Argos progresse uniquement si les résultats sont mesurés.
 
 La V0 interne ne sera pas considérée comme terminée tant que :
 
-- les scénarios obligatoires ne réussissent pas de bout en bout ;
+- les trois scénarios Web/API, réseau/Linux et Windows/Active Directory ne  
+    réussissent pas de bout en bout ;
     
 - aucune action ne dépasse le scope pendant les tests de qualification ;
     
@@ -1837,6 +1962,12 @@ La V0 interne ne sera pas considérée comme terminée tant que :
     contrôlée ;
     
 - l’expérience Experte permet de reprendre la main sans contourner la sécurité ;
+    
+- l’audit de code limité relie ses constats retenus à une preuve dynamique  
+    autorisée ou les marque explicitement comme non confirmés ;
+    
+- le niveau Autonome dans le scope reste techniquement limité aux environnements  
+    contrôlés et préautorisés ;
     
 - les outils sont versionnés, traçables et remplaçables ;
     
@@ -1917,7 +2048,8 @@ Les scénarios et seuils chiffrés seront fixés dans
 19. `19_ROADMAP_MODULES_ARGOS.md`
     
 
-`GUIDE_TRAVAIL_ARGOS_AVEC_CHATGPT.md` est archivé et non canonique.
+`GUIDE_TRAVAIL_ARGOS_AVEC_CHATGPT.md` est retiré du corpus actif et absent du  
+dépôt. Il n’a aucune autorité.
 
 ---
 
@@ -1930,6 +2062,9 @@ Les scénarios et seuils chiffrés seront fixés dans
 - Argos utilise un moteur unique.
     
 - Les deux expériences sont Guidée et Experte.
+    
+- Elles utilisent le même moteur et le même registre de capacités ; l’expérience  
+    Guidée applique davantage de protections et masque les réglages avancés.
     
 - Learn, Lab et Operator ne sont pas des modes.
     
@@ -1948,6 +2083,19 @@ Les scénarios et seuils chiffrés seront fixés dans
 - Argos ne dépend pas de plateformes interdisant les bots ou agents IA.
     
 - Black box, grey box et white box sont pris en charge.
+    
+- La V0 interne est réalisée en cinq incréments successifs et vérifiables.
+    
+- Les chaînes Web/API, réseau/Linux et Windows/Active Directory sont toutes trois  
+    obligatoires dans la V0, avec une profondeur volontairement limitée.
+    
+- L’audit de code limité appartient à la chaîne Web/API de la V0 ; l’AppSec  
+    approfondi est reporté à la V1.
+    
+- Dans la V0, Autonome dans le scope est réservé aux environnements contrôlés et  
+    préautorisés.
+    
+- Le bug bounty de la V0 reste supervisé, sans soumission automatique.
     
 - Les tests authentifiés multi-rôles font partie de la cible professionnelle.
     
@@ -1997,7 +2145,10 @@ Les sujets suivants ne remettent pas en cause la vision :
 
 - scénarios exacts et seuils de la V0 interne ;
     
-- profondeur Windows/AD obligatoire dans la V0 interne ;
+- vulnérabilités représentatives et profondeur exacte de chacune des trois  
+    chaînes obligatoires ;
+    
+- langages, règles et outils exacts de l’audit de code limité ;
     
 - stack frontend, backend et orchestrateur ;
     
@@ -2029,7 +2180,10 @@ Les sujets suivants ne remettent pas en cause la vision :
 Créer `01_SCOPE_V0_ARGOS.md` afin de transformer cette vision en exigences  
 vérifiables :
 
-- scénarios verticaux obligatoires ;
+- cinq incréments ordonnés ;
+    
+- trois scénarios verticaux obligatoires : Web/API, réseau/Linux et  
+    Windows/Active Directory ;
     
 - capacités obligatoires et différées ;
     
@@ -2042,6 +2196,8 @@ vérifiables :
 - classes d’action ;
     
 - outils minimaux ;
+    
+- audit de code limité et frontière avec l’AppSec V1 ;
     
 - exigences de sécurité ;
     

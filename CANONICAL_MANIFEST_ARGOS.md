@@ -1,8 +1,8 @@
 # ARGOS — Manifeste canonique
 
-**Version :** 1.0  
+**Version :** 1.1  
 **Statut :** canonique  
-**Date :** 27 juillet 2026
+**Date :** 28 juillet 2026
 
 ---
 
@@ -39,6 +39,7 @@ canonique d’Argos.
 |`DEFERRED`|Document volontairement reporté|
 |`ARCHIVED`|Historique conservé, sans autorité|
 |`SUPERSEDED`|Remplacé par une version ou un document plus récent|
+|`RETIRED`|Retiré du corpus et absent du dépôt actif|
 
 ---
 
@@ -47,10 +48,13 @@ canonique d’Argos.
 |   |   |   |   |
 |---|---|---|---|
 |Document|Version|Statut|Rôle|
-|`00_PRODUCT_BRIEF_ET_PLAN_GLOBAL_ARGOS.md`|2.4|`CANONICAL`|Vision, positionnement, limites et trajectoire|
-|`CANONICAL_MANIFEST_ARGOS.md`|1.0|`CANONICAL`|Versions, statuts, dépendances et ordre d’autorité|
-|`PROJECT_STATUS_ARGOS.md`|1.0|`CANONICAL`|État courant, décisions récentes, travail restant et prochaine étape|
-|`GUIDE_TRAVAIL_ARGOS_AVEC_CHATGPT.md`|2.0|`ARCHIVED`|Ancien workflow dépendant des chats, conservé uniquement pour historique|
+|`00_PRODUCT_BRIEF_ET_PLAN_GLOBAL_ARGOS.md`|2.5|`CANONICAL`|Vision, positionnement, limites et trajectoire|
+|`CANONICAL_MANIFEST_ARGOS.md`|1.1|`CANONICAL`|Versions, statuts, dépendances et ordre d’autorité|
+|`PROJECT_STATUS_ARGOS.md`|1.1|`CANONICAL`|État courant, décisions récentes, travail restant et prochaine étape|
+
+`GUIDE_TRAVAIL_ARGOS_AVEC_CHATGPT.md` est `RETIRED` : il est retiré du corpus  
+actif, absent du dépôt et sans autorité. Il ne doit pas être recréé ni utilisé  
+comme dépendance sans décision explicite.
 
 ---
 
@@ -152,6 +156,9 @@ modifier silencieusement une décision fondatrice.
     
 - `AGENTS.md` ne recopiera pas tout le corpus : il référencera les documents et  
     fixera les règles opérationnelles du dépôt.
+    
+- un document `RETIRED` absent du dépôt n’est pas présenté comme une archive  
+    disponible.
     
 
 ---
