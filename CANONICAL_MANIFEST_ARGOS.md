@@ -1,8 +1,8 @@
 # ARGOS — Manifeste canonique
 
-**Version :** 1.1  
+**Version :** 1.3\
 **Statut :** canonique  
-**Date :** 28 juillet 2026
+**Date :** 7 octobre 2026
 
 ---
 
@@ -49,8 +49,21 @@ canonique d’Argos.
 |---|---|---|---|
 |Document|Version|Statut|Rôle|
 |`00_PRODUCT_BRIEF_ET_PLAN_GLOBAL_ARGOS.md`|2.5|`CANONICAL`|Vision, positionnement, limites et trajectoire|
-|`CANONICAL_MANIFEST_ARGOS.md`|1.1|`CANONICAL`|Versions, statuts, dépendances et ordre d’autorité|
-|`PROJECT_STATUS_ARGOS.md`|1.1|`CANONICAL`|État courant, décisions récentes, travail restant et prochaine étape|
+|`CANONICAL_MANIFEST_ARGOS.md`|1.3|`CANONICAL`|Versions, statuts, dépendances et ordre d’autorité|
+|`PROJECT_STATUS_ARGOS.md`|1.3|`CANONICAL`|État courant, décisions récentes, travail restant et prochaine étape|
+|`01_SCOPE_V0_ARGOS.md`|1.0|`IN_PROGRESS`|Proposition de scope V0 existante, en attente de validation explicite|
+
+Les mises à jour 1.2 et 1.3 corrigent l'état des fichiers effectivement présents,
+ajoutent les documents de préparation GitHub et enregistrent le retrait du course
+pack ainsi que la revue des projets voisins. Elles ne valident pas le scope V0.
+
+Documents de présentation et de préparation, sans autorité sur le scope produit :
+
+- `README.md` : entrée du dépôt et distinction entre vision et code existant ;
+- `docs/ROADMAP.md` : proposition de progression pour une démo et un portfolio ;
+- `docs/REPOSITORY_REVIEW.md` : constat de préparation à la publication ;
+- `THIRD_PARTY_NOTICES.md` : suivi de provenance des éléments importés.
+- `docs/RELATED_PROJECTS.md` : sources d'inspiration et licences annoncées.
 
 `GUIDE_TRAVAIL_ARGOS_AVEC_CHATGPT.md` est `RETIRED` : il est retiré du corpus  
 actif, absent du dépôt et sans autorité. Il ne doit pas être recréé ni utilisé  
@@ -63,7 +76,7 @@ comme dépendance sans décision explicite.
 |   |   |   |   |
 |---|---|---|---|
 |Ordre|Document|Statut initial|Dépendances minimales|
-|1|`01_SCOPE_V0_ARGOS.md`|`PLANNED`|Product Brief|
+|1|`01_SCOPE_V0_ARGOS.md`|`IN_PROGRESS` — version 1.0 présente|Product Brief|
 |2|`02_PARCOURS_MISSION_ET_UTILISATEURS.md`|`PLANNED`|Product Brief, Scope V0|
 |3|`03_AUTORISATION_SCOPE_ET_RULES_OF_ENGAGEMENT.md`|`PLANNED`|Product Brief, Scope V0|
 |4|`04_THREAT_MODEL_ET_SECURITE_ARGOS.md`|`PLANNED`|Product Brief, Scope V0, Autorisation/RoE|
