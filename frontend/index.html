@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#030b13">
+  <meta name="color-scheme" content="dark">
+  <title>Argos — Accueil</title>
+  <link rel="icon" href="assets/argos-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="demo-data.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Aller au contenu</a>
+  <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <symbol id="i-shield" viewBox="0 0 24 24"><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></symbol>
+      <symbol id="i-eye-shield" viewBox="0 0 24 24"><path d="m12 2 9 3.5V12c0 6-9 10-9 10S3 18 3 12V5.5z"/><path d="M7 11.5s2-3 5-3 5 3 5 3-2 3-5 3-5-3-5-3Z"/><circle cx="12" cy="11.5" r="1.1"/></symbol>
+      <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="6" height="6" rx="1.3"/><rect x="15" y="3" width="6" height="6" rx="1.3"/><rect x="3" y="15" width="6" height="6" rx="1.3"/><rect x="15" y="15" width="6" height="6" rx="1.3"/></symbol>
+      <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><path d="M12 1v4m0 14v4M1 12h4m14 0h4"/></symbol>
+      <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18M5 7h14M5 17h14"/></symbol>
+      <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 6a2 2 0 0 1 2-2h5l2 3h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
+      <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9zM14 3v6h6M8 13h8M8 17h6"/></symbol>
+      <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20v-2a6 6 0 0 1 12 0v2M17 5a3 3 0 0 1 0 6m1 3a5 5 0 0 1 4 5"/></symbol>
+      <symbol id="i-gear" viewBox="0 0 24 24"><path d="m9 3-1 3-3 1-2 3 2 2-1 3 3 2 3-1 2 3 3-1 1-3 3-1 1-3-2-2 1-3-3-2-3 1-2-2z"/><circle cx="12" cy="11" r="3"/></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></symbol>
+      <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4"/></symbol>
+      <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 4h16v13H9l-5 4z"/><path d="M8 9h8M8 13h5"/></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+      <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
+      <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+      <symbol id="i-alert" viewBox="0 0 24 24"><path d="m12 3 10 18H2zM12 9v5M12 17v.1"/></symbol>
+      <symbol id="i-agent" viewBox="0 0 24 24"><path d="m12 2 9 5v10l-9 5-9-5V7z"/><rect x="7" y="8" width="10" height="8" rx="2"/><path d="M12 5v3M9 11v1M15 11v1M10 15h4"/></symbol>
+      <symbol id="i-clipboard" viewBox="0 0 24 24"><path d="M8 5H5v16h14V5h-3"/><rect x="8" y="3" width="8" height="5" rx="1"/><path d="m8 14 2 2 5-5"/></symbol>
+      <symbol id="i-terminal" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m6 9 4 3-4 3M13 15h5"/></symbol>
+      <symbol id="i-filter" viewBox="0 0 24 24"><path d="M3 5h18l-7 8v6l-4 2v-8z"/></symbol>
+      <symbol id="i-send" viewBox="0 0 24 24"><path d="m3 3 18 9-18 9 4-9zM7 12h14"/></symbol>
+      <symbol id="i-expand" viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></symbol>
+      <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+      <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3"/></symbol>
+      <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M4 16v5h16v-5"/></symbol>
+      <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+      <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7v.1"/></symbol>
+    </defs>
+  </svg>
+
+  <header class="topbar">
+    <button class="icon-button mobile-menu" id="menu-toggle" aria-label="Ouvrir la navigation" aria-controls="sidebar" aria-expanded="false"><svg class="icon"><use href="#i-menu"/></svg></button>
+    <a class="brand" href="#main-content" aria-label="Argos, accueil"><svg class="brand-mark"><use href="#i-eye-shield"/></svg><span>ARGOS</span></a>
+    <div class="environment"><span>Environnement</span><strong><i class="status-dot blue"></i>Démonstration</strong><svg class="icon"><use href="#i-chevron"/></svg></div>
+    <label class="global-search"><svg class="icon"><use href="#i-search"/></svg><input id="global-search" type="search" placeholder="Rechercher une mission, un constat, une preuve…" aria-label="Rechercher dans le dashboard" autocomplete="off"><kbd>Ctrl K</kbd></label>
+    <div class="header-actions">
+      <div class="notification-wrapper">
+        <button class="icon-button notification-button" id="notifications-toggle" aria-label="Notifications : 2 constats à revoir" aria-expanded="false" aria-controls="notifications"><svg class="icon"><use href="#i-bell"/></svg><span class="notification-count">2</span></button>
+        <div class="notification-popover" id="notifications" hidden><strong>À votre attention</strong><p>Deux constats de démonstration attendent une revue.</p><button class="text-button" data-open-mission>Voir la mission <svg class="icon"><use href="#i-arrow"/></svg></button></div>
+      </div>
+      <button class="icon-button" id="chat-focus" aria-label="Ouvrir l’assistant de démonstration"><svg class="icon"><use href="#i-chat"/></svg></button>
+      <div class="profile"><span class="profile-avatar">A</span><span><strong>Analyste</strong><small>Espace local</small></span></div>
+      <button class="primary-button new-mission" disabled title="La création de mission sera intégrée dans une prochaine page"><svg class="icon"><use href="#i-plus"/></svg>Nouvelle mission<span class="coming-soon">À venir</span></button>
+    </div>
+  </header>
+
+  <aside class="sidebar" id="sidebar" aria-label="Navigation principale">
+    <div class="nav-section-label">ESPACE DE TRAVAIL</div>
+    <nav class="navigation">
+      <a class="nav-item active" href="#main-content" aria-current="page"><svg class="icon"><use href="#i-grid"/></svg><span>Accueil</span><span class="active-dot"></span></a>
+      <button class="nav-item" disabled><svg class="icon"><use href="#i-target"/></svg><span>Red Team</span></button>
+      <button class="nav-item" disabled><svg class="icon"><use href="#i-globe"/></svg><span>OSINT</span></button>
+      <button class="nav-item" disabled><svg class="icon"><use href="#i-shield"/></svg><span>Blue Team</span></button>
+      <div class="nav-divider"></div>
+      <button class="nav-item" disabled><svg class="icon"><use href="#i-folder"/></svg><span>Preuves</span></button>
+      <button class="nav-item" disabled><svg class="icon"><use href="#i-file"/></svg><span>Rapports</span></button>
+      <button class="nav-item" disabled><svg class="icon"><use href="#i-users"/></svg><span>Agents</span></button>
+      <button class="nav-item" disabled><svg class="icon"><use href="#i-gear"/></svg><span>Paramètres</span></button>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="local-status"><span class="eyebrow">ENVIRONNEMENT LOCAL</span><strong><i class="status-dot"></i>MODE DÉMONSTRATION</strong><p>Explorez l’interface avec des données synthétiques.</p><button class="text-button" id="about-demo">À propos de la démo <svg class="icon"><use href="#i-arrow"/></svg></button></div>
+      <div class="sidebar-footer"><svg class="icon"><use href="#i-lock"/></svg><span>Argos Core <strong>0.1.0</strong></span></div>
+    </div>
+  </aside>
+  <button class="sidebar-backdrop" id="sidebar-backdrop" aria-label="Fermer la navigation" hidden></button>
+
+  <main id="main-content" class="workspace" tabindex="-1">
+    <div class="page-heading"><div><span class="page-eyebrow">ARGOS / ACCUEIL</span><h1>Vue d’ensemble</h1></div><div class="demo-pill"><span class="status-dot blue"></span>Données de démonstration</div></div>
+    <div class="dashboard-grid">
+      <div class="overview-column">
+        <section class="welcome-panel panel" aria-labelledby="welcome-title">
+          <div class="mascot-frame"><div class="mascot-aura"></div><img class="mascot" src="assets/argos-mascot.png" alt="Mascotte Argos, chien robotique aux yeux bleus" width="1024" height="1536"><div class="mascot-orbit"></div></div>
+          <div class="welcome-content"><h2 id="welcome-title">Bienvenue dans Argos <span class="welcome-wave" aria-hidden="true">✦</span></h2><p class="brand-promise">Observer. Comprendre. Agir.</p><p class="welcome-description">Gardez une vue claire sur vos missions et vos preuves.</p><div class="welcome-details"><div class="local-time"><span>Heure locale</span><strong id="local-clock">--:--:--</strong><small>Europe / Paris</small></div><div class="review-status"><span class="review-status-icon"><svg class="icon"><use href="#i-clipboard"/></svg></span><div><span>Revue des constats</span><strong>2 À EXAMINER</strong><small>Vos décisions restent au centre du parcours.</small></div></div></div></div>
+          <div class="summary-box"><div class="summary-title"><svg class="icon"><use href="#i-eye-shield"/></svg>VOTRE POINT DE SITUATION</div><p>Une mission de démonstration.<br>Deux constats en attente de revue.<br>Deux preuves locales associées.</p><button class="text-button" data-open-mission>Voir la mission <svg class="icon"><use href="#i-arrow"/></svg></button></div>
+        </section>
+
+        <section class="metrics-grid" aria-label="Indicateurs de démonstration">
+          <button class="metric-card panel" data-open-mission><span class="metric-label"><svg class="icon"><use href="#i-target"/></svg>MISSIONS</span><strong>1</strong><span class="metric-note"><i class="status-dot blue"></i>Mission de démonstration</span><svg class="metric-decoration" viewBox="0 0 90 38" aria-hidden="true"><path d="M1 32H22V24H45V16H67V7H89"/><path class="chart-fill" d="M1 32H22V24H45V16H67V7H89V38H1Z"/></svg></button>
+          <button class="metric-card panel amber" data-open-mission><span class="metric-label"><svg class="icon"><use href="#i-clipboard"/></svg>REVUES EN ATTENTE</span><strong>2</strong><span class="metric-note">Une décision humaine à enregistrer</span><div class="metric-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div></button>
+          <button class="metric-card panel" data-open-mission><span class="metric-label"><svg class="icon"><use href="#i-globe"/></svg>ACTIFS DU PÉRIMÈTRE</span><strong>1</strong><span class="metric-note">training-fixtures</span><svg class="metric-decoration target-decoration" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="25"/><circle cx="32" cy="32" r="15"/><circle cx="32" cy="32" r="4"/><path d="M32 3v58M3 32h58"/></svg></button>
+          <button class="metric-card panel red" data-chat-question="Constats à revoir"><span class="metric-label"><svg class="icon"><use href="#i-alert"/></svg>CONSTATS CRITIQUES</span><strong>0</strong><span class="metric-note">Aucun dans le jeu de démonstration</span><svg class="metric-decoration" viewBox="0 0 90 38" aria-hidden="true"><path d="M1 25H89"/><path class="chart-fill" d="M1 25H89V38H1Z"/></svg></button>
+          <button class="metric-card panel agents-metric" data-chat-question="Statut des agents"><span class="metric-label"><svg class="icon"><use href="#i-agent"/></svg>AGENTS CONNECTÉS</span><strong>0 <small>/ 0</small></strong><span class="metric-note">Aucun agent connecté</span><svg class="metric-ring" viewBox="0 0 60 60" aria-hidden="true"><circle cx="30" cy="30" r="24"/><path d="M30 6a24 24 0 0 1 22.8 16.6"/></svg></button>
+        </section>
+
+        <section class="domains-grid" aria-label="Domaines Argos prévus">
+          <article class="domain-card red-domain panel"><div class="domain-heading"><svg class="icon"><use href="#i-target"/></svg><h2>RED TEAM</h2><span class="domain-state">À venir</span></div><p>Évaluer votre sécurité.<br>Comprendre vos points faibles.</p><ul><li>Évaluations encadrées</li><li>Revue des constats</li><li>Preuves et rapports</li></ul><button class="domain-button" disabled>Espace Red Team <svg class="icon"><use href="#i-arrow"/></svg></button><svg class="domain-art network-art" viewBox="0 0 180 140" aria-hidden="true"><g class="art-grid"><path d="m26 31 62-15 63 35-24 65-67-17zM26 31l34 68 91-48M88 16l-28 83m28-83 39 100M26 31l101 85"/></g><g class="art-orbit"><ellipse cx="90" cy="70" rx="80" ry="50" transform="rotate(-22 90 70)"/></g><g class="art-nodes"><circle cx="26" cy="31" r="8"/><circle cx="88" cy="16" r="6"/><circle cx="151" cy="51" r="9"/><circle cx="127" cy="116" r="6"/><circle cx="60" cy="99" r="10"/><circle cx="90" cy="64" r="5"/></g><g class="art-centers"><circle cx="26" cy="31" r="2"/><circle cx="88" cy="16" r="2"/><circle cx="151" cy="51" r="2"/><circle cx="127" cy="116" r="2"/><circle cx="60" cy="99" r="2"/></g></svg></article>
+          <article class="domain-card purple-domain panel"><div class="domain-heading"><svg class="icon"><use href="#i-globe"/></svg><h2>OSINT</h2><span class="domain-state">À venir</span></div><p>Relier les informations.<br>Donner du contexte aux données.</p><ul><li>Sources ouvertes</li><li>Enrichissement du contexte</li><li>Traçabilité des sources</li></ul><button class="domain-button" disabled>Espace OSINT <svg class="icon"><use href="#i-arrow"/></svg></button><svg class="domain-art globe-art" viewBox="0 0 180 140" aria-hidden="true"><defs><pattern id="globe-dots" width="8" height="8" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r=".8" fill="currentColor"/></pattern></defs><ellipse cx="95" cy="70" rx="66" ry="58" fill="url(#globe-dots)" stroke="none"/><g class="art-grid"><ellipse cx="95" cy="70" rx="66" ry="58"/><ellipse cx="95" cy="70" rx="37" ry="58"/><ellipse cx="95" cy="70" rx="12" ry="58"/><path d="M29 70h132M36 43h118M36 97h118"/></g><g class="art-orbit"><ellipse cx="95" cy="70" rx="83" ry="24" transform="rotate(-29 95 70)"/></g><g class="art-centers"><circle cx="41" cy="104" r="3"/><circle cx="144" cy="33" r="3"/><circle cx="118" cy="66" r="2"/><circle cx="66" cy="35" r="2"/></g></svg></article>
+          <article class="domain-card blue-domain panel"><div class="domain-heading"><svg class="icon"><use href="#i-shield"/></svg><h2>BLUE TEAM</h2><span class="domain-state">À venir</span></div><p>Observer les signaux.<br>Préparer une réponse éclairée.</p><ul><li>Analyse et corrélation</li><li>Suivi des observations</li><li>Aide à la décision</li></ul><button class="domain-button" disabled>Espace Blue Team <svg class="icon"><use href="#i-arrow"/></svg></button><svg class="domain-art radar-art" viewBox="0 0 180 140" aria-hidden="true"><g class="art-grid"><ellipse cx="98" cy="73" rx="66" ry="51"/><ellipse cx="98" cy="73" rx="47" ry="35"/><ellipse cx="98" cy="73" rx="26" ry="19"/><path d="M24 73h148M98 12v122M48 34l100 78M48 112l100-78"/></g><path class="radar-sweep" d="M98 73 148 34a66 51 0 0 0-50-12z"/><g class="art-centers"><circle cx="148" cy="57" r="3"/><circle cx="62" cy="98" r="2"/><circle cx="121" cy="112" r="2"/></g><g class="radar-shield"><path d="m98 56 13 5v11c0 9-13 15-13 15S85 81 85 72V61z"/><path d="m92 71 4 4 8-8"/></g></svg></article>
+        </section>
+
+        <section class="details-grid" aria-label="Missions, rapports et agents">
+          <article class="panel detail-panel" id="reports-panel"><div class="panel-heading"><h2>RAPPORTS & DOCUMENTS</h2><span class="muted-count">01</span></div><a class="document-row searchable" href="assets/demo-report.md" download="argos-demo-report.md" data-search="rapport markdown argos démonstration synthétique"><span class="document-icon"><svg class="icon"><use href="#i-file"/></svg><small>MD</small></span><span class="document-content"><strong>Rapport de démonstration</strong><small>Argos Core · Markdown</small></span><svg class="icon row-action"><use href="#i-download"/></svg></a><button class="document-row searchable" data-open-mission data-search="mission constats preuves training fixtures démo"><span class="document-icon json-icon"><svg class="icon"><use href="#i-folder"/></svg><small>JSON</small></span><span class="document-content"><strong>Dossier de mission</strong><small>2 constats · 2 preuves</small></span><svg class="icon row-action"><use href="#i-chevron"/></svg></button><div class="document-note"><svg class="icon"><use href="#i-lock"/></svg>Des preuves liées à chaque constat.</div><a class="panel-footer-link" href="assets/demo-report.md" download="argos-demo-report.md">Télécharger le rapport <svg class="icon"><use href="#i-arrow"/></svg></a></article>
+          <article class="panel detail-panel" id="missions-panel"><div class="panel-heading"><h2>MISSION À EXAMINER</h2><span class="muted-count">01</span></div><button class="mission-row searchable" data-open-mission data-search="mission démonstration offline training fixtures diagnostic configuration bannière"><span class="mission-icon"><svg class="icon"><use href="#i-target"/></svg></span><span class="mission-content"><strong>Évaluation de démonstration</strong><small>training-fixtures</small></span><span class="badge amber-badge">À revoir</span></button><div class="mission-progress"><div><span>Revue humaine</span><strong>0 <span>/ 2 constats</span></strong></div><div class="progress-track"><span></span></div></div><div class="mission-tags"><span><svg class="icon"><use href="#i-folder"/></svg>2 preuves</span><span><svg class="icon"><use href="#i-globe"/></svg>1 actif</span><span><i class="status-dot blue"></i>Hors ligne</span></div><button class="panel-footer-link" data-open-mission>Examiner la mission <svg class="icon"><use href="#i-arrow"/></svg></button></article>
+          <article class="panel detail-panel"><div class="panel-heading"><h2>AGENTS</h2><span class="badge neutral-badge">À venir</span></div><div class="agent-row"><span class="agent-icon"><svg class="icon"><use href="#i-agent"/></svg></span><span><strong>Analyse</strong><small>Profil prévu</small></span><span class="agent-status"><i class="status-dot inactive"></i>Non connecté</span></div><div class="agent-row"><span class="agent-icon"><svg class="icon"><use href="#i-clipboard"/></svg></span><span><strong>Revue</strong><small>Profil prévu</small></span><span class="agent-status"><i class="status-dot inactive"></i>Non connecté</span></div><div class="agent-row"><span class="agent-icon"><svg class="icon"><use href="#i-file"/></svg></span><span><strong>Rapport</strong><small>Profil prévu</small></span><span class="agent-status"><i class="status-dot inactive"></i>Non connecté</span></div><div class="agents-footer"><span>0 agent connecté</span><svg class="icon"><use href="#i-info"/></svg></div></article>
+        </section>
+        <p class="search-feedback" id="search-feedback" role="status" hidden></p>
+      </div>
+
+      <section class="chat-panel panel" id="chat-panel" aria-labelledby="chat-title"><div class="panel-heading chat-heading"><div><svg class="icon"><use href="#i-eye-shield"/></svg><h2 id="chat-title">ARGOS CHAT</h2><span class="badge blue-badge">Démo</span></div><button class="icon-button" id="chat-expand" aria-label="Agrandir le panneau de chat" aria-expanded="false"><svg class="icon"><use href="#i-expand"/></svg></button></div><div class="chat-introduction"><span class="status-dot blue"></span>Assistant de démonstration · local</div><div class="chat-messages" id="chat-messages" role="log" aria-label="Conversation de démonstration" aria-live="polite" aria-relevant="additions"><div class="message assistant-message"><span class="message-avatar"><svg class="icon"><use href="#i-eye-shield"/></svg></span><div class="message-bubble"><span class="message-author">ARGOS</span><p>Bonjour, bienvenue dans votre espace de travail.</p><p>Je peux vous présenter la mission, les constats et les preuves de cette démonstration.</p><span class="message-time">Démo locale</span></div></div><div class="chat-day-divider"><span>EXPLORER LA DÉMONSTRATION</span></div></div><div class="chat-suggestions"><button data-chat-question="Résumer la mission"><svg class="icon"><use href="#i-target"/></svg>Résumer la mission<svg class="icon suggestion-arrow"><use href="#i-chevron"/></svg></button><button data-chat-question="Constats à revoir"><svg class="icon"><use href="#i-clipboard"/></svg>Constats à revoir<svg class="icon suggestion-arrow"><use href="#i-chevron"/></svg></button><button data-chat-question="Voir les preuves"><svg class="icon"><use href="#i-folder"/></svg>Voir les preuves<svg class="icon suggestion-arrow"><use href="#i-chevron"/></svg></button></div><div class="chat-footer"><form class="chat-form" id="chat-form"><label class="sr-only" for="chat-input">Question sur la démonstration</label><textarea id="chat-input" rows="2" maxlength="500" placeholder="Une question sur la démo…"></textarea><button class="icon-button send-button" id="chat-send" type="submit" aria-label="Envoyer le message" disabled><svg class="icon"><use href="#i-send"/></svg></button></form><div class="chat-privacy"><svg class="icon"><use href="#i-lock"/></svg>Les messages restent dans ce navigateur.</div></div></section>
+
+      <section class="activity-panel panel" aria-labelledby="activity-title"><div class="panel-heading"><div class="activity-title"><svg class="icon"><use href="#i-terminal"/></svg><h2 id="activity-title">JOURNAL DE DÉMONSTRATION</h2><span class="activity-mode"><i class="status-dot blue"></i>Exemple hors ligne</span></div><label class="activity-filter"><svg class="icon"><use href="#i-filter"/></svg><span class="sr-only">Filtrer le journal</span><select id="activity-filter"><option value="all">Tous les événements</option><option value="mission">Mission</option><option value="evidence">Preuves</option><option value="review">Revue</option><option value="report">Rapport</option></select></label></div><div class="activity-log" id="activity-log"></div><div class="activity-footer"><span><svg class="icon"><use href="#i-info"/></svg>Ces événements illustrent le parcours de la mission ; aucune analyse n’est en cours.</span><span id="activity-count">5 événements</span></div></section>
+    </div>
+    <footer class="workspace-footer"><span>ARGOS <i>·</i> Observer. Comprendre. Agir.</span><span>Accueil <i>·</i> Prototype d’interface</span></footer>
+  </main>
+
+  <dialog class="mission-dialog" id="mission-dialog" aria-labelledby="mission-dialog-title"><div class="dialog-heading"><div><span class="eyebrow">MISSION / DEMO-OFFLINE</span><h2 id="mission-dialog-title">Évaluation de démonstration</h2></div><button class="icon-button" data-close-dialog aria-label="Fermer la mission"><svg class="icon"><use href="#i-close"/></svg></button></div><p class="dialog-description">Un actif, deux constats synthétiques et deux preuves locales. Les constats attendent une revue humaine.</p><div class="dialog-scope"><svg class="icon"><use href="#i-globe"/></svg>Périmètre<span>training-fixtures</span><span class="badge blue-badge">Données synthétiques</span></div><div id="mission-findings"></div><div class="dialog-footer"><span>La revue d’un constat ne confirme pas automatiquement une vulnérabilité.</span><a class="primary-button" href="assets/demo-report.md" download="argos-demo-report.md"><svg class="icon"><use href="#i-download"/></svg>Rapport Markdown</a></div></dialog>
+  <dialog class="about-dialog" id="about-dialog" aria-labelledby="about-dialog-title"><div class="dialog-heading"><div><span class="eyebrow">ARGOS / DÉMONSTRATION</span><h2 id="about-dialog-title">Un aperçu de votre espace de travail</h2></div><button class="icon-button" data-close-dialog aria-label="Fermer les informations"><svg class="icon"><use href="#i-close"/></svg></button></div><p>Cette page reprend les propositions visuelles d’Argos avec les données synthétiques de la démo hors ligne.</p><p>Vous pouvez rechercher dans l’accueil, consulter la mission, filtrer le journal, télécharger le rapport et explorer les réponses de démonstration du chat.</p><p>Le chat utilise des réponses prédéfinies. Les autres espaces et la création de mission seront ajoutés progressivement.</p><button class="primary-button" data-close-dialog>Revenir à l’accueil <svg class="icon"><use href="#i-arrow"/></svg></button></dialog>
+  <noscript><p class="noscript-message">Activez JavaScript pour consulter les détails de la mission et utiliser la recherche et le chat de démonstration.</p></noscript>
+</body>
+</html>
