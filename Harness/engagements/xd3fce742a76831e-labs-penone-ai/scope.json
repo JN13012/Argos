@@ -1,0 +1,43 @@
+{
+  "engagement": "xd3fce742a76831e-labs-penone-ai",
+  "confirmed": true,
+  "confirmed_at": "2026-09-30",
+  "allowed_hosts": [
+    "xd3fce742a76831e.labs.penone.ai"
+  ],
+  "callback_hosts": [],
+  "identities": {
+    "guest": {
+      "role": "guest",
+      "handle": "primary",
+      "status": "active",
+      "note": "Jeremie Nagi, org Halcyon Freight (M0002). Already authenticated in the browser session -- this profile never handles the raw credential."
+    },
+    "bola_peer": {
+      "role": "guest",
+      "handle": "bob",
+      "status": "pending",
+      "note": "Second same-privilege guest account needed for bola-hunter. Request from the course/instructor, then flip status to active and rename .claude/agents/bola-hunter.md.disabled."
+    },
+    "bfla_reference": {
+      "role": "admin",
+      "handle": "admin",
+      "status": "pending",
+      "note": "Admin-tier reference account needed for bfla-hunter's clean paired-account method. Note: an admin-shaped response is already reachable in this engagement via the confirmed authentication-failures finding (JWT alg:none), which is a separate, already-standing finding -- this identity is for the class's intended clean test, not a prerequisite for that finding."
+    }
+  },
+  "prohibited": [
+    "destructive-testing",
+    "persistence",
+    "data-exfiltration",
+    "production-changes",
+    "out-of-org lateral movement beyond a single proof-of-reach step"
+  ],
+  "stop_conditions": [
+    "waf-block",
+    "account-lockout",
+    "captcha",
+    "target-unavailable",
+    "client-impact"
+  ]
+}

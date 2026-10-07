@@ -1,0 +1,40 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your basket · Saltwyck Market</title>
+<link rel="stylesheet" href="/static/style.css">
+</head><body>
+<header class="topbar">
+  <a class="brand" href="/">Saltwyck<span>Market</span></a>
+  <nav>
+    <a href="/shop">Shop</a>
+    <a href="/cart">Basket</a>
+    
+      <a href="/account">Account</a>
+      <a href="/support/lookup">Support</a>
+      
+      
+      <a href="/logout">Sign out</a>
+    
+  </nav>
+</header>
+<main>
+
+<h1>Your basket</h1>
+
+<table><thead><tr><th>Item</th><th>Qty</th><th>Line</th></tr></thead><tbody>
+
+  <tr><td><a href="/product/1138">Stone Cushion Classic</a></td><td>1</td><td>$98.42</td></tr>
+
+</tbody></table>
+<p class="price">Subtotal $98.42</p>
+<form method="post" action="/checkout" class="inline" id="checkout">
+  <label>Promotion code <input type="text" name="promo_code" placeholder="optional"></label>
+  <button type="submit">Place order</button>
+</form>
+<pre id="confirmation" class="alert" hidden></pre>
+<script src="/static/checkout.js"></script>
+
+</main>
+<footer><p>Saltwyck Market &middot; sellers keep 85.5% &middot; <a href="/shop">Browse</a></p></footer>
+</body></html>
+
