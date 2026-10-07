@@ -4,8 +4,8 @@
 dans son dossier de propositions Argos : `ChatGPT Image 15 juin 2026,
 23_38_03.png`. Elle est utilisée pour la mascotte de l'accueil.
 
-Les icônes d'interface et les illustrations des trois domaines sont des SVG
-dessinés dans `index.html`. Aucun paquet d'icônes, service de polices ou CDN
+Les icônes d'interface sont des SVG dessinés dans `index.html`.
+Aucun paquet d'icônes, service de polices ou CDN
 n'est requis.
 
 Les images complètes des propositions de dashboard ne sont pas embarquées :

@@ -2,7 +2,7 @@
 
 Prototype du dashboard d'accueil, reconstruit à partir des propositions visuelles
 fournies par le propriétaire. Fond bleu nuit, accents cyan, mascotte Argos,
-navigation latérale, indicateurs, domaines et panneau de chat.
+navigation latérale, indicateurs, suivi des missions et panneau de chat.
 
 ## Ouvrir la démonstration
 
