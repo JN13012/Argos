@@ -60,6 +60,7 @@ build/
 *.log
 
 # Runtime data
+/.argos/
 *.sqlite
 *.sqlite3
 *.db
