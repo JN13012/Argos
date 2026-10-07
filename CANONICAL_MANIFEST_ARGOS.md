@@ -1,6 +1,6 @@
 # ARGOS — Manifeste canonique
 
-**Version :** 1.3\
+**Version :** 1.4\
 **Statut :** canonique  
 **Date :** 7 octobre 2026
 
@@ -49,13 +49,19 @@ canonique d’Argos.
 |---|---|---|---|
 |Document|Version|Statut|Rôle|
 |`00_PRODUCT_BRIEF_ET_PLAN_GLOBAL_ARGOS.md`|2.5|`CANONICAL`|Vision, positionnement, limites et trajectoire|
-|`CANONICAL_MANIFEST_ARGOS.md`|1.3|`CANONICAL`|Versions, statuts, dépendances et ordre d’autorité|
-|`PROJECT_STATUS_ARGOS.md`|1.3|`CANONICAL`|État courant, décisions récentes, travail restant et prochaine étape|
+|`CANONICAL_MANIFEST_ARGOS.md`|1.4|`CANONICAL`|Versions, statuts, dépendances et ordre d’autorité|
+|`PROJECT_STATUS_ARGOS.md`|1.4|`CANONICAL`|État courant, décisions récentes, travail restant et prochaine étape|
 |`01_SCOPE_V0_ARGOS.md`|1.0|`IN_PROGRESS`|Proposition de scope V0 existante, en attente de validation explicite|
 
 Les mises à jour 1.2 et 1.3 corrigent l'état des fichiers effectivement présents,
 ajoutent les documents de préparation GitHub et enregistrent le retrait du course
 pack ainsi que la revue des projets voisins. Elles ne valident pas le scope V0.
+
+La version 1.4 enregistre l'acceptation du premier livrable hors ligne et son
+implémentation originale. `docs/FIRST_DELIVERABLE.md` version 1.0 fixe le contrat
+de cette tranche. `AGENTS.md` fixe les commandes et règles de développement pour
+ce périmètre limité. Ces documents ne valident pas le scope V0 complet et ne
+constituent pas l'architecture définitive de la plateforme.
 
 Documents de présentation et de préparation, sans autorité sur le scope produit :
 
@@ -91,7 +97,7 @@ comme dépendance sans décision explicite.
 |13|`13_BACKLOG_EPICS_ET_STORIES.md`|`PLANNED`|Documents 01 à 12 nécessaires au lot planifié|
 |14|`14_PLAN_DE_TEST_SECURITE_ET_QA.md`|`PLANNED`|Scope V0, Threat Model, Architecture, Benchmark|
 |15|`15_PLAN_DE_DEPLOIEMENT_ET_OPERATIONS.md`|`PLANNED`|Architecture, Threat Model, Conformité, Tests|
-|16|`AGENTS.md`|`PLANNED`|Scope, sécurité, architecture, backlog, tests, stack et commandes validés|
+|16|`AGENTS.md`|Présent — premier livrable hors ligne uniquement|`docs/FIRST_DELIVERABLE.md`, stack et commandes de ce lot|
 
 ---
 

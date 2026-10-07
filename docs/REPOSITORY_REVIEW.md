@@ -25,6 +25,12 @@ dans l'index. La recherche des motifs de secrets décrits plus bas ne trouve
 aucune correspondance dans ces 102 fichiers. Les réglages personnels et le
 sélecteur de mission restent sur disque.
 
+Lors de l'implémentation du premier livrable, le propriétaire a déplacé
+`Harness/Labs/` hors du projet : il s'agissait d'un exercice terminé, séparé du
+harness. Son retrait est enregistré dans un commit distinct. Les constats
+historiques ci-dessous restent datés de la préparation initiale ; la démo
+originale Argos Core utilise ses propres données synthétiques.
+
 ## Situation constatée
 
 - Branche `main`, remote `origin` déjà configuré vers `JN13012/Argos`.

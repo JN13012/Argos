@@ -1,0 +1,35 @@
+name: Offline checks
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Run offline contract and CLI tests
+        run: python -m unittest discover -s tests -v
+      - name: Check repository hygiene and syntax
+        run: python scripts/check_repository.py
+      - name: Reproduce the synthetic report
+        run: |
+          python -m argos report examples/offline/assessment.json --output .argos/report.md
+          cmp examples/offline/report.md .argos/report.md
+      - name: Check patch whitespace
+        run: git show --format= --check HEAD

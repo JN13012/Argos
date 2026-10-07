@@ -1,9 +1,9 @@
 # ARGOS — Statut du projet
 
-**Version :** 1.3\
+**Version :** 1.4\
 **Statut :** canonique  
 **Date de situation :** 7 octobre 2026\
-**Phase :** préparation du dépôt GitHub et validation du périmètre de développement
+**Phase :** premier livrable Argos Core hors ligne implémenté
 
 ---
 
@@ -15,10 +15,15 @@ Argos est défini comme une plateforme professionnelle de cybersécurité
 offensive pilotée par IA, capable de conduire un pentest autorisé depuis le  
 mandat jusqu’au retest.
 
-La plateforme Argos décrite dans le brief n'est pas implémentée. Le dépôt
-contient désormais `01_SCOPE_V0_ARGOS.md` version 1.0, toujours `IN_PROGRESS`,
-ainsi qu'un harness, des profils et un laboratoire pédagogiques importés.
-Ces éléments ne démontrent pas les capacités de la plateforme cible.
+Argos Core 0.1.0 implémente une première tranche originale : création de mission,
+import de constats synthétiques, contrôle de preuves locales, revue humaine et
+rapport Markdown déterministe. Les commandes fonctionnent avec la bibliothèque
+standard Python. `docs/FIRST_DELIVERABLE.md` décrit la tranche acceptée par le
+propriétaire et ses critères d'acceptation.
+
+La plateforme complète du brief n'est pas implémentée.
+`01_SCOPE_V0_ARGOS.md` version 1.0 reste `IN_PROGRESS`. Les supports pédagogiques
+importés sont séparés du nouveau code et ne participent pas à la démo.
 
 La demande du 7 octobre 2026 porte sur la préparation du dépôt pour GitHub et
 les recruteurs, puis sur une progression par petites améliorations. Le nettoyage,
@@ -34,6 +39,20 @@ Argos Arena est un projet séparé et n’est pas une dépendance d’Argos.
 ---
 
 ## 2. Travail terminé
+
+### Premier livrable original — 7 octobre 2026
+
+- `argos/` : commandes `init`, `import`, `validate`, `review` et `report` ;
+- schéma structurel dans `schemas/assessment.schema.json` et contrôles des
+  références, du scope et des preuves locales SHA-256 ;
+- exemples synthétiques et rapport de référence dans `examples/offline/` ;
+- revue humaine déclarée, sans confirmation automatique de vulnérabilité ;
+- tests de contrat et d'intégration CLI ; commandes de développement dans `AGENTS.md` ;
+- CI GitHub Actions sur Python 3.11, 3.12 et 3.13, avec actions officielles fixées
+  à des commits précis et permissions de lecture ;
+- autorisation du lot et contrat dans `docs/FIRST_DELIVERABLE.md`.
+- laboratoire pédagogique déplacé hors du dépôt par le propriétaire ; retrait
+  enregistré séparément, sans dépendance de la démo envers cet exercice.
 
 ### Préparation du dépôt — 7 octobre 2026
 
@@ -221,6 +240,7 @@ Argos Arena est un projet séparé et n’est pas une dépendance d’Argos.
 |---|---|---|
 |Vision produit|Positionnement et décisions fondatrices|Terminé|
 |Corpus canonique|Scope, sécurité, architecture, agents, outils, benchmark et tests|En cours|
+|Premier livrable hors ligne|Mission, import, preuves, revue et rapport|Implémenté — tranche limitée|
 |V0 interne|Noyau local et trois chaînes verticales réalisées en cinq incréments|Non commencé|
 |Pilote professionnel|Missions supervisées à faible risque|Non commencé|
 |MVP commercial|Utilisateurs externes et multi-client|Différé|
@@ -234,12 +254,13 @@ Argos Arena est un projet séparé et n’est pas une dépendance d’Argos.
 |---|---|---|
 |Document|Version|État|
 |`00_PRODUCT_BRIEF_ET_PLAN_GLOBAL_ARGOS.md`|2.5|Canonique|
-|`CANONICAL_MANIFEST_ARGOS.md`|1.1|Canonique|
-|`PROJECT_STATUS_ARGOS.md`|1.1|Canonique|
+|`CANONICAL_MANIFEST_ARGOS.md`|1.4|Canonique|
+|`PROJECT_STATUS_ARGOS.md`|1.4|Canonique|
 |`GUIDE_TRAVAIL_ARGOS_AVEC_CHATGPT.md`|—|Retiré du corpus et absent du dépôt|
-|`01_SCOPE_V0_ARGOS.md`|—|Prochaine création|
+|`01_SCOPE_V0_ARGOS.md`|1.0|`IN_PROGRESS` — validation complète en attente|
+|`docs/FIRST_DELIVERABLE.md`|1.0|Contrat du lot hors ligne accepté et implémenté|
 |`02` à `15`|—|Planifiés|
-|`AGENTS.md`|—|À créer avant le développement, après les spécifications structurantes|
+|`AGENTS.md`|—|Actif pour le premier livrable hors ligne|
 |`16` à `19`|—|Différés|
 
 Le détail des dépendances se trouve dans  
@@ -283,10 +304,11 @@ Elles ne nécessitent pas de reprendre un brainstorming général.
 
 ## 7. Prochaine étape autorisée
 
-Préparer la publication du dépôt, puis examiner et valider ou ajuster
-`01_SCOPE_V0_ARGOS.md`, déjà créé. La proposition de démo hors ligne dans
-`docs/ROADMAP.md` reste à accepter avant son implémentation ; elle ne remplace
-pas automatiquement les cinq incréments du scope proposé.
+Le premier livrable hors ligne proposé dans `docs/ROADMAP.md` a été accepté et
+implémenté. Sa fiche, son schéma et sa démonstration deviennent la base du prochain
+lot : spécifier la persistance et la reprise de missions. Cette prochaine tranche
+reste à définir avant implémentation. La démo ne remplace pas les cinq incréments
+du scope V0 proposé, dont la validation complète reste à faire.
 
 Avant publication, clarifier les droits des imports et décider du traitement de
 l'historique contenant les données de missions. Le push demandé porte sur un
@@ -322,8 +344,10 @@ La revue du scope doit confirmer :
     V1.
     
 
-Ne pas commencer le code ni créer `AGENTS.md` avant d’avoir les décisions  
-structurantes nécessaires.
+Pour la tranche hors ligne, les décisions de stack, de données, de sécurité et
+de tests sont fixées dans `docs/FIRST_DELIVERABLE.md` ; le code et `AGENTS.md`
+sont donc autorisés dans cette portée. Les capacités supplémentaires demandent
+leur propre périmètre et leurs critères d'acceptation.
 
 ---
 
