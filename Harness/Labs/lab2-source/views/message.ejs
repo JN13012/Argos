@@ -1,0 +1,12 @@
+<%- include("partials/head") %>
+<p class="muted small"><a href="/messages">Back to messages</a></p>
+<div class="card">
+  <h1><%= message.subject %></h1>
+  <p class="muted small">
+    From <%= message.sender %> &middot;
+    <%= message.created_at.toISOString().slice(0,10) %> &middot;
+    <%= message.category %>
+  </p>
+  <p><%= message.body %></p>
+</div>
+<%- include("partials/foot") %>

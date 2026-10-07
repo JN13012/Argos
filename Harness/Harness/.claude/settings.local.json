@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(update-config)",
+      "Skill(recon)",
+      "Bash(ls -la course-pack*)",
+      "Bash(find . -maxdepth 1 -iname \"*course*\")",
+      "Bash(find . -iname \"*.zip\")",
+      "Bash(find course-pack/project/claude-profile -maxdepth 2)",
+      "Bash(cat CURRENT_ENGAGEMENT.md)",
+      "Bash(ls engagements *)",
+      "Bash(ls -la ~/Downloads 2>&1 | grep -i course 2>&1; echo \"---all downloads---\"; ls -la ~/Downloads 2>&1 | head -n 30)",
+      "Bash(ollama list *)",
+      "Bash(ollama pull *)",
+      "Bash(ollama create *)"
+    ]
+  }
+}

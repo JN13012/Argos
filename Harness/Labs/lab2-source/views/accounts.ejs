@@ -1,0 +1,17 @@
+<%- include("partials/head") %>
+<h1>Your accounts</h1>
+<div class="grid">
+<% accounts.forEach(a => { %>
+  <article class="tile">
+    <a href="/accounts/<%= a.id %>"><h3><%= a.kind %></h3></a>
+    <p class="mono small"><%= a.sort_code %> &middot; <%= a.account_number %></p>
+    <p class="amount"><%= a.available_display %></p>
+    <dl class="tight">
+      <dt>Available</dt><dd><%= a.available_display %></dd>
+      <dt>Ledger</dt><dd><%= a.posted_display %></dd>
+      <dt>Arranged overdraft</dt><dd><%= a.overdraft_display %></dd>
+    </dl>
+  </article>
+<% }) %>
+</div>
+<%- include("partials/foot") %>

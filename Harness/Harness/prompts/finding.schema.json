@@ -1,0 +1,82 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://thm-workshop.local/prompts/finding.schema.json",
+  "title": "Finding",
+  "description": "One finding from one class subagent. Every subagent emits this shape, which is what lets separate subagent transcripts merge into a single finding set.",
+  "type": "object",
+  "required": ["vuln_class","endpoint","method","identity_used","evidence","ownership_assertion","capability_granted","confidence","dedupe_key"],
+  "properties": {
+    "vuln_class":   { "type": "string", "description": "The slug of the prompt file that produced this, so it matches prompts/classes/<slug>.md", "examples": ["bola","bfla","injection","ssrf"] },
+    "endpoint":     { "type": "string", "description": "Path with object identifiers normalised, for example /api/v1/orders/{id}" },
+    "method":       { "type": "string", "enum": ["GET","POST","PUT","PATCH","DELETE","HEAD","OPTIONS"] },
+    "identity_used":{ "type": "string", "description": "Which test identity produced the unauthorised access" },
+
+    "evidence": {
+      "type": "object",
+      "description": "Pointers into the harness request store, never response text. http_request returns an id and the harness holds the bytes, so a fabricated id has nothing behind it.",
+      "$comment": "additionalProperties is false on purpose. A subagent that pastes response_as_b here fails validation, which is the whole defence against soliloquizing.",
+      "required": ["request_id_a","request_id_b","body_diff"],
+      "additionalProperties": false,
+      "properties": {
+        "request_id_a": { "type": "string", "description": "Harness request id for the baseline or victim request" },
+        "request_id_b": { "type": "string", "description": "Harness request id for the same request under the attacking identity" },
+        "body_diff":    { "type": "string", "description": "What differs, not that something differs" },
+        "marker":       { "type": "string", "description": "The post-authentication body marker asserted on. Never a status code." },
+        "percentage_match":        { "type": "number", "minimum": 0, "maximum": 100, "description": "Body similarity of response B to response A. BOLA asserts gte 90. BFLA asserts lt 10 against the low privilege baseline." },
+        "percentage_match_schema": { "type": "number", "minimum": 0, "maximum": 100, "description": "Schema similarity of response B to the admin response. BFLA asserts gte 90." },
+        "out_of_band_id":          { "type": "string", "description": "Collaborator interaction id, for classes proved out of band such as blind SSRF" }
+      }
+    },
+
+    "ownership_assertion": { "type": "string", "description": "Which object or function belongs to whom, and why this access is wrong. Without it a diff is only two different responses." },
+
+    "repro_script": {
+      "type": "object",
+      "description": "A standalone reproduction. PTES requires that an unrelated qualified tester can reproduce the finding from the report alone, and this is the field that satisfies it.",
+      "required": ["interpreter","script","expected_result"],
+      "additionalProperties": false,
+      "properties": {
+        "interpreter":     { "type": "string", "enum": ["bash","python3"] },
+        "script":          { "type": "string", "description": "Runs from a clean machine. Takes the target as an argument, reads credentials from the environment, depends on no harness state and on nothing left behind by the run that found it." },
+        "expected_result": { "type": "string", "description": "What a third party sees when the finding is present, specific enough to judge pass or fail without having seen the engagement." }
+      }
+    },
+
+    "capability_granted": {
+      "description": "The primitive this finding hands an attacker. The chaining pass is a capability join and vuln_class does not join, so this is the key it runs on.",
+      "$ref": "#/$defs/capability"
+    },
+    "capability_required": {
+      "description": "The primitive this finding needs before it can be used. One finding's capability_granted is the next one's capability_required, and that pair is the join. Use none for an entry point that needs nothing.",
+      "$ref": "#/$defs/capability"
+    },
+
+    "reproduced":  { "type": "boolean", "description": "Confirmed on a second independent run from a clean state" },
+    "confidence":  { "type": "string", "enum": ["confirmed","probable","lead"], "description": "A lead is legitimate output that never reaches a client as a finding" },
+    "severity":    { "type": "string", "enum": ["informational","low","medium","high","critical"] },
+    "dedupe_key":  { "type": "string", "description": "class + normalised endpoint + parameter, so the merge pass can collapse duplicates" },
+    "non_finding": { "type": "boolean", "description": "True for observations that are raw material for another subagent's chain, such as a leaked internal hostname" }
+  },
+
+  "if":   { "required": ["non_finding"], "properties": { "non_finding": { "const": true } } },
+  "then": { "description": "A non-finding is an observation, so it carries no reproduction script. It still needs a capability_granted or the chaining pass cannot use it." },
+  "else": { "required": ["repro_script"] },
+
+  "$defs": {
+    "capability": {
+      "type": "string",
+      "enum": [
+        "read-arbitrary-object",
+        "write-arbitrary-object",
+        "server-side-request",
+        "arbitrary-file-read",
+        "js-execution-in-origin",
+        "credential-disclosure",
+        "privilege-escalation",
+        "database-query-execution",
+        "code-execution",
+        "none"
+      ]
+    }
+  }
+}

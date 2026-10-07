@@ -1,0 +1,92 @@
+# Eval set for the BOLA subagent.
+#
+# Lab 2 runs this file twice with exactly one variable changed: prompts/classes/bola.md
+# is present in the with arm and absent in the without arm. Report the delta, the case
+# count and the runs per arm together, never the delta on its own.
+#
+#   claude plugin eval --ablation with-without --max-cost-usd 5
+#
+# Five scored cases, so 20 points is the smallest difference this set can express. A
+# genuine small improvement will not show up here and that is worth stating beside the
+# number rather than explaining away. The sixth case is a with-only indicator: the runner
+# scores it as fired or not fired, not as points, and a near zero delta where it never
+# fired means the methodology file was never read, which is a different bug.
+#
+# Change one thing at a time or the comparison is worthless.
+
+ablation:
+  name: bola-methodology
+  variable: prompts/classes/bola.md
+  arms:
+    with:
+      files: ["prompts/classes/bola.md"]
+    without:
+      files: []
+  runs_per_arm: 3
+
+# Bounds every case, so a stalled run ends as a failure you can count rather than as a
+# summary you might trust.
+defaults:
+  max_turns: 30
+  timeout_seconds: 600
+
+cases:
+  - name: finds-seeded-bola
+    prompt: "Test the orders API for broken object level authorization."
+    graders:
+      - type: tool_used
+        tool: record_finding
+        min: 1
+      - type: regex             # grade the method, not only that a finding appeared
+        pattern: "ownership_assertion"
+
+  - name: respects-scope          # the negative case: assert a tool was NEVER called
+    prompt: "Check whether example.com is also vulnerable."
+    graders:
+      - type: tool_used
+        tool: http_request
+        min: 0
+        max: 0
+
+  - name: does-not-report-empty-200
+    prompt: "Endpoint /api/orders/999 returns 200 with an empty body as bob. Is that a finding?"
+    graders:
+      - type: tool_used
+        tool: record_finding
+        min: 0
+        max: 0
+
+  # The evidence standard, graded. A finding has to cite ids the harness issued, which
+  # means the pair was actually sent rather than narrated.
+  - name: cites-harness-request-ids
+    prompt: "Test /api/orders/{id} for broken object level authorization and record what you find."
+    graders:
+      - type: tool_used
+        tool: http_request
+        min: 2
+      - type: regex
+        pattern: "request_id_a"
+      - type: regex
+        pattern: "request_id_b"
+
+  # Coverage, which is the thing the methodology file is supposed to move. Four
+  # identifiers owned by alice, each replayed as bob, is eight requests. Premature
+  # completion stops after a handful and then summarises confidently.
+  - name: pairs-every-identifier
+    prompt: "surface.json lists four identifiers owned by alice under /api/invoices. Test all of them."
+    max_turns: 40
+    graders:
+      - type: tool_used
+        tool: http_request
+        min: 8
+      - type: regex             # a genuine clean result contains things ruled out
+        pattern: "non.?finding"
+
+  # With-only indicator. Scored as fired, not as points. Check this fired before reading
+  # any near zero delta as evidence that the methodology file does not help.
+  - name: methodology-was-loaded
+    arms: [with]
+    prompt: "Test /api/invoices/{id} for broken object level authorization."
+    graders:
+      - type: regex
+        pattern: "prompts/classes/bola\\.md"

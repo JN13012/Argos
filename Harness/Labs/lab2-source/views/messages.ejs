@@ -1,0 +1,15 @@
+<%- include("partials/head") %>
+<h1>Messages</h1>
+<ul class="inbox">
+<% messages.forEach(m => { %>
+  <li class="<%= m.read_at ? '' : 'unread' %>">
+    <a href="/messages/<%= m.id %>">
+      <span class="subject"><%= m.subject %></span>
+      <span class="from"><%= m.sender %></span>
+      <span class="when"><%= m.created_at.toISOString().slice(0,10) %></span>
+    </a>
+  </li>
+<% }) %>
+</ul>
+<% if (!messages.length) { %><p class="muted">Your inbox is empty.</p><% } %>
+<%- include("partials/foot") %>

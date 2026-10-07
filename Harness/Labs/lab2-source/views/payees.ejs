@@ -1,0 +1,15 @@
+<%- include("partials/head") %>
+<h1>Payees</h1>
+<p class="muted">
+  The code is your own reference for a beneficiary and is what appears in the
+  clearing file. Three to twelve characters, capitals and digits.
+</p>
+<table><thead><tr><th>Code</th><th>Name</th><th>Sort code</th><th>Account</th><th>Added</th></tr></thead><tbody>
+<% payees.forEach(p => { %>
+  <tr><td class="mono"><%= p.payee_ref %></td><td><%= p.display_name %></td>
+  <td class="mono small"><%= p.sort_code %></td><td class="mono small"><%= p.account_number %></td>
+  <td class="muted small"><%= p.created_at.toISOString().slice(0,10) %></td></tr>
+<% }) %>
+</tbody></table>
+<% if (!payees.length) { %><p class="muted">No payees yet.</p><% } %>
+<%- include("partials/foot") %>

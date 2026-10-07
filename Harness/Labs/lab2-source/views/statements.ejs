@@ -1,0 +1,15 @@
+<%- include("partials/head") %>
+<h1>Statements</h1>
+<p class="muted">
+  Historic periods are being moved onto the new search and may take a moment
+  to open.
+</p>
+<table><thead><tr><th>Account</th><th>Period</th><th class="r">Closing</th><th></th></tr></thead><tbody>
+<% statements.forEach(s => { %>
+  <tr><td class="mono"><%= s.account_number %></td>
+  <td><%= s.period_start.toISOString().slice(0,10) %> to <%= s.period_end.toISOString().slice(0,10) %></td>
+  <td class="r mono"><%= (s.closing_minor/100).toFixed(2) %> <%= s.currency %></td>
+  <td><a href="/api/statements/<%= s.id %>">Open</a></td></tr>
+<% }) %>
+</tbody></table>
+<%- include("partials/foot") %>
