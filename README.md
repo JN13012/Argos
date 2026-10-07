@@ -8,6 +8,19 @@ local evidence validation, human review and Markdown reports. The broader Argos
 platform described in the product brief remains a specification. This repository
 does not demonstrate performance comparable to commercial platforms.
 
+## Preview the dashboard
+
+The [home dashboard prototype](frontend/README.md) recreates the provided Argos
+design references with the project mascot and synthetic offline demo data.
+
+```bash
+python3 -m http.server 8000 --bind 127.0.0.1 --directory frontend
+```
+
+Open **http://localhost:8000**. Only the home dashboard is implemented; its
+search, mission preview, activity filters, reference report download and scripted
+demo chat work locally. It is not connected to Argos Core or an AI model yet.
+
 ## Run the offline demo
 
 Requires Python 3.11 or newer. From a clean checkout, no dependency installation,
@@ -56,6 +69,7 @@ findings remain in the report. See `python3 -m argos --help` for the five comman
 | Path | Purpose | Status |
 | --- | --- | --- |
 | `argos/` | Original offline CLI: storage, validation and reporting | Implemented |
+| `frontend/` | Home dashboard inspired by the provided design references | Interactive demo, not connected to the core |
 | `schemas/assessment.schema.json` | Version-one structural data contract | Implemented |
 | `examples/offline/` | Synthetic data, proofs and reference report | Reproducible demo |
 | `tests/` | Contract, reporting and CLI integration tests | Run offline |
