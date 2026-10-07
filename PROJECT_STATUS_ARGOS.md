@@ -1,9 +1,9 @@
 # ARGOS — Statut du projet
 
-**Version :** 1.1  
+**Version :** 1.3\
 **Statut :** canonique  
-**Date de situation :** 28 juillet 2026  
-**Phase :** préparation de la documentation canonique avant développement
+**Date de situation :** 7 octobre 2026\
+**Phase :** préparation du dépôt GitHub et validation du périmètre de développement
 
 ---
 
@@ -15,15 +15,44 @@ Argos est défini comme une plateforme professionnelle de cybersécurité
 offensive pilotée par IA, capable de conduire un pentest autorisé depuis le  
 mandat jusqu’au retest.
 
-Le développement d’Argos n’a pas encore commencé. La priorité est de produire  
-le corpus documentaire minimal qui permettra ensuite à Codex d’implémenter le  
-projet avec des limites, des critères d’acceptation et des tests explicites.
+La plateforme Argos décrite dans le brief n'est pas implémentée. Le dépôt
+contient désormais `01_SCOPE_V0_ARGOS.md` version 1.0, toujours `IN_PROGRESS`,
+ainsi qu'un harness, des profils et un laboratoire pédagogiques importés.
+Ces éléments ne démontrent pas les capacités de la plateforme cible.
+
+La demande du 7 octobre 2026 porte sur la préparation du dépôt pour GitHub et
+les recruteurs, puis sur une progression par petites améliorations. Le nettoyage,
+le README, la revue et une proposition de feuille de route sont ajoutés. La
+présentation publique complète nécessite encore une décision sur l'historique des
+missions et une clarification des droits de redistribution des imports restants.
+La vérification distante confirme que le dépôt GitHub est déjà public. Le
+propriétaire a retiré le course pack du dossier courant et demandé le push du
+nettoyage. Celui-ci conserve l'historique existant.
 
 Argos Arena est un projet séparé et n’est pas une dépendance d’Argos.
 
 ---
 
 ## 2. Travail terminé
+
+### Préparation du dépôt — 7 octobre 2026
+
+- suppression de 93 fichiers `Zone.Identifier` et ajout du `.gitignore` ;
+- exclusion Git des missions locales, du sélecteur actif et des réglages personnels,
+  avec conservation locale de ces données ;
+- ajout de `README.md`, `THIRD_PARTY_NOTICES.md`, `docs/REPOSITORY_REVIEW.md`
+  et de la proposition `docs/ROADMAP.md` ;
+- ajout d'un contrôle hors ligne de l'hygiène et de la syntaxe du dépôt ;
+- vérification de l'intégrité Git et de la syntaxe des sources importées ;
+- correction du manifeste : le scope V0 existe mais n'est pas validé.
+- retrait des 40 fichiers du course pack encore présents dans l'index après
+  suppression du dossier par le propriétaire ; exclusion du chemin pour les
+  prochains imports ;
+- ajout de `docs/RELATED_PROJECTS.md` avec sources primaires et licences annoncées ;
+- vérification de la visibilité publique et de l'alignement avec `origin/main`
+  avant préparation du commit.
+
+### Décisions et travaux de juillet 2026
 
 - vision inter-chats consolidée ;
     
@@ -254,9 +283,17 @@ Elles ne nécessitent pas de reprendre un brainstorming général.
 
 ## 7. Prochaine étape autorisée
 
-Créer `01_SCOPE_V0_ARGOS.md`.
+Préparer la publication du dépôt, puis examiner et valider ou ajuster
+`01_SCOPE_V0_ARGOS.md`, déjà créé. La proposition de démo hors ligne dans
+`docs/ROADMAP.md` reste à accepter avant son implémentation ; elle ne remplace
+pas automatiquement les cinq incréments du scope proposé.
 
-Le document doit fixer :
+Avant publication, clarifier les droits des imports et décider du traitement de
+l'historique contenant les données de missions. Le push demandé porte sur un
+commit normal de nettoyage ; une purge d'historique est une opération séparée,
+qui reste à décider explicitement.
+
+La revue du scope doit confirmer :
 
 1. les cinq incréments et leurs portes de validation ;
     
