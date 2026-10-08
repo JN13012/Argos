@@ -1,0 +1,9 @@
+{
+  "http://garage-classique.example/robots.txt": {"status": 200, "headers": {"content-type": "text/plain"}, "body": "User-agent: *\nAllow: /\n"},
+  "http://garage-classique.example/": {"status": 200, "headers": {"content-type": "text/html"}, "body": "<!doctype html><html><head><title>Garage démo classique</title></head><body><h1>Garage fictif</h1><p>Horaires et services : vidange, révision, pneus.</p><p>Rendez-vous par téléphone : <a href='tel:0400000000'>numéro fictif</a>.</p><a href='/contact'>Contact</a></body></html>"},
+  "http://garage-classique.example/contact": {"status": 200, "headers": {"content-type": "text/html"}, "body": "<html><head><title>Contact démo</title></head><body><a href='mailto:contact@garage-classique.example'>Contact professionnel fictif</a></body></html>"},
+  "https://garage-moderne.example/robots.txt": {"status": 404, "body": ""},
+  "https://garage-moderne.example/": {"status": 200, "headers": {"content-type": "text/html"}, "body": "<!doctype html><html><head><title>Garage démo moderne</title><meta name='description' content='Entretien automobile fictif'><meta name='viewport' content='width=device-width, initial-scale=1'></head><body><h1>Garage fictif</h1><a href='/reservation'>Réserver un rendez-vous</a><form><input type='email'><textarea name='message'></textarea></form></body></html>"},
+  "https://garage-moderne.example/reservation": {"status": 200, "headers": {"content-type": "text/html"}, "body": "<html><head><title>Réservation fictive</title></head><body><p>La démo ne transmet aucun formulaire.</p><form><input type='date'></form></body></html>"},
+  "https://garage-indisponible.example/robots.txt": {"status": 404, "body": ""}
+}

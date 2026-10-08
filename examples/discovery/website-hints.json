@@ -1,0 +1,5 @@
+[
+  {"siret": "00000010200001", "website": "http://garage-classique.example/", "source_url": "fixture:synthetic-website-declarations", "collected_at": "2026-10-08T00:00:00Z", "official_association_declared": true},
+  {"siret": "00000010300001", "website": "https://garage-moderne.example/", "source_url": "fixture:synthetic-website-declarations", "collected_at": "2026-10-08T00:00:00Z", "official_association_declared": true},
+  {"siret": "00000010400001", "website": "https://garage-indisponible.example/", "source_url": "fixture:synthetic-website-declarations", "collected_at": "2026-10-08T00:00:00Z", "official_association_declared": true}
+]

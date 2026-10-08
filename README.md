@@ -8,6 +8,31 @@ local evidence validation, human review and Markdown reports. The broader Argos
 platform described in the product brief remains a specification. This repository
 does not demonstrate performance comparable to commercial platforms.
 
+An independent **Discovery V0 prototype** discovers public French businesses,
+optionally reads a few pages of a declared official website, and produces
+traceable, deterministic potential-opportunity scores with SQLite/JSON snapshots.
+It does not contact prospects or perform security scans. Its scope differs from
+the security platform draft; see the [Discovery scope and contract](docs/DISCOVERY_V0.md).
+
+## Run the Discovery demo
+
+Requires Python 3.12+ and `uv`. From this checkout:
+
+```bash
+uv sync --locked
+uv run argos discover businesses --activity "garage automobile" \
+  --location Marseille --demo --limit 20 --json .argos/discovery-demo.json
+```
+
+The demo uses four fictional garages and simulated websites without network
+access. Runtime data stays under ignored `.argos/`; an existing JSON export is
+refused. Omit `--demo` to use the official French company and geographic APIs.
+Registry records do not systematically identify websites: provide a local
+`--website-hints` file to declare verified associations. Scores indicate potential
+service opportunities and observation confidence, never proven commercial needs
+or vulnerabilities. The [Discovery documentation](docs/DISCOVERY_V0.md) describes
+sources, scoring, network limits, installation and further examples.
+
 ## Preview the dashboard
 
 The [React dashboard](frontend/README.md) recreates the provided Argos design
@@ -71,13 +96,17 @@ without embedding proof content.
 
 `accepted` and `rejected` record human review decisions. They are not signed or
 authenticated, and do not certify technical validity. Pending and rejected
-findings remain in the report. See `python3 -m argos --help` for the five commands.
+findings remain in the report. See `python3 -m argos --help` for the offline commands
+and the independent Discovery entry point.
 
 ## What is here
 
 | Path | Purpose | Status |
 | --- | --- | --- |
-| `argos/` | Original offline CLI: storage, validation and reporting | Implemented |
+| `argos/` | Original offline CLI and independent `discovery/` prototype | Implemented tranches |
+| `examples/discovery/` | Fictional businesses and mock website responses | Offline Discovery demo |
+| `schemas/discovery.schema.json` | Discovery result and provenance contract | Version one |
+| `tests_discovery/` | Discovery unit, network-guard and SQLite/CLI tests | Run with `uv run pytest` |
 | `frontend/` | React and TypeScript home dashboard with unit and browser tests | Interactive demo, not connected to the core |
 | `schemas/assessment.schema.json` | Version-one structural data contract | Implemented |
 | `examples/offline/` | Synthetic data, proofs and reference report | Reproducible demo |
