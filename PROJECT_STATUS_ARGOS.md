@@ -1,8 +1,8 @@
 # ARGOS — Statut du projet
 
-**Version :** 1.4\
+**Version :** 1.5\
 **Statut :** canonique  
-**Date de situation :** 7 octobre 2026\
+**Date de situation :** 8 octobre 2026\
 **Phase :** premier livrable Argos Core hors ligne implémenté
 
 ---
@@ -70,6 +70,18 @@ Argos Arena est un projet séparé et n’est pas une dépendance d’Argos.
 - ajout de `docs/RELATED_PROJECTS.md` avec sources primaires et licences annoncées ;
 - vérification de la visibilité publique et de l'alignement avec `origin/main`
   avant préparation du commit.
+
+### Accueil Web — 8 octobre 2026
+
+- migration autorisée de l'accueil vers React, TypeScript strict et Vite ;
+- thème sombre et loup–kraken conservés, lisibilité et hiérarchie visuelle revues ;
+- composants séparés par fonctionnalité, source de données explicite et logique
+  de présentation indépendante de React ;
+- dossier synthétique, rapport correspondant, consultation des constats,
+  recherche, journal de session et chat à réponses locales ;
+- tests unitaires et navigateur, compilation et job CI dédiés au front ;
+- aucun raccordement au noyau, modèle IA ou moteur d'analyse ajouté ;
+- contrat et fonctionnement du premier livrable Python hors ligne conservés.
 
 ### Décisions et travaux de juillet 2026
 
