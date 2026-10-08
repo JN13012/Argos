@@ -2,17 +2,17 @@
 
 ## Mission
 
-**Title:** Synthetic offline assessment
+**Title:** Audit de configuration interne
 
-**ID:** demo\-offline
+**ID:** MIS\-001
 
-Demonstrates evidence integrity and human review using invented training data\. No application has been tested\.
+Revue des paramètres de diagnostic et de la bannière de l’application interne\.
 
-**Assessment SHA-256:** 3bd4926b765b4995a286ef979ec876b18d5952061046cf206e0e30a4cc2785e5
+**Assessment SHA-256:** 4fbb7b635ad333e5444881b6dcf06b4d2762967c515f09d99f5432b086d4479e
 
 **Scope:**
 
-- training\-fixtures
+- intranet\.example
 
 ## Review summary
 
@@ -30,31 +30,31 @@ Evidence integrity and a recorded review decision do not establish that a vulner
 
 ## Findings
 
-### F\-001 — Diagnostic configuration needs review
+### F\-001 — Configuration de diagnostic
 
 **Declared severity:** low
 
-**Asset:** training\-fixtures
+**Asset:** intranet\.example
 
 **Review:** needs_review
 
-The synthetic configuration declares debug mode\. This observation requires human review and is not a confirmed vulnerability\.
+Le fichier de configuration déclare un mode diagnostic\. Son contexte et ses paramètres doivent être examinés\.
 
-**Recommendation:** Check the intended environment and document the chosen diagnostic settings\.
+**Recommendation:** Vérifier le contexte et documenter la configuration retenue\.
 
 **Evidence IDs:** E\-001
 
-### F\-002 — Training banner could be clearer
+### F\-002 — Bannière applicative
 
 **Declared severity:** info
 
-**Asset:** training\-fixtures
+**Asset:** intranet\.example
 
 **Review:** needs_review
 
-The invented banner could describe the purpose of the training application more clearly\.
+La bannière présente l’application comme un environnement de formation\. Vérifier la clarté de ce libellé pour les utilisateurs\.
 
-**Recommendation:** Make the training\-only purpose explicit in the banner\.
+**Recommendation:** Préciser l’usage de l’environnement dans la bannière\.
 
 **Evidence IDs:** E\-002
 

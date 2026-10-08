@@ -1,4 +1,4 @@
-name: Offline checks
+name: Argos checks
 
 on:
   push:
@@ -34,3 +34,27 @@ jobs:
           cmp examples/offline/report.md .argos/report.md
       - name: Check patch whitespace
         run: git show --format= --check HEAD
+
+  frontend:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - name: Install locked dashboard dependencies
+        run: npm ci
+      - name: Check formatting, presentation contract and production build
+        run: npm run check
+      - name: Install browser for interaction tests
+        run: npx playwright install --with-deps chromium
+      - name: Check dashboard interactions on desktop and mobile
+        run: npm run test:e2e

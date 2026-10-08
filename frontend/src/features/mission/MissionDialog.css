@@ -1,0 +1,131 @@
+@layer features {
+  .dialog-description {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.8;
+    margin: 20px 0;
+  }
+  .dialog-scope {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 9px;
+    padding: 14px;
+    background: #132537;
+    border: 1px solid #2c445c;
+    border-radius: 8px;
+    color: var(--muted);
+    font-size: 12px;
+  }
+  .dialog-scope > .icon {
+    width: 16px;
+    height: 16px;
+    color: #8cbbdf;
+  }
+  .scope-value {
+    margin-right: auto;
+    font-family: Consolas, monospace;
+    color: var(--text);
+    overflow-wrap: anywhere;
+  }
+  .dialog-overview {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin: 16px 0 24px;
+    color: var(--muted);
+    font-size: 12px;
+  }
+  .finding-back {
+    margin-bottom: 18px;
+  }
+  .finding-card {
+    padding: 20px;
+    border: 1px solid #2b4057;
+    border-radius: 9px;
+    margin-bottom: 16px;
+  }
+  .finding-heading {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .finding-id {
+    color: var(--subtle);
+    font:
+      11px Consolas,
+      monospace;
+  }
+  .finding-heading h3 {
+    margin: 0 auto 0 0;
+    font-size: 15px;
+    font-weight: 500;
+  }
+  .finding-card p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.8;
+    margin: 14px 0;
+  }
+  .finding-card p strong {
+    color: #c5d3e3;
+    font-weight: 500;
+  }
+  .finding-asset span {
+    font-family: Consolas, monospace;
+  }
+  .finding-review {
+    border-left: 2px solid #5485aa;
+    padding: 10px 14px;
+    background: #122638;
+    margin: 18px 0;
+  }
+  .finding-review > strong {
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .finding-review p {
+    margin: 7px 0 0;
+  }
+  .finding-proofs {
+    display: grid;
+    gap: 10px;
+  }
+  .finding-evidence {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border-soft);
+    color: #a6c6df;
+    font-size: 11px;
+  }
+  .finding-evidence .icon {
+    width: 15px;
+    height: 15px;
+  }
+  .finding-evidence code {
+    margin-left: auto;
+    color: var(--subtle);
+    font-size: 10px;
+    overflow-wrap: anywhere;
+  }
+  .dialog-footer {
+    color: var(--subtle);
+    font-size: 11px;
+    line-height: 1.8;
+    margin: 20px 0 0;
+  }
+  @media (max-width: 700px) {
+    .finding-card {
+      padding: 16px;
+    }
+    .finding-evidence code {
+      width: 100%;
+      margin-left: 0;
+    }
+  }
+}

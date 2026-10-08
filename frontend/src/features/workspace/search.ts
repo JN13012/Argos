@@ -1,0 +1,11 @@
+export function normalizeSearch(value: string): string {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .trim();
+}
+
+export function matchesSearch(query: string, ...fields: string[]): boolean {
+  return normalizeSearch(fields.join(" ")).includes(normalizeSearch(query));
+}

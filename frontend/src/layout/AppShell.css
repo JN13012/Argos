@@ -1,0 +1,332 @@
+@layer layout {
+  .topbar {
+    position: fixed;
+    z-index: 20;
+    inset: 0 0 auto;
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+    padding: 0 var(--space-6);
+    border-bottom: 1px solid var(--border);
+    background: #080f19f5;
+    backdrop-filter: blur(16px);
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 176px;
+  }
+  .brand > span {
+    font-size: 25px;
+    font-weight: 600;
+    letter-spacing: 3.5px;
+  }
+  .environment {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .global-search {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    flex: 1;
+    max-width: 640px;
+    height: 42px;
+    margin: 0 auto;
+    padding: 0 12px;
+    border: 1px solid #26384c;
+    border-radius: 8px;
+    background: #0c1724;
+    color: var(--subtle);
+  }
+  .global-search:focus-within {
+    border-color: #5680a6;
+    box-shadow: 0 0 0 3px #3296ee12;
+  }
+  .global-search .icon {
+    width: 18px;
+    height: 18px;
+  }
+  .global-search input {
+    width: 100%;
+    min-width: 0;
+    padding: 6px 0;
+    border: 0;
+    outline: none;
+    background: none;
+    color: var(--text);
+    font-size: 12px;
+  }
+  .global-search kbd {
+    white-space: nowrap;
+    border: 1px solid #304158;
+    border-radius: 4px;
+    padding: 2px 5px;
+    font:
+      10px "Segoe UI",
+      sans-serif;
+    color: var(--subtle);
+  }
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-left: auto;
+  }
+  .profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 var(--space-4);
+    border-left: 1px solid var(--border);
+  }
+  .profile-avatar {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border: 1px solid #385a7d;
+    border-radius: 50%;
+    color: #bde3ff;
+    background: #17314a;
+    font-size: 13px;
+  }
+  .profile strong,
+  .profile small {
+    display: block;
+    white-space: nowrap;
+  }
+  .profile strong {
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .profile small {
+    font-size: 10px;
+    color: var(--subtle);
+    margin-top: 2px;
+  }
+  .mobile-menu {
+    display: none;
+  }
+  .sidebar {
+    position: fixed;
+    z-index: 15;
+    top: var(--header-height);
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    width: var(--sidebar-width);
+    padding: 26px 14px 0;
+    background: #0a1320;
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+  }
+  .nav-section-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    color: var(--subtle);
+    margin: 0 10px var(--space-5);
+  }
+  .navigation-group {
+    display: grid;
+    gap: 5px;
+  }
+  .navigation-group + .navigation-group {
+    border-top: 1px solid var(--border-soft);
+    padding-top: var(--space-4);
+    margin-top: var(--space-4);
+  }
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+    width: 100%;
+    min-height: 46px;
+    padding: 12px 13px;
+    border-radius: 7px;
+    text-align: left;
+    color: #9badc2;
+    font-size: 13px;
+  }
+  .nav-item .icon {
+    width: 18px;
+    height: 18px;
+  }
+  .nav-item.active {
+    color: #9ed5ff;
+    background: linear-gradient(90deg, #153552, #11263c);
+    font-weight: 500;
+  }
+  .nav-item.active::before {
+    content: "";
+    position: absolute;
+    width: 3px;
+    left: 0;
+    top: 12px;
+    bottom: 12px;
+    border-radius: 3px;
+    background: #71c2ff;
+  }
+  .nav-item:disabled {
+    color: #9badc2;
+  }
+  .active-dot {
+    width: 5px;
+    height: 5px;
+    margin-left: auto;
+    background: var(--cyan);
+    border-radius: 50%;
+  }
+  .sidebar-bottom {
+    margin-top: auto;
+    padding-top: var(--space-8);
+  }
+  .local-status {
+    padding: var(--space-4);
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    background: #0e1c2b;
+  }
+  .local-status .eyebrow {
+    font-size: 10px;
+  }
+  .local-status strong {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin: 12px 0 8px;
+    font-size: 12px;
+    color: var(--green);
+    font-weight: 500;
+  }
+  .local-status p {
+    margin: 0 0 10px;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .local-status .button {
+    font-size: 11px;
+  }
+  .sidebar-footer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 22px 8px;
+    color: var(--subtle);
+    font-size: 11px;
+  }
+  .sidebar-footer .icon {
+    width: 14px;
+    height: 14px;
+  }
+  .sidebar-footer strong {
+    font-weight: 400;
+    margin-left: 6px;
+  }
+  .sidebar-backdrop {
+    position: fixed;
+    inset: var(--header-height) 0 0;
+    z-index: 14;
+    background: #000a;
+  }
+  .workspace {
+    margin: var(--header-height) 0 0 var(--sidebar-width);
+    padding: 24px 28px 0;
+    min-height: calc(100dvh - var(--header-height));
+    background: radial-gradient(ellipse at 50% 0, #15314938, transparent 65%);
+  }
+  .workspace-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 14px 0 20px;
+  }
+  .workspace-footer .button {
+    font-size: 11px;
+  }
+  @media (min-width: 1800px) {
+    .workspace {
+      padding: 28px 40px 0;
+    }
+  }
+  @media (max-width: 1250px) {
+    :root {
+      --sidebar-width: 200px;
+    }
+    .topbar {
+      gap: 16px;
+      padding: 0 18px;
+    }
+    .brand {
+      min-width: 152px;
+    }
+    .environment {
+      display: none;
+    }
+    .profile > span:last-child {
+      display: none;
+    }
+    .profile {
+      padding: 0 10px;
+    }
+    .workspace {
+      padding: 20px;
+    }
+  }
+  @media (max-width: 1000px) {
+    .new-mission,
+    .profile {
+      display: none;
+    }
+    .brand {
+      min-width: auto;
+    }
+  }
+  @media (max-width: 700px) {
+    :root {
+      --sidebar-width: 0px;
+      --header-height: 64px;
+    }
+    .topbar {
+      gap: 10px;
+      padding: 0 12px;
+    }
+    .mobile-menu {
+      display: inline-flex;
+    }
+    .brand {
+      gap: 8px;
+    }
+    .brand > span {
+      font-size: 22px;
+      letter-spacing: 2.5px;
+    }
+    .global-search {
+      display: none;
+    }
+    .header-actions {
+      gap: 0;
+    }
+    .sidebar {
+      width: 240px;
+      transform: translateX(-100%);
+      transition: transform 0.18s ease;
+    }
+    .sidebar.open {
+      transform: none;
+    }
+    .workspace {
+      margin-left: 0;
+      padding: 16px 14px 0;
+    }
+  }
+}

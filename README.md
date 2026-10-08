@@ -10,16 +10,25 @@ does not demonstrate performance comparable to commercial platforms.
 
 ## Preview the dashboard
 
-The [home dashboard prototype](frontend/README.md) recreates the provided Argos
-design references with the project mascot and synthetic offline demo data.
+The [React dashboard](frontend/README.md) recreates the provided Argos design
+references with the project mascot and a fictional mission workspace.
+It uses TypeScript and Vite; development requires Node.js 24 or newer.
 
 ```bash
-python3 -m http.server 8000 --bind 127.0.0.1 --directory frontend
+cd frontend
+npm ci
+npm run dev
 ```
 
 Open **http://localhost:8000**. Only the home dashboard is implemented; its
-search, mission preview, activity filters, reference report download and scripted
-demo chat work locally. It is not connected to Argos Core or an AI model yet.
+search, direct finding access, compact session logs, report download and
+collapsible scripted chat work locally. Mission details appear once, with
+documents on the right and logs and chat underneath. The bundled report is
+generated with Argos Core from the same fictional
+assessment; the UI has no live connection to the core or an AI model. See the
+[home design review](docs/HOME_DESIGN_REVIEW.md) for its information priorities.
+For a production preview, run `npm run build` then `npm run preview` from
+`frontend/`. The Python CLI remains usable without installing frontend dependencies.
 
 ## Run the offline demo
 
@@ -69,7 +78,7 @@ findings remain in the report. See `python3 -m argos --help` for the five comman
 | Path | Purpose | Status |
 | --- | --- | --- |
 | `argos/` | Original offline CLI: storage, validation and reporting | Implemented |
-| `frontend/` | Home dashboard inspired by the provided design references | Interactive demo, not connected to the core |
+| `frontend/` | React and TypeScript home dashboard with unit and browser tests | Interactive demo, not connected to the core |
 | `schemas/assessment.schema.json` | Version-one structural data contract | Implemented |
 | `examples/offline/` | Synthetic data, proofs and reference report | Reproducible demo |
 | `tests/` | Contract, reporting and CLI integration tests | Run offline |
@@ -103,6 +112,9 @@ The original offline CLI runs directly from this checkout. The
 the reference report on Python 3.11, 3.12 and 3.13. The JSON Schema describes the
 structure; runtime checks also enforce references, scope, path containment and
 file integrity. Validation errors exit with code `2`; file I/O errors use `1`.
+The dashboard has a separate CI job for locked npm dependencies, formatting,
+TypeScript, unit tests and Playwright browser interactions. Its checks are
+documented in [frontend/README.md](frontend/README.md).
 
 Imported course instructions may refer to files not present in this checkout;
 see the repository review for the known gaps. The downloaded course pack has

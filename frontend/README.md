@@ -1,51 +1,147 @@
 # Accueil Argos
 
-Prototype du dashboard d'accueil, reconstruit à partir des propositions visuelles
-fournies par le propriétaire. Fond bleu nuit, accents cyan, mascotte Argos,
-navigation latérale, indicateurs, suivi des missions et panneau de chat.
+Dashboard React + TypeScript + Vite, inspiré des propositions visuelles du
+propriétaire. Navigation latérale, mission et constats directement accessibles,
+rapport à droite, journal de logs puis conversation repliable. Les styles et
+les ressources sont locaux ; aucune police distante ni CDN.
 
-## Ouvrir la démonstration
+## Lancer le front
 
-Depuis la racine du dépôt :
+Node.js **24 ou supérieur** et npm sont nécessaires. Depuis la racine du dépôt :
 
 ```bash
-python3 -m http.server 8000 --bind 127.0.0.1 --directory frontend
+cd frontend
+npm ci
+npm run dev
 ```
 
-Ouvrir **http://localhost:8000**. Arrêter le serveur avec `Ctrl+C`.
-Il est également possible d'ouvrir directement `frontend/index.html` dans un
-navigateur : les scripts classiques et les ressources relatives ne nécessitent
-ni serveur d'API ni téléchargement de dépendances.
+Ouvrir **http://localhost:8000**. Le serveur écoute uniquement sur `127.0.0.1`.
+Arrêter avec `Ctrl+C`. L'installation initiale récupère les dépendances npm.
+Une fois les dépendances disponibles, le dashboard fonctionne localement sans
+clé d'API ni accès à un service externe.
 
-## Périmètre
+Pour consulter la version compilée :
 
-Seul l'accueil est réalisé. La page s'adapte aux écrans de bureau, tablettes et
-téléphones. La recherche (`Ctrl+K` ou `Cmd+K`), l'aperçu de mission, les
-notifications, le filtrage du journal, le téléchargement du rapport et le chat
-de démonstration sont utilisables. Le chat peut être agrandi ; `Échap` le réduit.
+```bash
+npm run build
+npm run preview
+```
 
-Les espaces Red Team, OSINT, Blue Team, Preuves, Rapports, Agents et Paramètres,
-ainsi que la création de mission, sont présentés dans la navigation mais ne
-sont pas implémentés. Leurs boutons sont désactivés.
+`dist/` est généré et ignoré par Git. L'ouverture directe de `index.html` avec
+`file://` et l'ancien serveur Python pointant sur `frontend/` ne conviennent plus
+au projet source. La compilation produit des ressources statiques utilisables
+avec un serveur HTTP ; elle n'ajoute pas de serveur applicatif.
 
-## Données et fonctionnement
+## Périmètre et comportement
 
-- `demo-data.js` contient une copie du document synthétique
-  `examples/offline/assessment.json` ; les titres et descriptions de l'aperçu
-  sont présentés en français. Une mission, un actif, deux constats à revoir,
-  deux preuves référencées, aucun constat critique et aucun agent connecté.
-- `assets/demo-report.md` est une copie du rapport de référence du même exemple.
-  Le téléchargement ne génère pas un nouveau rapport.
-- Le journal illustre ce document ; ses numéros sont des étapes d'exemple, pas
-  des événements d'un moteur en cours d'exécution.
-- Le chat répond avec des textes prédéfinis. Les messages sont conservés
-  uniquement en mémoire et disparaissent au rechargement. Aucun appel à un
-  modèle, accès aux preuves locales ou lancement d'outil n'est effectué.
-- Le front n'est pas encore connecté à Argos Core. Le contrat de données,
-  les commandes et les tests du noyau restent ceux du livrable hors ligne.
+Seul l'accueil est implémenté. Les autres espaces restent désactivés : Red Team,
+OSINT, Blue Team, Preuves, Rapports, Agents et Paramètres. La création de mission
+reste une fonctionnalité future.
 
-HTML, CSS et JavaScript sans dépendance, police distante ni CDN. Les ressources
-visuelles sont décrites dans [assets/README.md](assets/README.md).
+- Recherche dans les constats et documents, insensible aux accents, accessible
+  par `Ctrl+K` ou `Cmd+K` sur ordinateur.
+- Ouverture du dossier complet ou d'un constat avec ses preuves et les décisions
+  de revue. Les dialogues natifs gèrent le clavier, le focus et `Échap`.
+- Un seul téléchargement de rapport, proposé lorsque l'empreinte du dossier
+  affiché correspond au dossier utilisé pour générer le rapport.
+- Logs de consultation et de demande de téléchargement, horodatés en Europe/Paris.
+  Trois événements visibles initialement, journal développable, filtres par type.
+  Les 100 derniers événements restent en mémoire jusqu'au rechargement.
+- Argos Chat à réponses prédéfinies : questions, raccourcis et messages en texte
+  simple. La conversation conserve ses messages et son brouillon lorsqu'elle
+  est repliée ou agrandie. Elle est limitée à 42 messages et 500 caractères par
+  question. Aucun modèle IA ni moteur d'analyse n'est connecté.
+- États de chargement, absence explicite de mission, données incompatibles et
+  erreur de lecture distincts. Une erreur ne provoque aucun remplacement par
+  des données fictives ; la navigation et l'aide restent accessibles.
 
-La prochaine tranche pourra connecter les données réelles de mission à cet
-accueil, avant de développer les pages de mission et de revue.
+## Données et limites
+
+`src/fixtures/workspace.json` décrit le cas fictif `MIS-001`, « Audit de
+configuration interne », avec `intranet.example` comme actif d'exemple.
+Il dérive des fixtures originales `examples/offline/` et conserve les chemins,
+empreintes et provenance des deux preuves synthétiques. Aucun système n'a été testé.
+
+`assets/mission-report.md` est produit par Argos Core à partir de ce même dossier.
+Le téléchargement ne génère pas de rapport. La comparaison SHA-256 porte sur
+le JSON canonique du dossier, pas sur les fichiers de preuve. Si le dossier est
+modifié ou Web Crypto indisponible, le rapport précédent n'est pas proposé.
+
+Le front ne lit pas de fichiers de preuve, n'exécute pas d'outil et n'est pas
+connecté à Argos Core. Une revue humaine ne confirme pas techniquement une
+vulnérabilité. Le contrôle de présentation ne remplace pas la validation du
+noyau Python. Le contrat `schema_version: 1` reste celui du livrable hors ligne.
+
+## Organisation du code
+
+```text
+src/
+  app/                 Assemblage de l'application et aide
+  components/          Boutons, badges, icônes, logo et dialogue partagés
+  layout/              En-tête, recherche, navigation et adaptation mobile
+  features/
+    workspace/         Contrat typé, contrôles, résumé, source et empreinte
+    home/              Composition de l'accueil, mission et rapport
+    mission/           Consultation du dossier et des constats
+    activity/          Événements de session et journal filtrable
+    chat/              Conversation et réponses locales
+  fixtures/            Dossier synthétique affiché
+  styles/              Variables de thème et styles de base
+  test/                Environnement de tests et fixtures de test
+tests/e2e/             Parcours Playwright sur le front compilé
+```
+
+Les styles propres à une fonctionnalité sont placés à côté de ses composants.
+Les variables communes de couleur et d'espacement vivent dans `styles/tokens.css`.
+Les couches CSS `tokens`, `base`, `components`, `layout` et `features` définissent
+une priorité explicite, pour que les règles d'adaptation des composants restent
+effectives quand les fichiers de styles évoluent.
+La géométrie des icônes SVG est originale et centralisée ; les images et leur
+provenance sont documentées dans [assets/README.md](assets/README.md).
+
+Les composants reçoivent des données et des callbacks explicites. Le chargement
+passe par `WorkspaceSource`, implémenté pour le dossier embarqué. Un futur
+adaptateur local pourra remplacer cette source sans réécrire les panneaux.
+Les entrées de source sont de type `unknown`, puis contrôlées avant affichage :
+TypeScript ne dispense pas de vérifier les données reçues à l'exécution.
+
+Les fonctions de contrôle, de résumé, de recherche et de cohérence du rapport
+sont indépendantes de React. Les états restent auprès des composants qui les
+utilisent ; aucun magasin global ni système de routage n'est ajouté pour cette
+page unique. Les fonctionnalités futures pourront introduire un routage ou un
+cache de données lorsque leurs besoins seront définis.
+
+## Vérifications
+
+Depuis `frontend/` :
+
+```bash
+npm run check
+npx playwright install chromium
+npm run test:e2e
+```
+
+`check` vérifie le formatage, exécute les tests Vitest / Testing Library,
+contrôle les types stricts et compile la version de production. Les tests
+couvrent le contrat de présentation, les empreintes, les décisions de revue,
+les données absentes, la recherche, les logs et l'échappement des messages.
+
+Playwright couvre le téléchargement exact, le focus des dialogues, le chat
+agrandi, la navigation mobile et les différentes largeurs d'écran sur la version
+compilée. Il démarre son propre serveur sur `127.0.0.1:4173`. Les traces et les
+captures d'échecs restent sous `.argos/playwright-results/`, ignoré par Git.
+L'installation du navigateur nécessite un téléchargement initial ; la CI
+exécute ces mêmes vérifications sur Node.js 24.
+
+Commandes de travail supplémentaires : `npm run test:watch`, `npm run typecheck`
+et `npm run format`. Les tests du noyau restent indépendants :
+
+```bash
+python3 -m unittest discover -s tests -v
+python3 scripts/check_repository.py
+git diff --check
+```
+
+Ces trois commandes s'exécutent à la racine du dépôt. Les choix de contenu sont
+expliqués dans [la revue de l'accueil](../docs/HOME_DESIGN_REVIEW.md).
+Le raccordement à des missions locales réelles reste un livrable séparé.
