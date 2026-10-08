@@ -25,6 +25,7 @@ def _parser():
     parser = argparse.ArgumentParser(prog="argos", description="Argos Core — offline evidence and reporting")
     parser.add_argument("--version", action="version", version=f"Argos Core {__version__}")
     commands = parser.add_subparsers(dest="command", required=True)
+    commands.add_parser("discover", help="Business discovery prototype (Python 3.12+; uv sync)")
     init = commands.add_parser("init", help="Create an empty mission document")
     init.add_argument("--id", required=True)
     init.add_argument("--title", required=True)
@@ -99,6 +100,17 @@ def _run(args):
 
 
 def main(argv=None):
+    argv = list(sys.argv[1:] if argv is None else argv)
+    if argv and argv[0] == "discover":
+        if sys.version_info < (3, 12):
+            print("argos discover requires Python 3.12+; the offline commands support Python 3.11+", file=sys.stderr)
+            return 2
+        try:
+            from .discovery.cli import main as discovery_main
+        except ModuleNotFoundError as exc:
+            print(f"argos discover requires installed dependencies ({exc.name}); run uv sync --locked", file=sys.stderr)
+            return 2
+        return discovery_main(argv[1:])
     args = _parser().parse_args(argv)
     try:
         _run(args)
