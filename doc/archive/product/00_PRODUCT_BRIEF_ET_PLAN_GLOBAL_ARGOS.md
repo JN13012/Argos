@@ -1,5 +1,12 @@
 # ARGOS — Product Brief et plan global
 
+**Status: ARCHIVED / SUPERSEDED.**
+
+Remplacé par la [vision modulaire](../../product/VISION.md).
+
+Le contenu ci-dessous est conservé pour mémoire. Ses anciens statuts, décisions
+et prochaines étapes ne définissent plus le corpus actif.
+
 **Version :** 2.5  
 **Statut :** vision approuvée — spécification V0 en cours  
 **Date :** 28 juillet 2026  

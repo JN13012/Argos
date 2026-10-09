@@ -1,5 +1,12 @@
 # ARGOS — Statut du projet
 
+**Status: ARCHIVED / SUPERSEDED.**
+
+Remplacé par le [statut courant](../../project/STATUS.md).
+
+Le contenu ci-dessous est conservé pour mémoire. Ses anciens statuts, décisions
+et prochaines étapes ne définissent plus le corpus actif.
+
 **Version :** 1.7\
 **Statut :** canonique  
 **Date de situation :** 9 octobre 2026\
@@ -37,7 +44,7 @@ publiée au commit `422e2b9` inclut également les réalisations récentes.
 
 Le front React/TypeScript et Discovery V0 sont réalisés comme prototypes
 indépendants. Le front n'est raccordé ni à Argos Core ni à Discovery.
-La [fiche Discovery](../livrables/DISCOVERY_V0.md) conserve sa contradiction avec
+La [fiche Discovery](../../livrables/DISCOVERY_V0.md) conserve sa contradiction avec
 l'exclusion de l'enrichissement commercial dans le draft V0 ; un rattachement
 au produit reste à décider séparément.
 
@@ -87,7 +94,7 @@ Argos Arena est un projet séparé et n’est pas une dépendance d’Argos.
 - thème sombre et loup–kraken conservés lors de la migration initiale,
   lisibilité et hiérarchie visuelle revues ;
 - présentation « Front init » et mascotte d'origine ensuite restaurées dans
-  React, comme décrit dans la [revue de l'accueil](../interface/HOME_DESIGN_REVIEW.md) ;
+  React, comme décrit dans la [revue de l'accueil](../reviews/HOME_DESIGN_REVIEW.md) ;
 - composants séparés par fonctionnalité, source de données explicite et logique
   de présentation indépendante de React ;
 - dossier synthétique, rapport correspondant, consultation des constats,
@@ -100,7 +107,7 @@ Argos Arena est un projet séparé et n’est pas une dépendance d’Argos.
 
 - documentation regroupée dans `doc/` par type : produit, suivi, livrables,
   guides, interface et références ;
-- sommaire dans [doc/README.md](../README.md) et README de racine réduit aux
+- sommaire dans [doc/README.md](../../README.md) et README de racine réduit aux
   points d'entrée ;
 - guides du front et des exemples déplacés avec leurs liens corrigés ;
 - chemin du livrable dans `AGENTS.md` et commandes de formatage du front adaptés ;
@@ -288,11 +295,11 @@ Argos Arena est un projet séparé et n’est pas une dépendance d’Argos.
 |   |   |   |
 |---|---|---|
 |Document|Version|État|
-|[00_PRODUCT_BRIEF_ET_PLAN_GLOBAL_ARGOS.md](../produit/00_PRODUCT_BRIEF_ET_PLAN_GLOBAL_ARGOS.md)|2.5|Canonique|
+|[00_PRODUCT_BRIEF_ET_PLAN_GLOBAL_ARGOS.md](../product/00_PRODUCT_BRIEF_ET_PLAN_GLOBAL_ARGOS.md)|2.5|Canonique|
 |[CANONICAL_MANIFEST_ARGOS.md](CANONICAL_MANIFEST_ARGOS.md)|1.6|Canonique|
 |[PROJECT_STATUS_ARGOS.md](PROJECT_STATUS_ARGOS.md)|1.7|Canonique|
 |`GUIDE_TRAVAIL_ARGOS_AVEC_CHATGPT.md`|—|Retiré du corpus et absent du dépôt|
-|[01_SCOPE_V0_ARGOS.md](../produit/01_SCOPE_V0_ARGOS.md)|1.0|`IN_PROGRESS` — validation complète en attente|
+|[01_SCOPE_V0_ARGOS.md](../product/01_SCOPE_V0_ARGOS.md)|1.0|`IN_PROGRESS` — validation complète en attente|
 |`doc/livrables/FIRST_DELIVERABLE.md`|1.0|Contrat du lot hors ligne accepté et implémenté|
 |`02` à `15`|—|Planifiés|
 |`AGENTS.md`|—|Actif pour le premier livrable hors ligne|

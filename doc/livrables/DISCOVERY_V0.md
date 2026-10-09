@@ -1,19 +1,26 @@
 # Discovery V0 — prototype local de qualification
 
 **Date :** 8 octobre 2026. **Contrat :** `schema_version: 1`.
-**Scoring :** `conservative-v1`. Cette tranche est autorisée par la demande actuelle.
+**Scoring :** `conservative-v1`. Cette fiche conserve le contrat de la tranche livrée.
 
-## Périmètre séparé
+**Status: IMPLEMENTATION NOTES — historique et contrat de la première
+implémentation OSINT Discovery.** Cette fiche décrit le code actuel sous
+`argos/discovery/`. La nouvelle [architecture OSINT](../architecture/OSINT.md)
+définit la cible ; le code n'a pas encore été restructuré selon cette cible.
+Le [scope actif](../product/SCOPE.md) donne désormais la priorité à Business
+Discovery + Website Opportunity. Le contrat technique ci-dessous reste inchangé.
+
+## Périmètre de l'implémentation
 
 Le dépôt possède déjà Argos Core hors ligne et un dashboard React. Discovery
 ajoute une tranche indépendante de découverte d'entreprises professionnelles
 publiques, enrichissement HTML limité et qualification explicable.
 
-**Contradiction documentée :** la section 15.2 de `01_SCOPE_V0_ARGOS.md` exclut
-l'enrichissement commercial de l'OSINT technique. Discovery étend aussi la stack
-et l'accès réseau au-delà de `doc/livrables/FIRST_DELIVERABLE.md`. Cette fiche enregistre
-cette différence sans réécrire la vision ni valider le draft V0. Un rattachement
-au produit reste une décision à formaliser.
+**Contexte historique :** l'ancien scope V0 offensif excluait l'enrichissement
+commercial ; il est désormais archivé et remplacé par le scope actif OSINT.
+Discovery constitue sa première implémentation partielle. Sa stack et son accès
+réseau restent distincts du lot Core hors ligne, dont le contrat est conservé
+en archive. Ce repositionnement ne change aucun comportement technique.
 
 Les cinq commandes hors ligne et leur contrat `assessment.schema.json` sont
 conservés. Discovery utilise [discovery.schema.json](../../schemas/discovery.schema.json).

@@ -4,19 +4,24 @@ Documentation is indexed in [doc/README.md](../README.md). Run the commands in
 this guide from the repository root, unless a command explicitly changes the
 working directory to `frontend/`.
 
-An early-stage research project exploring AI-assisted security assessment,
-with an emphasis on traceable evidence, clear boundaries and useful reports.
+Argos aims to be a modular, AI-assisted platform for OSINT, cybersecurity and
+automation. OSINT is the current priority; the [vision](../product/VISION.md)
+and [active scope](../product/SCOPE.md) describe that direction.
 
 **Current stage:** Argos Core 0.1.0 implements an offline CLI for mission data,
-local evidence validation, human review and Markdown reports. The broader Argos
-platform described in the product brief remains a specification. This repository
-does not demonstrate performance comparable to commercial platforms.
+local evidence validation, human review and Markdown reports. The
+[modular architecture](../architecture/ARCHITECTURE.md) remains a target;
+Discovery has not moved into `argos/osint/`. Red, Defense and a production agent
+harness remain future work.
 
 An independent **Discovery V0 prototype** discovers public French businesses,
 optionally reads a few pages of a declared official website, and produces
 traceable, deterministic potential-opportunity scores with SQLite/JSON snapshots.
-It does not contact prospects or perform security scans. Its scope differs from
-the security platform draft; see the [Discovery scope and contract](../livrables/DISCOVERY_V0.md).
+It is the first partial OSINT Discovery implementation and remains separate
+from Core and the dashboard. It does not contact prospects or perform security
+scans. See the [Discovery implementation contract](../livrables/DISCOVERY_V0.md)
+for its current limits and the [OSINT architecture](../architecture/OSINT.md)
+for its intended evolution.
 
 ## Run the Discovery demo
 
@@ -56,7 +61,8 @@ the welcome mascot, five overview cards and document, mission and planned-agent
 panels, with chat on the right on desktop and session logs below. The bundled report is
 generated with Argos Core from the same fictional
 assessment; the UI has no live connection to the core or an AI model. See the
-[home design review](../interface/HOME_DESIGN_REVIEW.md) for its information priorities.
+[archived home design review](../archive/reviews/HOME_DESIGN_REVIEW.md) for the
+presentation choices of that completed stage.
 For a production preview, run `npm run build` then `npm run preview` from
 `frontend/`. The Python CLI remains usable without installing frontend dependencies.
 
@@ -116,14 +122,15 @@ and the independent Discovery entry point.
 | `schemas/assessment.schema.json` | Version-one structural data contract | Implemented |
 | `examples/offline/` | Synthetic data, proofs and reference report | Reproducible demo |
 | `tests/` | Contract, reporting and CLI integration tests | Run offline |
-| [First deliverable](../livrables/FIRST_DELIVERABLE.md) | Authorized scope and acceptance criteria for Argos Core | Implemented tranche |
-| [Product brief](../produit/00_PRODUCT_BRIEF_ET_PLAN_GLOBAL_ARGOS.md) | Long-term vision and product principles | Vision document |
-| [V0 scope](../produit/01_SCOPE_V0_ARGOS.md) | Proposed initial scope and acceptance criteria | Draft, awaiting validation |
-| [Project status](../suivi/PROJECT_STATUS_ARGOS.md) | Decisions and current progress | Project record |
-| [Canonical manifest](../suivi/CANONICAL_MANIFEST_ARGOS.md) | Document authority and dependencies | Documentation index |
+| [Core deliverable archive](../archive/deliverables/FIRST_DELIVERABLE.md) | Preserved contract for the delivered offline tranche | Historical contract; existing behavior unchanged |
+| [Vision](../product/VISION.md) | Modular direction and product principles | Active / canonical |
+| [Active scope](../product/SCOPE.md) | OSINT and Business Discovery + Website Opportunity | Active / canonical |
+| [Architecture](../architecture/ARCHITECTURE.md) | Target module boundaries | Active / canonical; not yet applied |
+| [Project status](../project/STATUS.md) | Current implementation and known gaps | Active / canonical |
+| [Canonical manifest](../project/CANONICAL_MANIFEST.md) | Document roles and authority | Active corpus index |
 | `Harness/Harness/` | Experimental agent profile, hooks and engagement templates | Prototype, not a security boundary |
-| [Roadmap](../suivi/ROADMAP.md) | Proposed milestones for a public portfolio | Proposal |
-| [Repository review](../suivi/REPOSITORY_REVIEW.md) | Publication findings and validation limits | Preparation record |
+| [Roadmap](../project/ROADMAP.md) | OSINT-first progression and later modules | Active / canonical |
+| [Archive index](../archive/README.md) | Former direction and completed reviews | Historical documents |
 | [Related projects](../references/RELATED_PROJECTS.md) | Competitors, design references and license observations | Research notes |
 
 ## Review the repository
@@ -151,7 +158,8 @@ TypeScript, unit tests and Playwright browser interactions. Its checks are
 documented in the [frontend guide](../interface/FRONTEND.md).
 
 Imported course instructions may refer to files not present in this checkout;
-see the repository review for the known gaps. The downloaded course pack has
+the [archived repository review](../archive/reviews/REPOSITORY_REVIEW.md) records
+the gaps observed at that time. The downloaded course pack has
 been removed from the current tree. The offline demo does not use those imports.
 
 ## Data and provenance

@@ -1,5 +1,12 @@
 # ARGOS — Scope de la V0 interne
 
+**Status: ARCHIVED / SUPERSEDED.**
+
+Remplacé par le [scope actif OSINT](../../product/SCOPE.md).
+
+Le contenu ci-dessous est conservé pour mémoire. Ses anciens statuts, décisions
+et prochaines étapes ne définissent plus le corpus actif.
+
 **Version :** 1.0  
 **Statut :** `IN_PROGRESS` — proposition complète soumise à validation canonique  
 **Date :** 29 juillet 2026  

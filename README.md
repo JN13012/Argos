@@ -1,24 +1,20 @@
 # Argos
 
-An early-stage project exploring AI-assisted security assessment, with traceable
-evidence, clear boundaries and useful reports.
+Argos aims to be a modular, AI-assisted platform for OSINT, cybersecurity and
+automation: OSINT, Red, Defense, Agents / Harness and Interface. **OSINT is the
+current priority**, starting with Business Discovery + Website Opportunity.
+See the [vision](doc/product/VISION.md) and [active scope](doc/product/SCOPE.md).
 
-The repository contains an offline Python CLI, an independent business Discovery
-prototype and a React home dashboard. The broader security platform remains a
-specification; the dashboard is not connected to either engine.
+The repository currently contains an offline Python Core CLI, a business
+Discovery V0 prototype and a React home dashboard. The dashboard is not connected
+to the engines; Red, Defense and a production agent harness remain future work.
+Discovery still lives under `argos/discovery/`; the
+[target architecture](doc/architecture/ARCHITECTURE.md) has not been applied.
 
-All project documentation is organized in **[doc/](doc/README.md)**.
+- [Documentation index](doc/README.md), [status](doc/project/STATUS.md) and [roadmap](doc/project/ROADMAP.md).
+- [Getting started and demos](doc/guides/DEMARRAGE.md).
+- [Frontend guide](doc/interface/FRONTEND.md).
+- [Third-party notices](doc/references/THIRD_PARTY_NOTICES.md) for the separate research material in `Harness/`.
 
-| Start here | Documentation |
-| --- | --- |
-| Installation, demos, mission review and checks | [Getting started](doc/guides/DEMARRAGE.md) |
-| Run the dashboard on localhost:8000 | [Frontend guide](doc/interface/FRONTEND.md) |
-| Offline Core contract | [First deliverable](doc/livrables/FIRST_DELIVERABLE.md) |
-| Discovery setup, sources and limits | [Discovery V0](doc/livrables/DISCOVERY_V0.md) |
-| Product vision and proposed V0 | [Documentation index](doc/README.md#produit) |
-| Progress and document authority | [Project tracking](doc/README.md#suivi-du-projet) |
-| Imported material and attribution | [Third-party notices](doc/references/THIRD_PARTY_NOTICES.md) |
-
-Original code lives in `argos/`, the dashboard in `frontend/`, and synthetic data
-in `examples/`. Generated mission data and reports stay under ignored `.argos/`.
-Development instructions remain in [AGENTS.md](AGENTS.md).
+Generated data stays under ignored `.argos/`. Development instructions remain
+in [AGENTS.md](AGENTS.md).

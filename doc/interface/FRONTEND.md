@@ -152,6 +152,7 @@ python3 scripts/check_repository.py
 git diff --check
 ```
 
-Ces trois commandes s'exécutent à la racine du dépôt. Les choix de contenu sont
-expliqués dans [la revue de l'accueil](HOME_DESIGN_REVIEW.md).
+Ces trois commandes s'exécutent à la racine du dépôt. Les choix de contenu de
+l'étape terminée sont conservés dans
+[la revue historique de l'accueil](../archive/reviews/HOME_DESIGN_REVIEW.md).
 Le raccordement à des missions locales réelles reste un livrable séparé.

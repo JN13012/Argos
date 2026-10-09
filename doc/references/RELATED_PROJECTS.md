@@ -1,5 +1,10 @@
 # Projets proches d'Argos
 
+**Status: REFERENCES — recherche datée, sans autorité produit ou architecturale.**
+La direction actuelle est définie dans la [vision](../product/VISION.md) et le
+[scope actif](../product/SCOPE.md). Les observations externes ci-dessous conservent
+leurs dates de consultation ; elles ne sont pas revalidées par cette réorganisation.
+
 **Consultation initiale :** 7 octobre 2026. **Mise à jour ciblée :** 9 octobre 2026
 (GrepLeaks et état des réalisations Argos). Les observations sur les autres
 projets conservent leur date initiale et n'ont pas été revalidées lors de cette
@@ -107,11 +112,10 @@ adoptées ni des capacités déjà implémentées dans Argos :
 | Permissions | Examiner les permission/approval gates et distinguer exécution containerisée, montages de fichiers et accès explicite à l'hôte, en tenant compte des configurations par défaut |
 | Observabilité | Examiner les traces des demandes, décisions, actions et résultats de l'agent et leurs liens avec les preuves |
 
-**À approfondir :** réanalyser GrepLeaks lors de la conception de
-`06_ARCHITECTURE_TECHNIQUE.md`, `07_SYSTEME_MULTI_AGENTS_ET_WORKFLOWS.md` et
-`11_CATALOGUE_OUTILS_PLAYBOOKS_ET_SDK.md`. Ces documents restent planifiés et ne
-sont pas créés dans cette mise à jour. Les choix d'Argos devront être évalués
-selon ses propres exigences ; cette référence n'étend pas le scope V0 proposé.
+**À approfondir :** réanalyser GrepLeaks lors de futurs travaux sur
+l'architecture, les agents et l'outillage. L'ancien plan de documents numérotés
+est archivé. Ces pistes restent des questions de recherche, sans adoption
+architecturale ni extension du scope actif.
 
 ## Repères commerciaux
 
@@ -122,7 +126,7 @@ selon ses propres exigences ; cette référence n'étend pas le scope V0 propos�
 | [NodeZero](https://horizon3.ai/nodezero/) | Évaluations internes, externes, cloud et identités, avec vérification des corrections | Restitution du risque et suivi des corrections |
 | [Pentera](https://pentera.io/pentera-platform/) | Validation d'exposition sur réseau interne, actifs externes et cloud | Priorisation, gestion des corrections et mesure dans le temps |
 
-Ce sont des repères concurrentiels pour la vision produit. Cette revue ne leur
+Ce sont des repères commerciaux de recherche. Cette revue ne leur
 attribue aucune autorisation de réutilisation de code.
 
 ## Réalisations et références pour la suite
@@ -132,15 +136,15 @@ attribue aucune autorisation de réutilisation de code.
 La CLI hors ligne proposée lors de la revue du 7 octobre est désormais
 **Argos Core 0.1.0** : création/import de missions, validation des preuves,
 revue humaine et rapport Markdown déterministe, avec fixtures, tests et CI.
-Son périmètre est fixé dans le [premier livrable](../livrables/FIRST_DELIVERABLE.md).
+Son contrat est conservé dans l'[archive du premier livrable](../archive/deliverables/FIRST_DELIVERABLE.md).
 Le [front React/TypeScript](../interface/FRONTEND.md) et
 [Discovery V0](../livrables/DISCOVERY_V0.md) sont réalisés comme prototypes
 séparés ; le front n'est raccordé à aucun des deux moteurs.
 
-### Toujours utiles au prochain travail
+### Pistes issues de la revue historique
 
-La prochaine tranche Core proposée reste la **persistance et la reprise de
-missions**, avec un contrat à définir. **Red Clippy et DefectDojo** restent utiles
+La revue initiale proposait la **persistance et la reprise de missions Core** ;
+cette proposition ne fixe plus la priorité de travail. **Red Clippy et DefectDojo** restent utiles
 pour le modèle de données, les preuves et le suivi des corrections ; **Strix et
 Shannon** pour la lisibilité des rapports ; **PentestGPT** pour la discipline
 d'évaluation. Ces références sont des pistes d'étude, sans reprise de code.
@@ -152,10 +156,10 @@ démo ne constituent pas des résultats de benchmark.
 
 ### À analyser plus tard
 
-GrepLeaks sera réexaminé pour les futurs documents d'architecture, d'agents et
-d'outillage cités ci-dessus. Les fonctions avancées des autres projets restent
+GrepLeaks reste une piste pour de futurs travaux d'architecture, d'agents et
+d'outillage. Les fonctions avancées des autres projets restent
 des références pour ces lots futurs, sans adoption anticipée dans le noyau ni
-validation du scope V0.
+extension du scope actif.
 
 ## Réutilisation de code
 
