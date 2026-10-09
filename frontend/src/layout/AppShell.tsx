@@ -11,6 +11,8 @@ interface AppShellProps {
   query: string;
   onQueryChange(query: string): void;
   ready: boolean;
+  pendingCount: number;
+  onOpenMission(): void;
   onOpenChat(): void;
   onAbout(): void;
   modalOpen: boolean;
@@ -22,12 +24,15 @@ export function AppShell({
   query,
   onQueryChange,
   ready,
+  pendingCount,
+  onOpenMission,
   onOpenChat,
   onAbout,
   modalOpen,
   searchRef,
 }: AppShellProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [notificationsOpen, setNotificationsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(
     () => window.matchMedia("(max-width: 700px)").matches,
   );
@@ -56,7 +61,10 @@ export function AppShell({
 
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") closeSidebar();
+      if (event.key === "Escape") {
+        closeSidebar();
+        setNotificationsOpen(false);
+      }
       if (
         (event.ctrlKey || event.metaKey) &&
         event.key.toLowerCase() === "k" &&
@@ -96,8 +104,12 @@ export function AppShell({
           <span>ARGOS</span>
         </a>
         <div className="environment">
-          <span className="status-dot" />
-          <span>Espace local</span>
+          <span>Environnement</span>
+          <strong>
+            <span className="status-dot blue" />
+            Démonstration
+          </strong>
+          <Icon name="chevron" />
         </div>
         <label className="global-search">
           <Icon name="search" />
@@ -115,6 +127,40 @@ export function AppShell({
           <kbd>Ctrl K</kbd>
         </label>
         <div className="header-actions">
+          <div className="notification-wrapper">
+            <Button
+              variant="icon"
+              className="notification-button"
+              aria-label={`Notifications : ${pendingCount} constats à revoir`}
+              aria-expanded={notificationsOpen}
+              aria-controls="notifications"
+              disabled={!ready}
+              onClick={() => setNotificationsOpen(!notificationsOpen)}
+            >
+              <Icon name="bell" />
+              <span className="notification-count">{pendingCount}</span>
+            </Button>
+            <div
+              id="notifications"
+              className="notification-popover"
+              hidden={!notificationsOpen}
+            >
+              <strong>À votre attention</strong>
+              <p>
+                {pendingCount} constat{pendingCount === 1 ? "" : "s"} attend
+                {pendingCount === 1 ? "" : "ent"} une revue.
+              </p>
+              <Button
+                variant="quiet"
+                onClick={() => {
+                  setNotificationsOpen(false);
+                  onOpenMission();
+                }}
+              >
+                Voir la mission <Icon name="arrow" />
+              </Button>
+            </div>
+          </div>
           <Button
             variant="icon"
             id="chat-focus"
@@ -139,6 +185,7 @@ export function AppShell({
           >
             <Icon name="plus" />
             Nouvelle mission
+            <span className="coming-soon">À venir</span>
           </Button>
         </div>
       </header>

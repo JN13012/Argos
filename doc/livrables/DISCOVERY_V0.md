@@ -11,12 +11,12 @@ publiques, enrichissement HTML limité et qualification explicable.
 
 **Contradiction documentée :** la section 15.2 de `01_SCOPE_V0_ARGOS.md` exclut
 l'enrichissement commercial de l'OSINT technique. Discovery étend aussi la stack
-et l'accès réseau au-delà de `docs/FIRST_DELIVERABLE.md`. Cette fiche enregistre
+et l'accès réseau au-delà de `doc/livrables/FIRST_DELIVERABLE.md`. Cette fiche enregistre
 cette différence sans réécrire la vision ni valider le draft V0. Un rattachement
 au produit reste une décision à formaliser.
 
 Les cinq commandes hors ligne et leur contrat `assessment.schema.json` sont
-conservés. Discovery utilise [discovery.schema.json](../schemas/discovery.schema.json).
+conservés. Discovery utilise [discovery.schema.json](../../schemas/discovery.schema.json).
 Il n'utilise ni le dashboard, ni les imports `Harness/`, ni un modèle IA.
 Il ne réalise aucun scan/test d'intrusion et n'envoie aucun message commercial.
 
@@ -52,7 +52,7 @@ uv run argos discover businesses --activity "garage automobile" \
   --json .argos/discovery-demo.json
 ```
 
-Le mode `--demo` utilise les [fixtures synthétiques](../examples/discovery/README.md)
+Le mode `--demo` utilise les [fixtures synthétiques](../guides/EXEMPLES_DISCOVERY.md)
 sans DNS ni HTTP réel après installation. Les scores sont reproductibles ;
 les identifiants d'exécution et temps approximatifs peuvent varier :
 

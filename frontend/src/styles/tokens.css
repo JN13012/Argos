@@ -1,4 +1,4 @@
-@layer tokens, base, components, layout, features;
+@layer tokens, base, components, layout, features, classic;
 
 @layer tokens {
   :root {

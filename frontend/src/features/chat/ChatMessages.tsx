@@ -33,9 +33,25 @@ export function ChatMessages({
       aria-relevant="additions"
     >
       {!messages.length && (
-        <p className="chat-empty">
-          Posez une question sur le dossier ou choisissez un raccourci.
-        </p>
+        <>
+          <div className="message assistant-message">
+            <span className="message-avatar">
+              <Icon name="eye-shield" />
+            </span>
+            <div className="message-bubble">
+              <span className="message-author">ARGOS</span>
+              <p>Bonjour, bienvenue dans votre espace de travail.</p>
+              <p>
+                Je peux vous présenter la mission, les constats et les preuves
+                de cette démonstration.
+              </p>
+              <span className="message-time">Démo locale</span>
+            </div>
+          </div>
+          <div className="chat-day-divider">
+            <span>EXPLORER LA DÉMONSTRATION</span>
+          </div>
+        </>
       )}
       {messages.map((message) => (
         <div

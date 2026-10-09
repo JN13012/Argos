@@ -19,28 +19,61 @@ export function MissionPanel({
 }: MissionPanelProps) {
   return (
     <article
-      className="panel mission-panel"
+      className="panel detail-panel mission-panel"
       id="missions-panel"
-      aria-labelledby="mission-title"
+      aria-labelledby="mission-panel-title"
     >
-      <div className="mission-heading">
-        <div className="mission-identity">
-          <span className="eyebrow" id="mission-reference">
-            MISSION · {assessment.mission.id}
-          </span>
-          <h2 id="mission-title">{assessment.mission.title}</h2>
-          <div className="mission-context">
-            <span className="mission-scope">
-              <Icon name="globe" />
-              {assessment.mission.scope.join(", ")}
-            </span>
-            <span className="review-caption">Revue</span>
-            <ReviewBadge summary={summary} />
-          </div>
+      <div className="panel-heading">
+        <h2 id="mission-panel-title">Mission à examiner</h2>
+        <ReviewBadge summary={summary} />
+      </div>
+      <div className="mission-row">
+        <span className="mission-icon">
+          <Icon name="target" />
+        </span>
+        <div className="mission-content">
+          <h3 id="mission-title">{assessment.mission.title}</h3>
+          <small>
+            {assessment.mission.id} · {assessment.mission.scope.join(", ")}
+          </small>
         </div>
-        <Button onClick={() => onOpenMission(null)} data-open-mission>
-          Ouvrir le dossier <Icon name="arrow" />
-        </Button>
+      </div>
+      <div className="mission-progress">
+        <div>
+          <span>Revue des constats</span>
+          <strong>
+            {summary.reviewedCount} <span>/ {summary.findingCount}</span>
+          </strong>
+        </div>
+        <div
+          className="progress-track"
+          role="progressbar"
+          aria-label="Constats revus"
+          aria-valuemin={0}
+          aria-valuemax={Math.max(summary.findingCount, 1)}
+          aria-valuenow={summary.reviewedCount}
+        >
+          <span
+            style={{
+              width: `${summary.findingCount ? (summary.reviewedCount / summary.findingCount) * 100 : 0}%`,
+            }}
+          />
+        </div>
+      </div>
+      <div className="mission-tags">
+        <span>
+          <Icon name="folder" />
+          {summary.evidenceCount} preuves
+        </span>
+        <span>
+          <Icon name="globe" />
+          {assessment.mission.scope.length} actif
+          {assessment.mission.scope.length === 1 ? "" : "s"}
+        </span>
+        <span>
+          <span className="status-dot" />
+          Hors ligne
+        </span>
       </div>
       <section id="priorities-panel" aria-labelledby="priority-title">
         <div className="priority-heading">
@@ -86,6 +119,14 @@ export function MissionPanel({
           )}
         </div>
       </section>
+      <Button
+        variant="quiet"
+        className="panel-footer-link"
+        onClick={() => onOpenMission(null)}
+        data-open-mission
+      >
+        Ouvrir le dossier <Icon name="arrow" />
+      </Button>
     </article>
   );
 }

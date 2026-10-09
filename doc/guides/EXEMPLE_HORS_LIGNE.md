@@ -11,10 +11,10 @@ python3 -m argos validate examples/offline/assessment.json
 python3 -m argos report examples/offline/assessment.json --output .argos/report.md
 ```
 
-The generated file must match [report.md](report.md) byte for byte. Repeated
+The generated file must match [report.md](../../examples/offline/report.md) byte for byte. Repeated
 exports to the same path require `--force`. Each proof's SHA-256 is declared in
-[assessment.json](assessment.json) and checked against the actual file.
+[assessment.json](../../examples/offline/assessment.json) and checked against the actual file.
 
 Both findings start as `needs_review`. A decision recorded using the `review`
 command is a declared human review, not a technical confirmation. The complete
-creation/import/review example is in the repository README.
+creation/import/review example is in the [getting started guide](DEMARRAGE.md#create-import-and-review-a-mission).

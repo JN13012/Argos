@@ -7,7 +7,7 @@
 Le propriétaire a supprimé `Harness/course-pack/` du dossier courant et demandé
 le push du nettoyage. Les 40 fichiers source restants de cet import sont retirés
 du prochain arbre Git ; le chemin est désormais ignoré. Les références du README
-et des notices sont actualisées, et `docs/RELATED_PROJECTS.md` ajoute une revue
+et des notices sont actualisées, et `doc/references/RELATED_PROJECTS.md` ajoute une revue
 des projets voisins avec sources primaires.
 
 `gh repo view` confirme que `JN13012/Argos` est **déjà public**, avec `main` comme

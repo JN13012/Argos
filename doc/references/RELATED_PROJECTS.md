@@ -55,7 +55,7 @@ documentés permettent de montrer des contributions personnelles aux recruteurs.
 
 Avant une reprise, identifier le fichier et son commit exact, lire sa licence
 et les notices applicables, puis enregistrer son origine et les modifications
-dans `THIRD_PARTY_NOTICES.md`. Une licence annoncée pour un dépôt ne tranche pas
+dans `doc/references/THIRD_PARTY_NOTICES.md`. Une licence annoncée pour un dépôt ne tranche pas
 la licence de chaque dépendance ou de ses autres éditions. Les conditions GPL,
 AGPL ou limitées à la recherche demandent une vérification adaptée au mode
 d'intégration envisagé. Aucune reprise de code de ces projets n'a été effectuée

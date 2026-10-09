@@ -1,17 +1,22 @@
-import logoUrl from "../../assets/argos-wolf-kraken.png";
+import logoUrl from "../../assets/argos-mascot.png";
 
 export function BrandLogo({ variant }: { variant: "header" | "welcome" }) {
-  return (
+  const image = (
     <img
-      className={`brand-logo brand-logo--${variant}`}
+      className={`brand-logo brand-logo--${variant} ${variant === "welcome" ? "mascot" : ""}`}
       src={logoUrl}
-      width={1254}
-      height={1254}
+      width={1024}
+      height={1536}
       alt={
         variant === "welcome"
-          ? "Emblème Argos, loup et kraken cybernétiques"
+          ? "Mascotte Argos, chien robotique aux yeux bleus"
           : ""
       }
     />
+  );
+  return variant === "header" ? (
+    <span className="brand-mark">{image}</span>
+  ) : (
+    image
   );
 }
