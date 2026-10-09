@@ -128,7 +128,7 @@ and the independent Discovery entry point.
 | [Architecture](../architecture/ARCHITECTURE.md) | Target module boundaries | ACTIVE DESIGN; revisable and not yet applied |
 | [Project status](../project/STATUS.md) | Current implementation and known gaps | ACTIVE |
 | [Canonical manifest](../project/CANONICAL_MANIFEST.md) | Document roles and authority | Active corpus index |
-| `Harness/Harness/` | Experimental agent profile, hooks and engagement templates | Prototype, not a security boundary |
+| `Harness/` | Experimental agent profile, hooks and engagement templates | Prototype, not a security boundary |
 | [Roadmap](../project/ROADMAP.md) | OSINT-first progression and later modules | ACTIVE |
 | [Archive index](../archive/README.md) | Former direction and completed reviews | Historical documents |
 | [Related projects](../references/RELATED_PROJECTS.md) | Competitors, design references and license observations | Research notes |

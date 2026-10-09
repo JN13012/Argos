@@ -7,26 +7,31 @@ cible, **pas l'arborescence actuelle ni une migration déjà réalisée**.
 
 ```text
 argos/
+├── core/
 ├── osint/
 ├── red/
 ├── defense/
-├── agents/
-│   ├── harness/
-│   └── profiles/
-├── core/
-└── interface/
+└── agents/
+
+frontend/
 ```
 
 ## Responsabilités
 
-| Module cible | Responsabilité |
+| Composant cible | Responsabilité |
 | --- | --- |
 | `core/` | Fonctions réellement transverses, partagées lorsque plusieurs domaines en ont besoin ; aucune logique métier propre à OSINT ou Red |
 | `osint/` | Moteur de découverte, résolution, enrichissement et analyse ; référence : [OSINT](OSINT.md) |
 | `red/` | Capacités métier offensives autorisées ; intégration ultérieure |
 | `defense/` | Capacités défensives futures |
 | `agents/` | Infrastructure d'agents et configurations spécialisées ; référence : [Agents / Harness](AGENTS_HARNESS.md) |
-| `interface/` | Adaptateurs et contrats d'accès aux capacités ; présentation indépendante de la logique métier |
+| `frontend/` | Interface utilisateur / UX commune aux modules, indépendante de la logique métier |
+
+`argos/` rassemble la logique métier, les capacités, les agents et les contrats
+internes. L'Interface reste un domaine fonctionnel de la vision produit, porté
+par `frontend/`, sans imposer un package Python sous `argos/`. Une future API ou
+couche d'adaptation pourra être ajoutée si un besoin concret le justifie ; aucun
+package `argos/interface/` ou `argos/api/` n'est prévu à ce stade.
 
 Le partage dans `core/` doit répondre à un besoin démontré. Le nom actuel
 « Argos Core » désigne le livrable hors ligne ; il ne signifie pas qu'un dossier

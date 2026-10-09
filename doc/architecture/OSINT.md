@@ -61,6 +61,11 @@ enrichment ajoute des observations, analysis produit des interprétations et
 workflows assemble ces capacités. Le noyau OSINT porte les concepts propres à
 ce domaine, distincts des fonctions transverses d'Argos.
 
+`argos/osint/storage/` désigne le **code de persistance** : repositories,
+interfaces et adapters de stockage. `.argos/osint/` désigne les **données runtime
+locales**, réparties dans `db/`, `raw/`, `exports/` et `cache/`. Cette distinction
+entre code et données décrit la cible ; les chemins actuels restent inchangés.
+
 ## Frontière OSINT Cyber / Red
 
 Les familles `connectors/cyber/`, `discovery/cyber_assets/`, `enrichment/cyber/`
