@@ -6,18 +6,19 @@ direction produit, l'architecture cible et les prototypes réellement existants.
 
 ## Start here
 
-| Ordre | Document | Question traitée |
-| --- | --- | --- |
-| 1 | [VISION](product/VISION.md) | Que vise Argos ? |
-| 2 | [SCOPE](product/SCOPE.md) | Quel est le périmètre actif ? |
-| 3 | [ARCHITECTURE](architecture/ARCHITECTURE.md) | Comment les modules cibles se séparent-ils ? |
-| 4 | [OSINT](architecture/OSINT.md) | Comment découvrir, conserver, enrichir et analyser les entités ? |
-| 5 | [STATUS](project/STATUS.md) | Qu'est-ce qui existe aujourd'hui ? |
-| 6 | [ROADMAP](project/ROADMAP.md) | Dans quel ordre progresser ? |
+| Ordre | Document | Statut | Question traitée |
+| --- | --- | --- | --- |
+| 1 | [VISION](product/VISION.md) | `CANONICAL` | Que vise Argos ? |
+| 2 | [SCOPE](product/SCOPE.md) | `CANONICAL` | Quel est le périmètre actif ? |
+| 3 | [ARCHITECTURE](architecture/ARCHITECTURE.md) | `ACTIVE DESIGN` | Comment les modules cibles se séparent-ils ? |
+| 4 | [OSINT](architecture/OSINT.md) | `ACTIVE DESIGN` | Comment découvrir, conserver, enrichir et analyser les entités ? |
+| 5 | [STATUS](project/STATUS.md) | `ACTIVE` | Qu'est-ce qui existe aujourd'hui ? |
+| 6 | [ROADMAP](project/ROADMAP.md) | `ACTIVE` | Dans quel ordre progresser ? |
 
-Le document [AGENTS_HARNESS](architecture/AGENTS_HARNESS.md) précise le pilotage
-des capacités. Le [manifeste](project/CANONICAL_MANIFEST.md) distingue
-`ACTIVE / CANONICAL`, `IMPLEMENTATION NOTES`, `REFERENCES` et `ARCHIVED`.
+Le document [AGENTS_HARNESS](architecture/AGENTS_HARNESS.md), `ACTIVE DESIGN`,
+précise le pilotage des capacités. Le [manifeste](project/CANONICAL_MANIFEST.md)
+distingue les décisions produit `CANONICAL`, le design révisable `ACTIVE DESIGN`,
+le suivi `ACTIVE`, puis les notes d'implémentation, références et archives.
 
 ## Implementation notes
 

@@ -1,6 +1,6 @@
 # Argos — Architecture modulaire
 
-**Status: ACTIVE / CANONICAL — architecture cible.**
+**Status: ACTIVE DESIGN — architecture cible, encore révisable avant implémentation.**
 
 Cette organisation traduit la [vision](../product/VISION.md). Elle décrit la
 cible, **pas l'arborescence actuelle ni une migration déjà réalisée**.
@@ -52,6 +52,40 @@ agents/
     ├── red/
     └── defense/
 ```
+
+## Données runtime par domaine — cible
+
+```text
+.argos/
+├── osint/
+│   ├── db/
+│   ├── raw/
+│   ├── exports/
+│   └── cache/
+│
+├── red/
+│   ├── engagements/
+│   ├── evidence/
+│   ├── reports/
+│   └── cache/
+│
+├── defense/
+│   └── ...
+│
+└── shared/
+    └── ...
+```
+
+Cette séparation évite de mélanger données OSINT, missions et preuves Red,
+données Defense, exports et caches. `shared/` est réservé aux données réellement
+communes. Les responsabilités du stockage et des sorties OSINT sont définies
+dans [OSINT](OSINT.md#stockage-local-first).
+
+**Cette structure est une cible documentaire ; ces dossiers ne sont pas
+annoncés comme existants.** La structure physique exacte pourra évoluer.
+Discovery V0 utilise toujours `.argos/discovery.sqlite3` par défaut ; les chemins
+du Core et les exemples actuels restent inchangés. Aucun fichier runtime n'est
+déplacé pendant cette passe.
 
 ## État du dépôt
 

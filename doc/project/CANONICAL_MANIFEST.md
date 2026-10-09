@@ -1,17 +1,30 @@
 # Argos — Manifeste documentaire
 
-## ACTIVE / CANONICAL
+## CANONICAL
 
-Chaque document fait autorité dans son domaine, selon la direction demandée
-pour cette réorganisation documentaire.
+Décisions produit actuellement validées.
 
 | Document | Domaine |
 | --- | --- |
 | [VISION](../product/VISION.md) | Vision modulaire et principes produit |
 | [SCOPE](../product/SCOPE.md) | Scope actif et première verticale |
+
+## ACTIVE DESIGN
+
+Architecture cible actuelle, à challenger avant implémentation et encore révisable.
+
+| Document | Domaine |
+| --- | --- |
 | [ARCHITECTURE](../architecture/ARCHITECTURE.md) | Frontières des modules cibles |
 | [OSINT](../architecture/OSINT.md) | Architecture et stockage OSINT cibles |
 | [AGENTS_HARNESS](../architecture/AGENTS_HARNESS.md) | Pilotage des capacités et profils d'agents |
+
+## ACTIVE
+
+Documents opérationnels de suivi.
+
+| Document | Domaine |
+| --- | --- |
 | [STATUS](STATUS.md) | Implémentation réelle et écarts connus |
 | [ROADMAP](ROADMAP.md) | Ordre des prochaines étapes |
 

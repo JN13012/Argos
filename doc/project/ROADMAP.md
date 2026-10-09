@@ -1,6 +1,6 @@
 # Argos — Roadmap
 
-**Status: ACTIVE / CANONICAL — trajectoire proposée, sans engagement de délai.**
+**Status: ACTIVE — trajectoire proposée, sans engagement de délai.**
 
 La progression suit le [scope actif](../product/SCOPE.md). L'existant et ses
 limites sont décrits dans le [statut](STATUS.md) ; l'architecture OSINT cible
