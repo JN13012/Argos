@@ -1,6 +1,6 @@
 # Argos — Status
 
-**Status: ACTIVE / CANONICAL — état de l'implémentation au 9 octobre 2026.**
+**Status: ACTIVE — état de l'implémentation au 9 octobre 2026.**
 
 ## Current direction
 
@@ -36,6 +36,6 @@ modifie aucun code ni contrat existant.
 
 ## Next step
 
-Après validation de la documentation, restructurer progressivement Discovery
+Après revue et validation du design, restructurer progressivement Discovery
 sous le module OSINT et améliorer Business Discovery / Website Opportunity.
 La [roadmap](ROADMAP.md) ordonne ces étapes sans annoncer leur réalisation.

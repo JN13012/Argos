@@ -1,6 +1,6 @@
 # Argos — Agents / Harness
 
-**Status: ACTIVE / CANONICAL — architecture cible des agents.**
+**Status: ACTIVE DESIGN — architecture cible des agents, encore révisable.**
 
 Le harness pilote les capacités définies dans l'[architecture modulaire](ARCHITECTURE.md).
 Un harness commun convient lorsque les primitives sont réellement communes,

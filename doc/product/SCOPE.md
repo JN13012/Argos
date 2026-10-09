@@ -1,6 +1,6 @@
 # Argos — Scope actif
 
-**Status: ACTIVE / CANONICAL — périmètre produit actif.**
+**Status: CANONICAL — périmètre produit actif validé.**
 
 Le développement actif porte sur **Argos OSINT**. La première verticale est
 **Business Discovery + Website Opportunity** : par exemple, rechercher des

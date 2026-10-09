@@ -1,6 +1,6 @@
 # Argos — Vision
 
-**Status: ACTIVE / CANONICAL — vision produit.**
+**Status: CANONICAL — vision produit validée.**
 
 Argos vise une plateforme modulaire pilotée par IA pour collecter, structurer,
 analyser et exploiter des informations utiles à la cybersécurité, à l'OSINT et
