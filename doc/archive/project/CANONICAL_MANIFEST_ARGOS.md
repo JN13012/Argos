@@ -1,5 +1,12 @@
 # ARGOS — Manifeste canonique
 
+**Status: ARCHIVED / SUPERSEDED.**
+
+Remplacé par le [manifeste concis](../../project/CANONICAL_MANIFEST.md).
+
+Le contenu ci-dessous est conservé pour mémoire. Ses anciens statuts, décisions
+et prochaines étapes ne définissent plus le corpus actif.
+
 **Version :** 1.6\
 **Statut :** canonique  
 **Date :** 9 octobre 2026
@@ -48,10 +55,10 @@ canonique d’Argos.
 |   |   |   |   |
 |---|---|---|---|
 |Document|Version|Statut|Rôle|
-|[00_PRODUCT_BRIEF_ET_PLAN_GLOBAL_ARGOS.md](../produit/00_PRODUCT_BRIEF_ET_PLAN_GLOBAL_ARGOS.md)|2.5|`CANONICAL`|Vision, positionnement, limites et trajectoire|
+|[00_PRODUCT_BRIEF_ET_PLAN_GLOBAL_ARGOS.md](../product/00_PRODUCT_BRIEF_ET_PLAN_GLOBAL_ARGOS.md)|2.5|`CANONICAL`|Vision, positionnement, limites et trajectoire|
 |[CANONICAL_MANIFEST_ARGOS.md](CANONICAL_MANIFEST_ARGOS.md)|1.6|`CANONICAL`|Versions, statuts, dépendances et ordre d’autorité|
 |[PROJECT_STATUS_ARGOS.md](PROJECT_STATUS_ARGOS.md)|1.7|`CANONICAL`|État courant, décisions récentes, travail restant et prochaine étape|
-|[01_SCOPE_V0_ARGOS.md](../produit/01_SCOPE_V0_ARGOS.md)|1.0|`IN_PROGRESS`|Proposition de scope V0 existante, en attente de validation explicite|
+|[01_SCOPE_V0_ARGOS.md](../product/01_SCOPE_V0_ARGOS.md)|1.0|`IN_PROGRESS`|Proposition de scope V0 existante, en attente de validation explicite|
 
 Les mises à jour 1.2 et 1.3 corrigent l'état des fichiers effectivement présents,
 ajoutent les documents de préparation GitHub et enregistrent le retrait du course
@@ -79,7 +86,7 @@ comme dépendance sans décision explicite.
 
 La version 1.5 enregistre le regroupement demandé par le propriétaire dans
 `doc/`, avec les catégories `produit`, `suivi`, `livrables`, `guides`, `interface`
-et `references`. Le [sommaire](../README.md) donne les emplacements actuels de
+et `references`. Le [sommaire](../../README.md) donne les emplacements actuels de
 tous les documents. Leurs noms stables et leurs statuts sont conservés.
 
 Le guide de démarrage reprend le contenu détaillé de l'ancien README de racine.

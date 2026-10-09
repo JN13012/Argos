@@ -1,5 +1,12 @@
 # Revue de l’accueil Argos
 
+**Status: ARCHIVED / SUPERSEDED.**
+
+Revue historique d'une étape frontend terminée. Le comportement actuel est documenté dans le [guide du front](../../interface/FRONTEND.md).
+
+Le contenu ci-dessous est conservé pour mémoire. Ses anciens statuts, décisions
+et prochaines étapes ne définissent plus le corpus actif.
+
 À la demande du propriétaire, l'accueil reprend la présentation de « Front init »
 (`8d4dccd`) : mascotte d'origine, couleurs sombres, bandeau de bienvenue,
 indicateurs et chat à droite. Cette restauration conserve les composants React,
@@ -93,7 +100,7 @@ indépendants de React ; le chargement passe par une source de données explicit
 Le mode agrandi du chat utilise un dialogue natif, conserve le brouillon et les
 messages, maintient le focus au clavier et revient à son bouton d'ouverture.
 Les détails de structure et de vérification sont dans
-[le guide du front](FRONTEND.md).
+[le guide du front](../../interface/FRONTEND.md).
 
 Avec plusieurs missions, le bloc principal pourra devenir une liste de dossiers
 à reprendre, chaque mission conservant une seule ligne de résumé. Responsable,

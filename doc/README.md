@@ -1,80 +1,69 @@
 # Documentation Argos
 
-Ce dossier rassemble la documentation du projet. Les documents sont classés
-par usage ; leurs statuts restent précisés dans le manifeste et dans chaque
-fiche. Le déplacement des fichiers ne valide pas le scope V0 proposé.
+Argos vise une plateforme modulaire : OSINT, Red, Defense, Agents / Harness et
+Interface. **La priorité actuelle est OSINT.** Le corpus actif distingue la
+direction produit, l'architecture cible et les prototypes réellement existants.
 
-Pour démarrer, lire le [guide de démarrage](guides/DEMARRAGE.md). Pour développer
-le noyau hors ligne, lire le [contrat du premier livrable](livrables/FIRST_DELIVERABLE.md)
-et les [instructions du dépôt](../AGENTS.md). Pour tester l'accueil Web, suivre
-le [guide du front](interface/FRONTEND.md).
+## Start here
 
-## Classement
-
-| Dossier | Type de documentation |
-| --- | --- |
-| `produit/` | Vision, positionnement et proposition de scope |
-| `suivi/` | Autorité des documents, statut, feuille de route et revues du dépôt |
-| `livrables/` | Périmètres, contrats et critères d'acceptation des lots réalisés |
-| `guides/` | Démarrage, démonstrations, utilisation et vérifications |
-| `interface/` | Développement du front, choix de présentation et ressources visuelles |
-| `references/` | Projets voisins, provenance et attribution des imports |
-
-## Produit
-
-| Document | Contenu | Statut |
+| Ordre | Document | Question traitée |
 | --- | --- | --- |
-| [Product Brief et plan global](produit/00_PRODUCT_BRIEF_ET_PLAN_GLOBAL_ARGOS.md) | Vision et décisions fondatrices | Vision approuvée, version 2.5 |
-| [Scope V0](produit/01_SCOPE_V0_ARGOS.md) | Proposition de périmètre et d'acceptation de la plateforme | `IN_PROGRESS`, version 1.0 |
+| 1 | [VISION](product/VISION.md) | Que vise Argos ? |
+| 2 | [SCOPE](product/SCOPE.md) | Quel est le périmètre actif ? |
+| 3 | [ARCHITECTURE](architecture/ARCHITECTURE.md) | Comment les modules cibles se séparent-ils ? |
+| 4 | [OSINT](architecture/OSINT.md) | Comment découvrir, conserver, enrichir et analyser les entités ? |
+| 5 | [STATUS](project/STATUS.md) | Qu'est-ce qui existe aujourd'hui ? |
+| 6 | [ROADMAP](project/ROADMAP.md) | Dans quel ordre progresser ? |
 
-## Suivi du projet
+Le document [AGENTS_HARNESS](architecture/AGENTS_HARNESS.md) précise le pilotage
+des capacités. Le [manifeste](project/CANONICAL_MANIFEST.md) distingue
+`ACTIVE / CANONICAL`, `IMPLEMENTATION NOTES`, `REFERENCES` et `ARCHIVED`.
 
-| Document | Contenu |
-| --- | --- |
-| [Manifeste canonique](suivi/CANONICAL_MANIFEST_ARGOS.md) | Versions, statuts, dépendances et ordre d'autorité |
-| [Statut du projet](suivi/PROJECT_STATUS_ARGOS.md) | Travail terminé, décisions actives et prochaines étapes |
-| [Feuille de route](suivi/ROADMAP.md) | Progression proposée pour la démo et le portfolio |
-| [Revue du dépôt](suivi/REPOSITORY_REVIEW.md) | Préparation à la publication et constats historiques datés |
+## Implementation notes
 
-## Livrables
+- [Discovery V0](livrables/DISCOVERY_V0.md) : contrat et historique de la première
+  implémentation OSINT Discovery, toujours sous `argos/discovery/`.
+- [Premier livrable Core](livrables/FIRST_DELIVERABLE.md) : page de compatibilité
+  vers le contrat archivé du lot hors ligne livré, dont le comportement est
+  inchangé. Ce contrat ne définit pas la nouvelle direction produit.
+- [AGENTS.md](../AGENTS.md) : instructions opérationnelles du dépôt, conservées
+  pour le lot hors ligne.
 
-| Document | Contenu |
-| --- | --- |
-| [Premier livrable : Argos Core hors ligne](livrables/FIRST_DELIVERABLE.md) | Contrat des missions, import, preuves, revue humaine et rapports |
-| [Prototype Discovery V0](livrables/DISCOVERY_V0.md) | Découverte d'entreprises, sources, scores et snapshots ; lot indépendant du scope V0 de la plateforme |
+## Frontend
+
+- [FRONTEND](interface/FRONTEND.md) : accueil React, lancement, données et tests.
+- [Ressources visuelles](interface/RESSOURCES_VISUELLES.md) : origine et usage des
+  images et icônes.
+
+Le frontend reste dans `frontend/`, sans connexion aux moteurs ni modèle IA.
 
 ## Guides
 
-| Document | Contenu |
-| --- | --- |
-| [Démarrage et vérifications](guides/DEMARRAGE.md) | Installation, démos, parcours de mission, structure du dépôt et contrôles |
-| [Exemple hors ligne](guides/EXEMPLE_HORS_LIGNE.md) | Données synthétiques, preuves et rapport de référence |
-| [Exemples Discovery](guides/EXEMPLES_DISCOVERY.md) | Entreprises fictives et réponses Web simulées |
+- [Démarrage et vérifications](guides/DEMARRAGE.md).
+- [Exemple hors ligne](guides/EXEMPLE_HORS_LIGNE.md).
+- [Exemples Discovery](guides/EXEMPLES_DISCOVERY.md).
 
-## Interface
+## References
 
-| Document | Contenu |
-| --- | --- |
-| [Guide du front](interface/FRONTEND.md) | Lancement, interactions, architecture, données et tests |
-| [Revue de l'accueil](interface/HOME_DESIGN_REVIEW.md) | Présentation restaurée, cohérence des données et limites du chat |
-| [Ressources visuelles](interface/RESSOURCES_VISUELLES.md) | Origine et utilisation des mascottes et des icônes |
+- [RELATED_PROJECTS](references/RELATED_PROJECTS.md) : recherche et observations
+  datées sur des projets voisins, sans autorité produit ou architecturale.
+- [THIRD_PARTY_NOTICES](references/THIRD_PARTY_NOTICES.md) : provenance des imports,
+  conservée sans modification.
 
-## Références
+## Archive
 
-| Document | Contenu |
-| --- | --- |
-| [Projets voisins](references/RELATED_PROJECTS.md) | Sources d'inspiration et observations de licences, datées de la revue |
-| [Origine des éléments importés](references/THIRD_PARTY_NOTICES.md) | Provenance et attribution des supports tiers |
+L'[index des archives](archive/README.md) donne accès à l'ancien Product Brief,
+au scope V0 offensif, à l'ancien suivi, au premier livrable et aux revues
+terminées. Ces documents ne font plus autorité sur la direction active.
 
 ## Conventions
 
-Les liens entre documents sont relatifs au fichier consulté. Les chemins de code
-et les commandes sont relatifs à la racine du dépôt, sauf indication explicite
-dans le guide du front. Les noms des documents produit restent stables ; les
-documents seulement planifiés dans le manifeste n'ont pas de fichier créé.
+Les liens Markdown sont relatifs au document. Les commandes et chemins de code
+sont relatifs à la racine du dépôt, sauf indication explicite. Le
+[README racine](../README.md) sert d'entrée courte.
 
-Le [README de la racine](../README.md) sert d'entrée et `AGENTS.md` conserve les
-instructions opérationnelles attendues par les outils. Les schémas restent dans
-`schemas/`, les fixtures et rapports de référence dans `examples/` et
-`frontend/assets/`. Les supports importés sous `Harness/` conservent leur
-organisation et leur provenance séparées.
+L'organisation anglaise `product/`, `architecture/` et `project/` porte le
+corpus actif ; `livrables/`, `guides/`, `interface/` et `references/` conservent les
+notes utiles. Cette réorganisation est exclusivement documentaire : aucun code,
+schéma, fixture ou import `Harness/` n'est déplacé. Les données générées restent
+localement sous `.argos/`, ignoré par Git.

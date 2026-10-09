@@ -1,5 +1,12 @@
 # Préparation GitHub et progression d'Argos
 
+**Status: ARCHIVED / SUPERSEDED.**
+
+Remplacée par la [roadmap OSINT prioritaire](../../project/ROADMAP.md).
+
+Le contenu ci-dessous est conservé pour mémoire. Ses anciens statuts, décisions
+et prochaines étapes ne définissent plus le corpus actif.
+
 **Date initiale :** 7 octobre 2026. **État actualisé :** 9 octobre 2026.
 **Statut :** Argos Core hors ligne implémenté, prototypes front et Discovery
 réalisés séparément ; persistance/reprise Core proposée.
@@ -7,7 +14,7 @@ réalisés séparément ; persistance/reprise Core proposée.
 Cette feuille de route organise les réalisations et la progression proposée du
 dépôt. Elle ne valide pas `01_SCOPE_V0_ARGOS.md` et ne remplace pas la vision
 canonique. Le premier livrable a été accepté dans la conversation ; sa portée est
-fixée dans [FIRST_DELIVERABLE.md](../livrables/FIRST_DELIVERABLE.md). Il ne modifie pas les
+fixée dans [FIRST_DELIVERABLE.md](../deliverables/FIRST_DELIVERABLE.md). Il ne modifie pas les
 engagements produit du scope V0 complet.
 
 Pour une candidature, privilégier une petite réalisation vérifiable, une
@@ -39,10 +46,10 @@ contrat à définir avant implémentation.
 - **Front React/TypeScript :** accueil interactif réalisé, avec dossier
   synthétique, rapport correspondant, recherche, journal de session et chat
   local. Il reste un prototype séparé, sans connexion à Argos Core, Discovery
-  ou un modèle IA. Voir le [guide du front](../interface/FRONTEND.md).
+  ou un modèle IA. Voir le [guide du front](../../interface/FRONTEND.md).
 - **Discovery V0 :** prototype indépendant de découverte d'entreprises,
   qualification et snapshots SQLite/JSON. Sa
-  [fiche de périmètre](../livrables/DISCOVERY_V0.md) conserve explicitement la
+  [fiche de périmètre](../../livrables/DISCOVERY_V0.md) conserve explicitement la
   contradiction entre l'enrichissement commercial et l'OSINT technique du
   draft V0 ; aucun rattachement officiel au scope produit n'est décidé ici.
 - **Documentation :** regroupement sous `doc/` et sommaire réalisés le
@@ -68,7 +75,7 @@ et l'évaluation hors ligne. Les capacités réseau/Linux et Windows/AD du brief
 restent des sujets du scope proposé, sans implémentation ni promesse de délai
 dans cette feuille de route de présentation.
 
-Une [revue des projets voisins](../references/RELATED_PROJECTS.md) précise les références à
+Une [revue des projets voisins](../../references/RELATED_PROJECTS.md) précise les références à
 étudier, les licences annoncées et les éléments de conception utiles aux prochains
 lots. Le course pack a été retiré du dossier courant ; les références
 pédagogiques conservées demandent encore une attribution vérifiée.

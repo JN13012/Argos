@@ -1,5 +1,12 @@
 # Revue du dépôt avant publication
 
+**Status: ARCHIVED / SUPERSEDED.**
+
+Revue historique de préparation du dépôt. Pour l'état actuel, consulter le [statut](../../project/STATUS.md) ; la provenance reste suivie dans les [notices tierces](../../references/THIRD_PARTY_NOTICES.md).
+
+Le contenu ci-dessous est conservé pour mémoire. Ses anciens statuts, décisions
+et prochaines étapes ne définissent plus le corpus actif.
+
 **Date :** 7 octobre 2026. **Référence initiale inspectée :** `0fd37c5`.
 
 ## Mise à jour après retrait du course pack
