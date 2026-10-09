@@ -1,6 +1,6 @@
 # ARGOS — Manifeste canonique
 
-**Version :** 1.5\
+**Version :** 1.6\
 **Statut :** canonique  
 **Date :** 9 octobre 2026
 
@@ -49,8 +49,8 @@ canonique d’Argos.
 |---|---|---|---|
 |Document|Version|Statut|Rôle|
 |[00_PRODUCT_BRIEF_ET_PLAN_GLOBAL_ARGOS.md](../produit/00_PRODUCT_BRIEF_ET_PLAN_GLOBAL_ARGOS.md)|2.5|`CANONICAL`|Vision, positionnement, limites et trajectoire|
-|[CANONICAL_MANIFEST_ARGOS.md](CANONICAL_MANIFEST_ARGOS.md)|1.5|`CANONICAL`|Versions, statuts, dépendances et ordre d’autorité|
-|[PROJECT_STATUS_ARGOS.md](PROJECT_STATUS_ARGOS.md)|1.6|`CANONICAL`|État courant, décisions récentes, travail restant et prochaine étape|
+|[CANONICAL_MANIFEST_ARGOS.md](CANONICAL_MANIFEST_ARGOS.md)|1.6|`CANONICAL`|Versions, statuts, dépendances et ordre d’autorité|
+|[PROJECT_STATUS_ARGOS.md](PROJECT_STATUS_ARGOS.md)|1.7|`CANONICAL`|État courant, décisions récentes, travail restant et prochaine étape|
 |[01_SCOPE_V0_ARGOS.md](../produit/01_SCOPE_V0_ARGOS.md)|1.0|`IN_PROGRESS`|Proposition de scope V0 existante, en attente de validation explicite|
 
 Les mises à jour 1.2 et 1.3 corrigent l'état des fichiers effectivement présents,
@@ -87,6 +87,12 @@ Les guides du front et des exemples sont également regroupés sous `doc/`.
 `README.md` reste l'entrée du dépôt et `AGENTS.md` reste à la racine pour les
 outils. Les schémas, fixtures, rapports de référence et imports gardent leurs
 emplacements. Cette réorganisation ne modifie aucun contrat ni le scope produit.
+
+La version 1.6 synchronise les versions après l'actualisation factuelle du statut
+du projet et précise qu'`AGENTS.md` est déjà actif pour le lot hors ligne.
+La mise à jour de la revue des références ajoute GrepLeaks comme piste d'étude ;
+aucune décision produit, dépendance logicielle ou validation du scope V0 n'en
+découle. Les documents `06`, `07` et `11` restent planifiés.
 
 ---
 
@@ -151,7 +157,7 @@ Pour le développement :
 
 1. limites légales, mandat et politiques de sécurité ;
     
-2. `AGENTS.md` du dépôt lorsqu’il existera ;
+2. `AGENTS.md` du dépôt, actif pour le premier livrable hors ligne ;
     
 3. critères d’acceptation de la story active ;
     

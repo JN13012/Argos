@@ -1,6 +1,6 @@
 # ARGOS — Statut du projet
 
-**Version :** 1.6\
+**Version :** 1.7\
 **Statut :** canonique  
 **Date de situation :** 9 octobre 2026\
 **Phase :** premier livrable Argos Core hors ligne implémenté
@@ -31,8 +31,18 @@ le README, la revue et une proposition de feuille de route sont ajoutés. La
 présentation publique complète nécessite encore une décision sur l'historique des
 missions et une clarification des droits de redistribution des imports restants.
 La vérification distante confirme que le dépôt GitHub est déjà public. Le
-propriétaire a retiré le course pack du dossier courant et demandé le push du
-nettoyage. Celui-ci conserve l'historique existant.
+propriétaire a retiré le course pack du dossier courant. Le nettoyage a été
+publié et conserve l'historique existant ; la branche `feat/offline-reporting`
+publiée au commit `422e2b9` inclut également les réalisations récentes.
+
+Le front React/TypeScript et Discovery V0 sont réalisés comme prototypes
+indépendants. Le front n'est raccordé ni à Argos Core ni à Discovery.
+La [fiche Discovery](../livrables/DISCOVERY_V0.md) conserve sa contradiction avec
+l'exclusion de l'enrichissement commercial dans le draft V0 ; un rattachement
+au produit reste à décider séparément.
+
+La version 1.7 actualise l'inventaire des réalisations et les formulations sur
+la publication, sans modifier les décisions produit ni le scope proposé.
 
 Argos Arena est un projet séparé et n’est pas une dépendance d’Argos.
 
@@ -74,7 +84,10 @@ Argos Arena est un projet séparé et n’est pas une dépendance d’Argos.
 ### Accueil Web — 8 octobre 2026
 
 - migration autorisée de l'accueil vers React, TypeScript strict et Vite ;
-- thème sombre et loup–kraken conservés, lisibilité et hiérarchie visuelle revues ;
+- thème sombre et loup–kraken conservés lors de la migration initiale,
+  lisibilité et hiérarchie visuelle revues ;
+- présentation « Front init » et mascotte d'origine ensuite restaurées dans
+  React, comme décrit dans la [revue de l'accueil](../interface/HOME_DESIGN_REVIEW.md) ;
 - composants séparés par fonctionnalité, source de données explicite et logique
   de présentation indépendante de React ;
 - dossier synthétique, rapport correspondant, consultation des constats,
@@ -276,8 +289,8 @@ Argos Arena est un projet séparé et n’est pas une dépendance d’Argos.
 |---|---|---|
 |Document|Version|État|
 |[00_PRODUCT_BRIEF_ET_PLAN_GLOBAL_ARGOS.md](../produit/00_PRODUCT_BRIEF_ET_PLAN_GLOBAL_ARGOS.md)|2.5|Canonique|
-|[CANONICAL_MANIFEST_ARGOS.md](CANONICAL_MANIFEST_ARGOS.md)|1.5|Canonique|
-|[PROJECT_STATUS_ARGOS.md](PROJECT_STATUS_ARGOS.md)|1.6|Canonique|
+|[CANONICAL_MANIFEST_ARGOS.md](CANONICAL_MANIFEST_ARGOS.md)|1.6|Canonique|
+|[PROJECT_STATUS_ARGOS.md](PROJECT_STATUS_ARGOS.md)|1.7|Canonique|
 |`GUIDE_TRAVAIL_ARGOS_AVEC_CHATGPT.md`|—|Retiré du corpus et absent du dépôt|
 |[01_SCOPE_V0_ARGOS.md](../produit/01_SCOPE_V0_ARGOS.md)|1.0|`IN_PROGRESS` — validation complète en attente|
 |`doc/livrables/FIRST_DELIVERABLE.md`|1.0|Contrat du lot hors ligne accepté et implémenté|
@@ -332,10 +345,10 @@ lot : spécifier la persistance et la reprise de missions. Cette prochaine tranc
 reste à définir avant implémentation. La démo ne remplace pas les cinq incréments
 du scope V0 proposé, dont la validation complète reste à faire.
 
-Avant publication, clarifier les droits des imports et décider du traitement de
-l'historique contenant les données de missions. Le push demandé porte sur un
-commit normal de nettoyage ; une purge d'historique est une opération séparée,
-qui reste à décider explicitement.
+Le dépôt est déjà public. Les droits des imports et le traitement de l'historique
+contenant les données de missions restent à clarifier. Le nettoyage publié
+n'a pas purgé cet historique ; une purge reste une opération séparée à décider
+explicitement.
 
 La revue du scope doit confirmer :
 
