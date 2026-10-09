@@ -5,7 +5,7 @@
 Cette feuille de route organise la présentation du dépôt et propose une première
 démo. Elle ne valide pas `01_SCOPE_V0_ARGOS.md` et ne remplace pas la vision
 canonique. Le premier livrable a été accepté dans la conversation ; sa portée est
-fixée dans [FIRST_DELIVERABLE.md](FIRST_DELIVERABLE.md). Il ne modifie pas les
+fixée dans [FIRST_DELIVERABLE.md](../livrables/FIRST_DELIVERABLE.md). Il ne modifie pas les
 engagements produit du scope V0 complet.
 
 Pour une candidature, privilégier une petite réalisation vérifiable, une
@@ -47,7 +47,7 @@ et l'évaluation hors ligne. Les capacités réseau/Linux et Windows/AD du brief
 restent des sujets du scope proposé, sans implémentation ni promesse de délai
 dans cette feuille de route de présentation.
 
-Une [revue des projets voisins](RELATED_PROJECTS.md) précise les références à
+Une [revue des projets voisins](../references/RELATED_PROJECTS.md) précise les références à
 étudier, les licences annoncées et les éléments de conception utiles au premier
 livrable. Le course pack a été retiré du dossier courant ; les références
 pédagogiques conservées demandent encore une attribution vérifiée.

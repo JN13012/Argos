@@ -27,7 +27,7 @@ function sourceFor(assessment: unknown): WorkspaceSource {
 }
 
 describe("home interactions", () => {
-  it("shows a single mission summary, one export and one initial session event", async () => {
+  it("restores the classic home with five metrics, an open chat and one export", async () => {
     render(<App />);
     expect(
       await screen.findByRole("heading", { name: fixture().mission.title }),
@@ -41,7 +41,12 @@ describe("home interactions", () => {
       screen.getAllByRole("link", { name: "Télécharger le rapport" }),
     ).toHaveLength(1);
     expect(screen.getByText("1 événement")).toBeVisible();
-    expect(document.getElementById("chat-content")).not.toBeVisible();
+    expect(
+      screen.getByRole("heading", { name: "Bienvenue dans Argos" }),
+    ).toBeVisible();
+    expect(document.querySelectorAll(".metric-card")).toHaveLength(5);
+    expect(screen.getByRole("heading", { name: "Agents" })).toBeVisible();
+    expect(document.getElementById("chat-content")).toBeVisible();
   });
 
   it("opens only the chosen finding and its proofs, then the whole mission", async () => {

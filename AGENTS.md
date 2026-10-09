@@ -1,7 +1,7 @@
 # Working on Argos
 
 The current authorized implementation is the offline deliverable described in
-`docs/FIRST_DELIVERABLE.md`. The broader V0 scope remains a draft. Read the
+`doc/livrables/FIRST_DELIVERABLE.md`. The broader V0 scope remains a draft. Read the
 deliverable before changing its data contract or behavior.
 
 - Original code lives in `argos/`; synthetic fixtures in `examples/offline/`.
@@ -22,5 +22,6 @@ python3 scripts/check_repository.py
 git diff --check
 ```
 
-The demo and reference report are described in `README.md`. The workflow in
+Documentation is indexed in `doc/README.md`. The demo and reference report are
+described in `doc/guides/DEMARRAGE.md`. The workflow in
 `.github/workflows/checks.yml` runs the same offline tests on several interpreters.

@@ -22,7 +22,7 @@ d'Argos ; il ne valide pas l'ensemble de `01_SCOPE_V0_ARGOS.md`.
 
 ## Contrat de données
 
-Le schéma est [assessment.schema.json](../schemas/assessment.schema.json).
+Le schéma est [assessment.schema.json](../../schemas/assessment.schema.json).
 Chaque document contient une mission (`id`, `title`, `description`, `scope`),
 des preuves (`id`, `path`, `sha256`, `description`, `source`) et des constats
 (`id`, `title`, `severity`, `asset`, `description`, `recommendation`,

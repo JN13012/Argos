@@ -10,7 +10,7 @@ test.beforeEach(async ({ page }) => {
   );
 });
 
-test("keeps the home focused and serves its assets locally", async ({
+test("restores the classic home and serves its assets locally", async ({
   page,
   baseURL,
 }) => {
@@ -27,7 +27,11 @@ test("keeps the home focused and serves its assets locally", async ({
   ).toHaveCount(1);
   await expect(page.locator(".priority-row")).toHaveCount(2);
   await expect(page.locator(".activity-row")).toHaveCount(1);
-  await expect(page.locator("#chat-content")).toBeHidden();
+  await expect(
+    page.getByRole("heading", { name: "Bienvenue dans Argos" }),
+  ).toBeVisible();
+  await expect(page.locator(".metric-card")).toHaveCount(5);
+  await expect(page.locator("#chat-content")).toBeVisible();
   await expect(
     page.getByRole("textbox", { name: "Question sur la mission" }),
   ).toBeVisible();
@@ -40,8 +44,8 @@ test("keeps the home focused and serves its assets locally", async ({
     }));
   });
   expect(logos).toEqual([
-    { width: 1254, height: 1254 },
-    { width: 1254, height: 1254 },
+    { width: 1024, height: 1536 },
+    { width: 1024, height: 1536 },
   ]);
   expect(
     requests.filter((url) => new URL(url).origin !== new URL(baseURL!).origin),
@@ -162,7 +166,7 @@ test("opens mobile navigation and excludes the closed drawer from keyboard navig
   await expect(page.locator("#sidebar")).toHaveAttribute("inert", "");
 });
 
-test("fits desktop, tablet and small mobile widths with chat below the logs", async ({
+test("fits all widths with chat beside the overview on desktop and logs below", async ({
   page,
 }, testInfo) => {
   test.skip(
@@ -175,8 +179,8 @@ test("fits desktop, tablet and small mobile widths with chat below the logs", as
       visible: width <= 700,
     });
     await expect(
-      page.getByRole("button", { name: "Nouvelle mission" }),
-    ).toBeVisible({ visible: width > 1000 });
+      page.getByRole("button", { name: /Nouvelle mission/ }),
+    ).toBeVisible({ visible: width > 700 });
     expect(
       await page.evaluate(
         () => document.documentElement.scrollWidth > window.innerWidth,
@@ -185,14 +189,21 @@ test("fits desktop, tablet and small mobile widths with chat below the logs", as
     ).toBe(false);
     const logs = await page.locator(".activity-panel").boundingBox();
     const chat = await page.locator("#chat-panel").boundingBox();
-    expect(chat!.y).toBeGreaterThanOrEqual(logs!.y + logs!.height);
-    await page.getByRole("button", { name: "Ouvrir la conversation" }).click();
+    const overview = await page.locator(".overview-column").boundingBox();
+    expect(logs!.y).toBeGreaterThanOrEqual(chat!.y + chat!.height);
+    if (width > 920) {
+      expect(chat!.x).toBeGreaterThanOrEqual(overview!.x + overview!.width);
+      expect(Math.abs(chat!.y - overview!.y)).toBeLessThan(1);
+    } else {
+      expect(chat!.y).toBeGreaterThanOrEqual(overview!.y + overview!.height);
+    }
+    await page.getByRole("button", { name: "Réduire la conversation" }).click();
     expect(
       await page.evaluate(
         () => document.documentElement.scrollWidth > window.innerWidth,
       ),
-      `open chat overflow at ${width}px`,
+      `collapsed chat overflow at ${width}px`,
     ).toBe(false);
-    await page.getByRole("button", { name: "Réduire la conversation" }).click();
+    await page.getByRole("button", { name: "Ouvrir la conversation" }).click();
   }
 });

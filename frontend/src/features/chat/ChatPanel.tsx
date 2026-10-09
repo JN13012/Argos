@@ -14,6 +14,7 @@ interface ChatPanelProps {
   focusRequest: number;
   expanded: boolean;
   onExpandedChange(expanded: boolean): void;
+  initiallyOpen?: boolean;
 }
 
 const MAX_MESSAGES = 42;
@@ -40,8 +41,9 @@ export function ChatPanel({
   focusRequest,
   expanded,
   onExpandedChange,
+  initiallyOpen = false,
 }: ChatPanelProps) {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(initiallyOpen);
   const [draft, setDraft] = useState("");
   const [messages, setMessages] = useState<readonly ChatMessage[]>([]);
   const inputRef = useRef<HTMLTextAreaElement>(null);

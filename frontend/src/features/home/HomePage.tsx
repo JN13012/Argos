@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { BrandLogo } from "../../components/BrandLogo";
 import { ActivityLog } from "../activity/ActivityLog";
 import { appendActivity } from "../activity/activity";
 import type { ActivityInput } from "../activity/activity";
@@ -11,6 +10,7 @@ import { matchesSearch, normalizeSearch } from "../workspace/search";
 import type { WorkspaceState } from "../workspace/useWorkspace";
 import { MissionPanel } from "./MissionPanel";
 import { ReportsPanel } from "./ReportsPanel";
+import { AgentsPanel, MetricsPanel, WelcomePanel } from "./ClassicOverview";
 import "./HomePage.css";
 
 interface HomePageProps {
@@ -85,53 +85,59 @@ export function HomePage({
 
   return (
     <div className="dashboard-grid" id="dashboard-content">
-      <section className="welcome-panel" aria-labelledby="welcome-title">
-        <div className="mascot-frame">
-          <BrandLogo variant="welcome" />
-        </div>
-        <div className="welcome-content">
-          <h2 id="welcome-title">Reprendre votre travail</h2>
-          <p>
-            {summary.pendingCount
-              ? "Choisissez un constat pour poursuivre la revue."
-              : summary.findingCount
-                ? "Retrouvez les décisions de revue dans le dossier."
-                : "Consultez le dossier pour préparer la revue."}
+      <div className="overview-column">
+        <WelcomePanel
+          summary={summary}
+          scopeCount={assessment.mission.scope.length}
+          onOpenMission={() => openMission(null)}
+        />
+        <MetricsPanel
+          assessment={assessment}
+          summary={summary}
+          onOpenMission={() => openMission(null)}
+        />
+        <section
+          className="details-grid"
+          aria-label="Missions, rapports et agents"
+        >
+          <ReportsPanel
+            mission={assessment.mission}
+            report={report}
+            matchesQuery={reportMatchesQuery}
+            summary={summary}
+            onOpenMission={() => openMission(null)}
+            onDownload={() =>
+              recordActivity({
+                type: "report",
+                text: "Téléchargement du rapport demandé.",
+                reference: assessment.mission.id,
+              })
+            }
+          />
+          <MissionPanel
+            assessment={assessment}
+            summary={summary}
+            findings={findings}
+            onOpenMission={openMission}
+          />
+          <AgentsPanel />
+        </section>
+        {normalizeSearch(query) && (
+          <p className="search-feedback" id="search-feedback" role="status">
+            {resultCount
+              ? `${resultCount} résultat${resultCount === 1 ? "" : "s"} dans les constats et rapports.`
+              : "Aucun constat ou rapport ne correspond à cette recherche."}
           </p>
-        </div>
-      </section>
-      <MissionPanel
-        assessment={assessment}
-        summary={summary}
-        findings={findings}
-        onOpenMission={openMission}
-      />
-      <ReportsPanel
-        mission={assessment.mission}
-        report={report}
-        matchesQuery={reportMatchesQuery}
-        onDownload={() =>
-          recordActivity({
-            type: "report",
-            text: "Téléchargement du rapport demandé.",
-            reference: assessment.mission.id,
-          })
-        }
-      />
-      {normalizeSearch(query) && (
-        <p className="search-feedback" id="search-feedback" role="status">
-          {resultCount
-            ? `${resultCount} résultat${resultCount === 1 ? "" : "s"} dans les constats et rapports.`
-            : "Aucun constat ou rapport ne correspond à cette recherche."}
-        </p>
-      )}
-      <ActivityLog events={events} query={query} />
+        )}
+      </div>
       <ChatPanel
         context={{ assessment, summary, reportAvailable: report !== null }}
         focusRequest={chatFocusRequest}
         expanded={chatExpanded}
         onExpandedChange={onChatExpandedChange}
+        initiallyOpen
       />
+      <ActivityLog events={events} query={query} />
       <MissionDialog
         assessment={assessment}
         summary={summary}

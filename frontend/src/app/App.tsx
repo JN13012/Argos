@@ -27,6 +27,10 @@ export function App({
       query={query}
       onQueryChange={setQuery}
       ready={workspace.status === "ready"}
+      pendingCount={
+        workspace.status === "ready" ? workspace.summary.pendingCount : 0
+      }
+      onOpenMission={() => setSelection({ findingId: null })}
       searchRef={searchRef}
       onOpenChat={() => setChatFocusRequest((current) => current + 1)}
       onAbout={() => setAboutOpen(true)}
@@ -39,7 +43,16 @@ export function App({
         data-state={workspace.status}
         aria-busy={workspace.status === "loading"}
       >
-        <h1 className="sr-only">Accueil Argos</h1>
+        <div className="page-heading">
+          <div>
+            <span className="page-eyebrow">ARGOS / ACCUEIL</span>
+            <h1>Vue d’ensemble</h1>
+          </div>
+          <div className="demo-pill">
+            <span className="status-dot blue" />
+            Données de démonstration
+          </div>
+        </div>
         {workspace.status === "ready" ? (
           <HomePage
             workspace={workspace}
@@ -54,6 +67,9 @@ export function App({
           <WorkspaceStatus state={workspace} />
         )}
         <footer className="workspace-footer">
+          <span>
+            ARGOS <i>·</i> Observer. Comprendre. Agir.
+          </span>
           <Button variant="quiet" onClick={() => setAboutOpen(true)}>
             À propos d’Argos
           </Button>

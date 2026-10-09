@@ -1,46 +1,41 @@
 # Revue de l’accueil Argos
 
-L’accueil doit permettre de choisir la prochaine action et de reprendre un
-dossier. Chaque information dispose d’un emplacement principal ; chaque bouton
-ouvre un contenu ou effectue une action distincte.
+À la demande du propriétaire, l'accueil reprend la présentation de « Front init »
+(`8d4dccd`) : mascotte d'origine, couleurs sombres, bandeau de bienvenue,
+indicateurs et chat à droite. Cette restauration conserve les composants React,
+la consultation des preuves, la cohérence du rapport et les états de chargement.
 
 ## Organisation retenue
 
-| Zone | Contenu et action |
-| --- | --- |
-| Bandeau | Logo et consigne courte, adaptée à l’état du dossier ; aucun compteur ni rappel de mission |
-| Mission | Nom, identifiant, périmètre et état de revue, puis constats à examiner directement accessibles |
-| Rapports et documents | Rapport disponible à droite, avec une seule action de téléchargement |
-| Journal de logs | Événements de session récents, trois lignes maximum avant développement |
-| Argos Chat | Champ de saisie sous les logs ; conversation et raccourcis ouverts à la demande |
+| Zone                  | Contenu et action                                                                       |
+| --------------------- | --------------------------------------------------------------------------------------- |
+| Bandeau               | Mascotte d'origine, bienvenue, heure locale, état de revue et point de situation        |
+| Indicateurs           | Mission, revues en attente, actifs du périmètre, constats critiques et agents connectés |
+| Mission               | Nom, identifiant, périmètre, progression de revue et constats directement accessibles   |
+| Rapports et documents | Rapport et dossier dans le premier panneau, avec une seule action de téléchargement     |
+| Agents                | Profils prévus explicitement non connectés, zéro agent connecté                         |
+| Journal de logs       | Événements de session récents, trois lignes maximum avant développement                 |
+| Argos Chat            | Conversation ouverte à droite sur ordinateur, sous la synthèse sur les petits écrans    |
 
-La mission constitue le contenu principal. Son titre et son périmètre ne sont
-plus répétés dans un bandeau, une carte de compteur et une seconde carte de
-mission. Le nombre de constats à examiner figure seulement à côté de leur
-liste. La sévérité est attachée à chaque constat ; une observation critique se
-repère dans cette liste lorsqu’elle existe. Le front n’affiche pas de carte
-« zéro constat critique » ni de score de sécurité global.
+Les compteurs sont calculés depuis le dossier chargé. Les graphiques des cartes
+sont des décorations, sans série de mesures ni score de sécurité global. Les
+notifications reprennent les constats en attente. Le titre de mission figure
+dans son panneau et dans le contexte du chat ; la sévérité reste attachée à
+chaque constat.
 
-Les preuves et la progression de revue appartiennent au dossier, accessible par
+Les preuves et les décisions de revue appartiennent au dossier, accessible par
 « Ouvrir le dossier ». Cliquer sur un constat ouvre directement ce constat avec
 ses preuves. « Voir toute la mission » réaffiche l’ensemble du dossier.
 Le contexte de mission reste disponible dans la conversation lorsqu’elle est
 ouverte, et les références de mission dans les événements du journal.
 
-## Éléments retirés
+## Limites de la présentation
 
-- La rangée de compteurs « Missions à revoir », « Constats à revoir »,
-  « Constats critiques » et « Preuves référencées ».
-- Les rappels « Vos priorités » et « Mission à examiner » qui répétaient le
-  même état ou ouvraient le même dossier.
-- Le panneau de notifications alimenté uniquement par ces constats en attente.
-- Le document JSON qui rouvrait la mission et les boutons de téléchargement
-  dupliqués. Le rapport comporte une seule action dans la colonne de droite.
-- Les résumés de mission produits automatiquement dans le chat et les lignes
-  de logs générées uniquement pour annoncer les métadonnées déjà affichées.
-- Les cartes Red Team, OSINT et Blue Team, déjà présentes dans la navigation.
-- Les profils d’agents inexistants, les courbes sans mesure, les slogans et les
-  mentions « Démo » dans le parcours courant.
+Le panneau Agents décrit une présentation prévue, sans activité inventée.
+La navigation Red Team, OSINT et Blue Team reste désactivée. Les événements du
+journal correspondent aux interactions locales ; le message d'accueil du chat
+est une introduction fixe. Le dossier JSON s'ouvre dans le dialogue de mission,
+et seul le rapport correspondant peut être téléchargé.
 
 Les sorties d’outils complètes, contenus de preuves, secrets et prompts internes
 ne doivent pas occuper l’accueil. Les détails utiles à la revue appartiennent
@@ -83,22 +78,22 @@ ancien. Développer le journal affiche tous les résultats dans une zone défila
 
 Le chat reste un assistant local à réponses prédéfinies, sans modèle connecté.
 Cette limite est décrite dans l’aide et la documentation. Le champ de saisie
-reste visible ; une question, le bouton de conversation ou le raccourci de
-l’en-tête ouvre les échanges. Le mode agrandi conserve le contexte et se réduit
+reste visible et la conversation est ouverte à l'arrivée. Le bouton de
+conversation ou le raccourci de l'en-tête permet de la rouvrir après réduction.
+Le mode agrandi conserve le contexte et se réduit
 avec Échap. Replier la conversation conserve les messages pendant la session.
 
 ## Évolution de l’accueil
 
-La version React du 8 octobre 2026 conserve cette organisation. Les composants
+La restauration de l'accueil conserve la structure React du 8 octobre 2026. Les composants
 de mission, de documents, de journal et de conversation sont séparés. Les
-styles partagés emploient des variables de thème, avec des textes plus lisibles,
-des espacements réguliers et une action de téléchargement clairement identifiée.
+styles reprennent le thème de « Front init », adapté aux composants actuels.
 La logique de présentation et les contrôles de cohérence du rapport restent
 indépendants de React ; le chargement passe par une source de données explicite.
 Le mode agrandi du chat utilise un dialogue natif, conserve le brouillon et les
 messages, maintient le focus au clavier et revient à son bouton d'ouverture.
 Les détails de structure et de vérification sont dans
-[frontend/README.md](../frontend/README.md).
+[le guide du front](FRONTEND.md).
 
 Avec plusieurs missions, le bloc principal pourra devenir une liste de dossiers
 à reprendre, chaque mission conservant une seule ligne de résumé. Responsable,

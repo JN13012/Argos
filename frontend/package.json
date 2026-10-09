@@ -14,8 +14,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
-    "format": "prettier --write src tests *.ts *.json index.html README.md",
-    "format:check": "prettier --check src tests *.ts *.json index.html README.md",
+    "format": "prettier --write src tests *.ts *.json index.html ../doc/interface/*.md",
+    "format:check": "prettier --check src tests *.ts *.json index.html ../doc/interface/*.md",
     "check": "npm run format:check && npm run test && npm run build"
   },
   "dependencies": {

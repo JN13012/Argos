@@ -1,8 +1,8 @@
 # ARGOS — Manifeste canonique
 
-**Version :** 1.4\
+**Version :** 1.5\
 **Statut :** canonique  
-**Date :** 7 octobre 2026
+**Date :** 9 octobre 2026
 
 ---
 
@@ -48,17 +48,17 @@ canonique d’Argos.
 |   |   |   |   |
 |---|---|---|---|
 |Document|Version|Statut|Rôle|
-|`00_PRODUCT_BRIEF_ET_PLAN_GLOBAL_ARGOS.md`|2.5|`CANONICAL`|Vision, positionnement, limites et trajectoire|
-|`CANONICAL_MANIFEST_ARGOS.md`|1.4|`CANONICAL`|Versions, statuts, dépendances et ordre d’autorité|
-|`PROJECT_STATUS_ARGOS.md`|1.4|`CANONICAL`|État courant, décisions récentes, travail restant et prochaine étape|
-|`01_SCOPE_V0_ARGOS.md`|1.0|`IN_PROGRESS`|Proposition de scope V0 existante, en attente de validation explicite|
+|[00_PRODUCT_BRIEF_ET_PLAN_GLOBAL_ARGOS.md](../produit/00_PRODUCT_BRIEF_ET_PLAN_GLOBAL_ARGOS.md)|2.5|`CANONICAL`|Vision, positionnement, limites et trajectoire|
+|[CANONICAL_MANIFEST_ARGOS.md](CANONICAL_MANIFEST_ARGOS.md)|1.5|`CANONICAL`|Versions, statuts, dépendances et ordre d’autorité|
+|[PROJECT_STATUS_ARGOS.md](PROJECT_STATUS_ARGOS.md)|1.6|`CANONICAL`|État courant, décisions récentes, travail restant et prochaine étape|
+|[01_SCOPE_V0_ARGOS.md](../produit/01_SCOPE_V0_ARGOS.md)|1.0|`IN_PROGRESS`|Proposition de scope V0 existante, en attente de validation explicite|
 
 Les mises à jour 1.2 et 1.3 corrigent l'état des fichiers effectivement présents,
 ajoutent les documents de préparation GitHub et enregistrent le retrait du course
 pack ainsi que la revue des projets voisins. Elles ne valident pas le scope V0.
 
 La version 1.4 enregistre l'acceptation du premier livrable hors ligne et son
-implémentation originale. `docs/FIRST_DELIVERABLE.md` version 1.0 fixe le contrat
+implémentation originale. `doc/livrables/FIRST_DELIVERABLE.md` version 1.0 fixe le contrat
 de cette tranche. `AGENTS.md` fixe les commandes et règles de développement pour
 ce périmètre limité. Ces documents ne valident pas le scope V0 complet et ne
 constituent pas l'architecture définitive de la plateforme.
@@ -66,14 +66,27 @@ constituent pas l'architecture définitive de la plateforme.
 Documents de présentation et de préparation, sans autorité sur le scope produit :
 
 - `README.md` : entrée du dépôt et distinction entre vision et code existant ;
-- `docs/ROADMAP.md` : proposition de progression pour une démo et un portfolio ;
-- `docs/REPOSITORY_REVIEW.md` : constat de préparation à la publication ;
-- `THIRD_PARTY_NOTICES.md` : suivi de provenance des éléments importés.
-- `docs/RELATED_PROJECTS.md` : sources d'inspiration et licences annoncées.
+- `doc/suivi/ROADMAP.md` : proposition de progression pour une démo et un portfolio ;
+- `doc/suivi/REPOSITORY_REVIEW.md` : constat de préparation à la publication ;
+- `doc/references/THIRD_PARTY_NOTICES.md` : suivi de provenance des éléments importés.
+- `doc/references/RELATED_PROJECTS.md` : sources d'inspiration et licences annoncées.
 
 `GUIDE_TRAVAIL_ARGOS_AVEC_CHATGPT.md` est `RETIRED` : il est retiré du corpus  
 actif, absent du dépôt et sans autorité. Il ne doit pas être recréé ni utilisé  
 comme dépendance sans décision explicite.
+
+### Organisation documentaire — 9 octobre 2026
+
+La version 1.5 enregistre le regroupement demandé par le propriétaire dans
+`doc/`, avec les catégories `produit`, `suivi`, `livrables`, `guides`, `interface`
+et `references`. Le [sommaire](../README.md) donne les emplacements actuels de
+tous les documents. Leurs noms stables et leurs statuts sont conservés.
+
+Le guide de démarrage reprend le contenu détaillé de l'ancien README de racine.
+Les guides du front et des exemples sont également regroupés sous `doc/`.
+`README.md` reste l'entrée du dépôt et `AGENTS.md` reste à la racine pour les
+outils. Les schémas, fixtures, rapports de référence et imports gardent leurs
+emplacements. Cette réorganisation ne modifie aucun contrat ni le scope produit.
 
 ---
 
@@ -97,7 +110,7 @@ comme dépendance sans décision explicite.
 |13|`13_BACKLOG_EPICS_ET_STORIES.md`|`PLANNED`|Documents 01 à 12 nécessaires au lot planifié|
 |14|`14_PLAN_DE_TEST_SECURITE_ET_QA.md`|`PLANNED`|Scope V0, Threat Model, Architecture, Benchmark|
 |15|`15_PLAN_DE_DEPLOIEMENT_ET_OPERATIONS.md`|`PLANNED`|Architecture, Threat Model, Conformité, Tests|
-|16|`AGENTS.md`|Présent — premier livrable hors ligne uniquement|`docs/FIRST_DELIVERABLE.md`, stack et commandes de ce lot|
+|16|`AGENTS.md`|Présent — premier livrable hors ligne uniquement|`doc/livrables/FIRST_DELIVERABLE.md`, stack et commandes de ce lot|
 
 ---
 

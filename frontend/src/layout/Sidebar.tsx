@@ -57,12 +57,12 @@ export function Sidebar({
       </nav>
       <div className="sidebar-bottom">
         <div className="local-status">
-          <span className="eyebrow">ESPACE LOCAL</span>
+          <span className="eyebrow">ENVIRONNEMENT LOCAL</span>
           <strong>
             <span className="status-dot" />
-            Hors ligne
+            MODE DÉMONSTRATION
           </strong>
-          <p>Vos dossiers et vos documents, au même endroit.</p>
+          <p>Explorez l’interface avec des données synthétiques.</p>
           <Button variant="quiet" onClick={onAbout}>
             À propos d’Argos <Icon name="arrow" />
           </Button>

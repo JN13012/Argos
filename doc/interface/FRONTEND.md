@@ -1,9 +1,15 @@
 # Accueil Argos
 
 Dashboard React + TypeScript + Vite, inspiré des propositions visuelles du
-propriétaire. Navigation latérale, mission et constats directement accessibles,
-rapport à droite, journal de logs puis conversation repliable. Les styles et
-les ressources sont locaux ; aucune police distante ni CDN.
+propriétaire. L'accueil reprend la présentation de « Front init » (`8d4dccd`) :
+mascotte d'origine, bandeau de bienvenue, cinq indicateurs et panneaux Documents,
+Mission et Agents. La conversation est ouverte à droite sur ordinateur et le
+journal de logs se trouve dessous. Les styles et les ressources sont locaux ;
+aucune police distante ni CDN.
+
+Le code reste dans `frontend/`. Sauf indication contraire, les chemins de source
+et les commandes de ce guide sont relatifs à ce dossier ; les liens Markdown
+pointent vers la documentation regroupée dans `doc/`.
 
 ## Lancer le front
 
@@ -42,6 +48,8 @@ reste une fonctionnalité future.
   par `Ctrl+K` ou `Cmd+K` sur ordinateur.
 - Ouverture du dossier complet ou d'un constat avec ses preuves et les décisions
   de revue. Les dialogues natifs gèrent le clavier, le focus et `Échap`.
+- Les indicateurs et notifications utilisent les données du dossier affiché.
+  Le panneau Agents présente des profils prévus, avec zéro agent connecté.
 - Un seul téléchargement de rapport, proposé lorsque l'empreinte du dossier
   affiché correspond au dossier utilisé pour générer le rapport.
 - Logs de consultation et de demande de téléchargement, horodatés en Europe/Paris.
@@ -93,11 +101,13 @@ tests/e2e/             Parcours Playwright sur le front compilé
 
 Les styles propres à une fonctionnalité sont placés à côté de ses composants.
 Les variables communes de couleur et d'espacement vivent dans `styles/tokens.css`.
-Les couches CSS `tokens`, `base`, `components`, `layout` et `features` définissent
+Les couches CSS `tokens`, `base`, `components`, `layout`, `features` et `classic` définissent
 une priorité explicite, pour que les règles d'adaptation des composants restent
 effectives quand les fichiers de styles évoluent.
+`styles/classic.css` reprend le thème de « Front init » et adapte les contrôles
+React et les dialogues natifs à cette présentation.
 La géométrie des icônes SVG est originale et centralisée ; les images et leur
-provenance sont documentées dans [assets/README.md](assets/README.md).
+provenance sont documentées dans [les ressources visuelles](RESSOURCES_VISUELLES.md).
 
 Les composants reçoivent des données et des callbacks explicites. Le chargement
 passe par `WorkspaceSource`, implémenté pour le dossier embarqué. Un futur
@@ -143,5 +153,5 @@ git diff --check
 ```
 
 Ces trois commandes s'exécutent à la racine du dépôt. Les choix de contenu sont
-expliqués dans [la revue de l'accueil](../docs/HOME_DESIGN_REVIEW.md).
+expliqués dans [la revue de l'accueil](HOME_DESIGN_REVIEW.md).
 Le raccordement à des missions locales réelles reste un livrable séparé.

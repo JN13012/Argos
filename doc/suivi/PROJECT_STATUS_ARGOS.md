@@ -1,8 +1,8 @@
 # ARGOS — Statut du projet
 
-**Version :** 1.5\
+**Version :** 1.6\
 **Statut :** canonique  
-**Date de situation :** 8 octobre 2026\
+**Date de situation :** 9 octobre 2026\
 **Phase :** premier livrable Argos Core hors ligne implémenté
 
 ---
@@ -18,7 +18,7 @@ mandat jusqu’au retest.
 Argos Core 0.1.0 implémente une première tranche originale : création de mission,
 import de constats synthétiques, contrôle de preuves locales, revue humaine et
 rapport Markdown déterministe. Les commandes fonctionnent avec la bibliothèque
-standard Python. `docs/FIRST_DELIVERABLE.md` décrit la tranche acceptée par le
+standard Python. `doc/livrables/FIRST_DELIVERABLE.md` décrit la tranche acceptée par le
 propriétaire et ses critères d'acceptation.
 
 La plateforme complète du brief n'est pas implémentée.
@@ -50,7 +50,7 @@ Argos Arena est un projet séparé et n’est pas une dépendance d’Argos.
 - tests de contrat et d'intégration CLI ; commandes de développement dans `AGENTS.md` ;
 - CI GitHub Actions sur Python 3.11, 3.12 et 3.13, avec actions officielles fixées
   à des commits précis et permissions de lecture ;
-- autorisation du lot et contrat dans `docs/FIRST_DELIVERABLE.md`.
+- autorisation du lot et contrat dans `doc/livrables/FIRST_DELIVERABLE.md`.
 - laboratoire pédagogique déplacé hors du dépôt par le propriétaire ; retrait
   enregistré séparément, sans dépendance de la démo envers cet exercice.
 
@@ -59,15 +59,15 @@ Argos Arena est un projet séparé et n’est pas une dépendance d’Argos.
 - suppression de 93 fichiers `Zone.Identifier` et ajout du `.gitignore` ;
 - exclusion Git des missions locales, du sélecteur actif et des réglages personnels,
   avec conservation locale de ces données ;
-- ajout de `README.md`, `THIRD_PARTY_NOTICES.md`, `docs/REPOSITORY_REVIEW.md`
-  et de la proposition `docs/ROADMAP.md` ;
+- ajout de `README.md`, `doc/references/THIRD_PARTY_NOTICES.md`, `doc/suivi/REPOSITORY_REVIEW.md`
+  et de la proposition `doc/suivi/ROADMAP.md` ;
 - ajout d'un contrôle hors ligne de l'hygiène et de la syntaxe du dépôt ;
 - vérification de l'intégrité Git et de la syntaxe des sources importées ;
 - correction du manifeste : le scope V0 existe mais n'est pas validé.
 - retrait des 40 fichiers du course pack encore présents dans l'index après
   suppression du dossier par le propriétaire ; exclusion du chemin pour les
   prochains imports ;
-- ajout de `docs/RELATED_PROJECTS.md` avec sources primaires et licences annoncées ;
+- ajout de `doc/references/RELATED_PROJECTS.md` avec sources primaires et licences annoncées ;
 - vérification de la visibilité publique et de l'alignement avec `origin/main`
   avant préparation du commit.
 
@@ -82,6 +82,16 @@ Argos Arena est un projet séparé et n’est pas une dépendance d’Argos.
 - tests unitaires et navigateur, compilation et job CI dédiés au front ;
 - aucun raccordement au noyau, modèle IA ou moteur d'analyse ajouté ;
 - contrat et fonctionnement du premier livrable Python hors ligne conservés.
+
+### Organisation documentaire — 9 octobre 2026
+
+- documentation regroupée dans `doc/` par type : produit, suivi, livrables,
+  guides, interface et références ;
+- sommaire dans [doc/README.md](../README.md) et README de racine réduit aux
+  points d'entrée ;
+- guides du front et des exemples déplacés avec leurs liens corrigés ;
+- chemin du livrable dans `AGENTS.md` et commandes de formatage du front adaptés ;
+- noms et statuts des documents produit, contrats, code et données conservés.
 
 ### Décisions et travaux de juillet 2026
 
@@ -265,12 +275,12 @@ Argos Arena est un projet séparé et n’est pas une dépendance d’Argos.
 |   |   |   |
 |---|---|---|
 |Document|Version|État|
-|`00_PRODUCT_BRIEF_ET_PLAN_GLOBAL_ARGOS.md`|2.5|Canonique|
-|`CANONICAL_MANIFEST_ARGOS.md`|1.4|Canonique|
-|`PROJECT_STATUS_ARGOS.md`|1.4|Canonique|
+|[00_PRODUCT_BRIEF_ET_PLAN_GLOBAL_ARGOS.md](../produit/00_PRODUCT_BRIEF_ET_PLAN_GLOBAL_ARGOS.md)|2.5|Canonique|
+|[CANONICAL_MANIFEST_ARGOS.md](CANONICAL_MANIFEST_ARGOS.md)|1.5|Canonique|
+|[PROJECT_STATUS_ARGOS.md](PROJECT_STATUS_ARGOS.md)|1.6|Canonique|
 |`GUIDE_TRAVAIL_ARGOS_AVEC_CHATGPT.md`|—|Retiré du corpus et absent du dépôt|
-|`01_SCOPE_V0_ARGOS.md`|1.0|`IN_PROGRESS` — validation complète en attente|
-|`docs/FIRST_DELIVERABLE.md`|1.0|Contrat du lot hors ligne accepté et implémenté|
+|[01_SCOPE_V0_ARGOS.md](../produit/01_SCOPE_V0_ARGOS.md)|1.0|`IN_PROGRESS` — validation complète en attente|
+|`doc/livrables/FIRST_DELIVERABLE.md`|1.0|Contrat du lot hors ligne accepté et implémenté|
 |`02` à `15`|—|Planifiés|
 |`AGENTS.md`|—|Actif pour le premier livrable hors ligne|
 |`16` à `19`|—|Différés|
@@ -316,7 +326,7 @@ Elles ne nécessitent pas de reprendre un brainstorming général.
 
 ## 7. Prochaine étape autorisée
 
-Le premier livrable hors ligne proposé dans `docs/ROADMAP.md` a été accepté et
+Le premier livrable hors ligne proposé dans `doc/suivi/ROADMAP.md` a été accepté et
 implémenté. Sa fiche, son schéma et sa démonstration deviennent la base du prochain
 lot : spécifier la persistance et la reprise de missions. Cette prochaine tranche
 reste à définir avant implémentation. La démo ne remplace pas les cinq incréments
@@ -357,7 +367,7 @@ La revue du scope doit confirmer :
     
 
 Pour la tranche hors ligne, les décisions de stack, de données, de sécurité et
-de tests sont fixées dans `docs/FIRST_DELIVERABLE.md` ; le code et `AGENTS.md`
+de tests sont fixées dans `doc/livrables/FIRST_DELIVERABLE.md` ; le code et `AGENTS.md`
 sont donc autorisés dans cette portée. Les capacités supplémentaires demandent
 leur propre périmètre et leurs critères d'acceptation.
 
