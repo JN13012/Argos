@@ -11,8 +11,8 @@ through real Business Discovery tests, starting with garages in Marseille.
 ## Status
 
 Repository rebuild completed. Application implementation is restarting from a
-clean baseline. A minimal Python foundation is available; OSINT business
-implementation has not started.
+clean baseline. The minimal Python foundation and OSINT domain models are
+available; the OSINT engine has not been implemented.
 
 ## Documentation
 
