@@ -2,19 +2,21 @@
 
 ## Architecture actuelle
 
-**No active application implementation yet.** Le dépôt contient le README et
-la documentation de direction ; aucun package applicatif, test fonctionnel ou
+Le dépôt contient la documentation de direction et une fondation Python minimale :
+un package importable, une entrée CLI et un test d'import. Aucun module métier ni
 workflow de CI n'est actif.
 
-La prochaine fondation sera construite sous :
+La fondation est construite sous :
 
 ```text
 argos/
+├── __init__.py
+├── __main__.py
 └── osint/
+    └── __init__.py
 ```
 
-Ces fichiers seront créés dans la prochaine tâche. Cette passe ne crée aucun
-package, contrat de données ni implémentation.
+Cette fondation ne définit aucun contrat de données ni implémentation métier.
 
 ## Direction future
 
