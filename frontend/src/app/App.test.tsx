@@ -42,8 +42,8 @@ describe("home interactions", () => {
     ).toHaveLength(1);
     expect(screen.getByText("1 événement")).toBeVisible();
     expect(
-      screen.getByRole("heading", { name: "Bienvenue dans Argos" }),
-    ).toBeVisible();
+      screen.queryByRole("heading", { name: "Bienvenue dans Argos" }),
+    ).not.toBeInTheDocument();
     expect(document.querySelectorAll(".metric-card")).toHaveLength(5);
     expect(screen.getByRole("heading", { name: "Agents" })).toBeVisible();
     expect(document.getElementById("chat-content")).toBeVisible();

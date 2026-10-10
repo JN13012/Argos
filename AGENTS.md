@@ -1,5 +1,12 @@
 # Working on Argos
 
+Argos is an Epitech final-year cybersecurity project (4th year), supervised and
+graded by the Epitech Marseille teaching staff. It covers OSINT, Red and
+Defense. Read the [project framework](doc/product/CADRE.md) before
+working on collection or offensive capabilities. OSINT uses lawful sources
+without bypassing technical protections. Active Red work targets only labs,
+training platforms or explicitly authorized scopes.
+
 The current authorized implementation is the offline deliverable described in
 `doc/livrables/FIRST_DELIVERABLE.md`. The broader V0 scope remains a draft. Read the
 deliverable before changing its data contract or behavior.

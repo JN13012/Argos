@@ -29,7 +29,18 @@ test("restores the classic home and serves its assets locally", async ({
   await expect(page.locator(".activity-row")).toHaveCount(1);
   await expect(
     page.getByRole("heading", { name: "Bienvenue dans Argos" }),
-  ).toBeVisible();
+  ).toHaveCount(0);
+  await expect(page.locator(".welcome-panel")).toHaveCount(0);
+  await expect(page.getByText("ARGOS / ACCUEIL", { exact: true })).toHaveCount(
+    0,
+  );
+  await expect(
+    page.getByRole("heading", { name: "Vue d’ensemble" }),
+  ).toHaveCount(0);
+  await expect(page.locator(".brand-logo--header")).toHaveAttribute(
+    "src",
+    /argos-wolf-kraken/,
+  );
   await expect(page.locator(".metric-card")).toHaveCount(5);
   await expect(page.locator("#chat-content")).toBeVisible();
   await expect(
@@ -43,10 +54,7 @@ test("restores the classic home and serves its assets locally", async ({
       height: image.naturalHeight,
     }));
   });
-  expect(logos).toEqual([
-    { width: 1024, height: 1536 },
-    { width: 1024, height: 1536 },
-  ]);
+  expect(logos).toEqual([{ width: 1254, height: 1254 }]);
   expect(
     requests.filter((url) => new URL(url).origin !== new URL(baseURL!).origin),
   ).toEqual([]);

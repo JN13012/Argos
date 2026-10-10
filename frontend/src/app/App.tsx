@@ -44,10 +44,6 @@ export function App({
         aria-busy={workspace.status === "loading"}
       >
         <div className="page-heading">
-          <div>
-            <span className="page-eyebrow">ARGOS / ACCUEIL</span>
-            <h1>Vue d’ensemble</h1>
-          </div>
           <div className="demo-pill">
             <span className="status-dot blue" />
             Données de démonstration

@@ -10,7 +10,7 @@ import { matchesSearch, normalizeSearch } from "../workspace/search";
 import type { WorkspaceState } from "../workspace/useWorkspace";
 import { MissionPanel } from "./MissionPanel";
 import { ReportsPanel } from "./ReportsPanel";
-import { AgentsPanel, MetricsPanel, WelcomePanel } from "./ClassicOverview";
+import { AgentsPanel, MetricsPanel } from "./ClassicOverview";
 import "./HomePage.css";
 
 interface HomePageProps {
@@ -86,11 +86,6 @@ export function HomePage({
   return (
     <div className="dashboard-grid" id="dashboard-content">
       <div className="overview-column">
-        <WelcomePanel
-          summary={summary}
-          scopeCount={assessment.mission.scope.length}
-          onOpenMission={() => openMission(null)}
-        />
         <MetricsPanel
           assessment={assessment}
           summary={summary}

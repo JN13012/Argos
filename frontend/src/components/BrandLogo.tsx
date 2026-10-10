@@ -1,22 +1,15 @@
-import logoUrl from "../../assets/argos-mascot.png";
+import wolfKrakenUrl from "../../assets/argos-wolf-kraken.png";
 
-export function BrandLogo({ variant }: { variant: "header" | "welcome" }) {
-  const image = (
-    <img
-      className={`brand-logo brand-logo--${variant} ${variant === "welcome" ? "mascot" : ""}`}
-      src={logoUrl}
-      width={1024}
-      height={1536}
-      alt={
-        variant === "welcome"
-          ? "Mascotte Argos, chien robotique aux yeux bleus"
-          : ""
-      }
-    />
-  );
-  return variant === "header" ? (
-    <span className="brand-mark">{image}</span>
-  ) : (
-    image
+export function BrandLogo() {
+  return (
+    <span className="brand-mark">
+      <img
+        className="brand-logo brand-logo--header"
+        src={wolfKrakenUrl}
+        width={1254}
+        height={1254}
+        alt=""
+      />
+    </span>
   );
 }
