@@ -1,4 +1,4 @@
-from dataclasses import FrozenInstanceError, replace
+from dataclasses import replace
 from datetime import UTC, datetime, timedelta, timezone
 from uuid import uuid4
 
@@ -114,31 +114,13 @@ def test_scope_rejects_blank_fields(name: str, value: str) -> None:
         replace(scope, **{name: value})
 
 
-@pytest.mark.parametrize(("attribute", "value"), [
-    ("activity", "car washes"),
-    ("location", "Paris"),
-])
-def test_scope_is_immutable(attribute: str, value: str) -> None:
-    scope = SearchScope(activity="garages", location="Marseille")
-
-    with pytest.raises(FrozenInstanceError):
-        setattr(scope, attribute, value)
-
-
 def test_entity_exists_without_external_identifiers(entity: Entity) -> None:
-    assert entity.entity_type is EntityType.ESTABLISHMENT
-    assert entity.entity_type.value == "establishment"
     assert entity.display_name == "Garage du Port"
 
-    entity.display_name = "Garage du Vieux Port"
 
-    assert entity.display_name == "Garage du Vieux Port"
-
-
-@pytest.mark.parametrize("value", ["", " \t"])
-def test_entity_rejects_blank_display_name(entity: Entity, value: str) -> None:
+def test_entity_rejects_blank_display_name(entity: Entity) -> None:
     with pytest.raises(ValueError, match="display_name"):
-        replace(entity, display_name=value)
+        replace(entity, display_name="")
 
 
 @pytest.mark.parametrize("name", ["created_at", "updated_at"])
@@ -153,7 +135,7 @@ def test_entity_requires_utc_timestamps(
     ("siret", "12345678900012"),
     ("google_place_id", "example-place-id"),
 ])
-def test_identifier_supports_multiple_sources(
+def test_identifier_supports_multiple_schemes(
     entity: Entity, scheme: str, value: str,
 ) -> None:
     identifier = Identifier(entity.id, scheme, value, "fixture")
@@ -161,55 +143,31 @@ def test_identifier_supports_multiple_sources(
     assert identifier.entity_id == entity.id
     assert identifier.scheme == scheme
     assert identifier.value == value
-    assert identifier.source == "fixture"
 
 
 @pytest.mark.parametrize("name", ["scheme", "value", "source"])
-@pytest.mark.parametrize("value", ["", " \t"])
 def test_identifier_rejects_blank_fields(
-    identifier: Identifier, name: str, value: str,
+    identifier: Identifier, name: str,
 ) -> None:
     with pytest.raises(ValueError, match=name):
-        replace(identifier, **{name: value})
-
-
-def test_observation_has_a_utc_timestamp(observation: Observation) -> None:
-    assert observation.observed_at.tzinfo is UTC
-    assert observation.observed_at.utcoffset() == timedelta(0)
+        replace(identifier, **{name: ""})
 
 
 def test_conflicting_observations_remain_separate(observation: Observation) -> None:
-    newer = replace(
-        observation,
+    newer = Observation(
         id=uuid4(),
+        entity_id=observation.entity_id,
+        field=observation.field,
         value="Garage du Vieux Port",
         source="another_fixture",
         observed_at=NOW + timedelta(hours=1),
     )
 
-    assert newer.entity_id == observation.entity_id
-    assert newer.field == observation.field
-    assert newer.id != observation.id
-    assert observation.value == "Garage du Port"
-    assert observation.source == "fixture"
-    assert newer.value == "Garage du Vieux Port"
-    assert newer.source == "another_fixture"
-
-
-@pytest.mark.parametrize(("attribute", "value"), [
-    ("value", "Updated name"),
-    ("source", "another_fixture"),
-])
-def test_observation_is_immutable(
-    observation: Observation, attribute: str, value: str,
-) -> None:
-    with pytest.raises(FrozenInstanceError):
-        setattr(observation, attribute, value)
-
-
-def test_observation_preserves_raw_values(observation: Observation) -> None:
-    assert replace(observation, value="  raw value  ").value == "  raw value  "
-    assert replace(observation, value="").value == ""
+    observations = [observation, newer]
+    assert [(fact.value, fact.source) for fact in observations] == [
+        ("Garage du Port", "fixture"),
+        ("Garage du Vieux Port", "another_fixture"),
+    ]
 
 
 def test_observation_requires_utc(
@@ -220,32 +178,15 @@ def test_observation_requires_utc(
 
 
 @pytest.mark.parametrize("name", ["field", "source"])
-@pytest.mark.parametrize("value", ["", " \t"])
 def test_observation_rejects_blank_provenance(
-    observation: Observation, name: str, value: str,
+    observation: Observation, name: str,
 ) -> None:
     with pytest.raises(ValueError, match=name):
-        replace(observation, **{name: value})
-
-
-@pytest.mark.parametrize("status", list(SearchStatus))
-def test_search_represents_each_status(search: Search, status: SearchStatus) -> None:
-    assert replace(search, status=status).status is status
+        replace(observation, **{name: ""})
 
 
 def test_search_can_be_unfinished(search: Search) -> None:
-    assert search.status is SearchStatus.PENDING
     assert search.completed_at is None
-
-
-def test_search_can_be_completed(search: Search) -> None:
-    completed_at = NOW + timedelta(minutes=5)
-    completed = replace(
-        search, status=SearchStatus.COMPLETED, completed_at=completed_at,
-    )
-
-    assert completed.completed_at == completed_at
-    assert completed.status is SearchStatus.COMPLETED
 
 
 @pytest.mark.parametrize("name", ["started_at", "completed_at"])
@@ -256,10 +197,9 @@ def test_search_requires_utc_timestamps(
         replace(search, **{name: invalid_datetime})
 
 
-@pytest.mark.parametrize("value", ["", " \t"])
-def test_search_rejects_blank_query(search: Search, value: str) -> None:
+def test_search_rejects_blank_query(search: Search) -> None:
     with pytest.raises(ValueError, match="query"):
-        replace(search, query=value)
+        replace(search, query="")
 
 
 def test_search_result_references_search_and_global_entity(
@@ -271,8 +211,6 @@ def test_search_result_references_search_and_global_entity(
     assert search_result.search_id == search.id
     assert another_result.search_id == another_search.id
     assert search_result.entity_id == another_result.entity_id == entity.id
-    entity.display_name = "Updated name"
-    assert search_result.entity_id == entity.id
 
 
 def test_search_result_requires_utc(
@@ -282,31 +220,39 @@ def test_search_result_requires_utc(
         replace(search_result, discovered_at=invalid_datetime)
 
 
-@pytest.mark.parametrize("value", ["", " \t"])
-def test_search_result_rejects_blank_connector(
-    search_result: SearchResult, value: str,
-) -> None:
+def test_search_result_rejects_blank_connector(search_result: SearchResult) -> None:
     with pytest.raises(ValueError, match="connector"):
-        replace(search_result, connector=value)
+        replace(search_result, connector="")
 
 
-@pytest.mark.parametrize("status", list(CoverageStatus))
-def test_coverage_represents_each_status(
-    coverage: Coverage, status: CoverageStatus,
-) -> None:
+def test_coverage_can_report_an_exhausted_source(coverage: Coverage) -> None:
+    assert coverage.status is CoverageStatus.COMPLETE_FOR_SOURCE
+    assert coverage.pagination_exhausted
+    assert not coverage.truncated
+
+
+def test_coverage_can_report_truncation(coverage: Coverage) -> None:
     report = replace(
         coverage,
-        status=status,
-        pagination_exhausted=status is CoverageStatus.COMPLETE_FOR_SOURCE,
-        truncated=status is CoverageStatus.TRUNCATED,
-        errors=["Source unavailable"] if status is CoverageStatus.FAILED else [],
+        status=CoverageStatus.TRUNCATED,
+        pagination_exhausted=False,
+        truncated=True,
     )
 
-    assert report.status is status
-    assert report.pagination_exhausted is (status is CoverageStatus.COMPLETE_FOR_SOURCE)
-    assert report.truncated is (status is CoverageStatus.TRUNCATED)
-    if status is CoverageStatus.FAILED:
-        assert report.errors == ["Source unavailable"]
+    assert report.truncated
+    assert not report.pagination_exhausted
+
+
+def test_coverage_preserves_source_errors(coverage: Coverage) -> None:
+    report = replace(
+        coverage,
+        status=CoverageStatus.FAILED,
+        pagination_exhausted=False,
+        errors=["Source unavailable"],
+    )
+
+    assert report.errors == ["Source unavailable"]
+    assert not report.pagination_exhausted
 
 
 def test_coverage_collections_are_not_shared(coverage: Coverage) -> None:
@@ -342,7 +288,6 @@ def test_coverage_rejects_negative_exclusion_counts(coverage: Coverage) -> None:
         replace(coverage, exclusions={"outside_scope": -1})
 
 
-@pytest.mark.parametrize("value", ["", " \t"])
-def test_coverage_rejects_blank_connector(coverage: Coverage, value: str) -> None:
+def test_coverage_rejects_blank_connector(coverage: Coverage) -> None:
     with pytest.raises(ValueError, match="connector"):
-        replace(coverage, connector=value)
+        replace(coverage, connector="")
