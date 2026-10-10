@@ -17,7 +17,6 @@ from argos.osint import (
     SearchStatus,
 )
 
-
 NOW = datetime(2026, 10, 10, 12, tzinfo=UTC)
 
 
@@ -115,11 +114,15 @@ def test_scope_rejects_blank_fields(name: str, value: str) -> None:
         replace(scope, **{name: value})
 
 
-def test_scope_is_immutable() -> None:
+@pytest.mark.parametrize(("attribute", "value"), [
+    ("activity", "car washes"),
+    ("location", "Paris"),
+])
+def test_scope_is_immutable(attribute: str, value: str) -> None:
     scope = SearchScope(activity="garages", location="Marseille")
 
     with pytest.raises(FrozenInstanceError):
-        scope.location = "Paris"
+        setattr(scope, attribute, value)
 
 
 def test_entity_exists_without_external_identifiers(entity: Entity) -> None:
@@ -191,8 +194,17 @@ def test_conflicting_observations_remain_separate(observation: Observation) -> N
     assert observation.source == "fixture"
     assert newer.value == "Garage du Vieux Port"
     assert newer.source == "another_fixture"
+
+
+@pytest.mark.parametrize(("attribute", "value"), [
+    ("value", "Updated name"),
+    ("source", "another_fixture"),
+])
+def test_observation_is_immutable(
+    observation: Observation, attribute: str, value: str,
+) -> None:
     with pytest.raises(FrozenInstanceError):
-        observation.value = newer.value
+        setattr(observation, attribute, value)
 
 
 def test_observation_preserves_raw_values(observation: Observation) -> None:
