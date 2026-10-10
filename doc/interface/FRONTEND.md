@@ -1,8 +1,8 @@
 # Accueil Argos
 
 Dashboard React + TypeScript + Vite, inspiré des propositions visuelles du
-propriétaire. L'accueil reprend la présentation de « Front init » (`8d4dccd`) :
-mascotte d'origine, bandeau de bienvenue, cinq indicateurs et panneaux Documents,
+propriétaire. L'accueil adapte la présentation de « Front init » (`8d4dccd`) :
+logo wolf-kraken dans l'en-tête, cinq indicateurs et panneaux Documents,
 Mission et Agents. La conversation est ouverte à droite sur ordinateur et le
 journal de logs se trouve dessous. Les styles et les ressources sont locaux ;
 aucune police distante ni CDN.

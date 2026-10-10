@@ -4,6 +4,8 @@ Argos aims to be a modular, AI-assisted platform for OSINT, cybersecurity and
 automation: OSINT, Red, Defense, Agents / Harness and Interface. **OSINT is the
 current priority**, starting with Business Discovery + Website Opportunity.
 See the [vision](doc/product/VISION.md) and [active scope](doc/product/SCOPE.md).
+Argos is an Epitech final-year cybersecurity project; its academic and ethical
+framework is described in [CADRE](doc/product/CADRE.md).
 
 The repository currently contains an offline Python Core CLI, a business
 Discovery V0 prototype and a React home dashboard. The dashboard is not connected

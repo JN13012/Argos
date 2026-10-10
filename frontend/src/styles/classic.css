@@ -255,17 +255,14 @@
   .brand-mark {
     position: relative;
     display: block;
-    width: 36px;
-    height: 40px;
+    width: 56px;
+    height: 56px;
     flex-shrink: 0;
     overflow: hidden;
   }
   .brand-mark img {
-    position: absolute;
-    width: 180%;
-    height: auto;
-    left: -43%;
-    top: -25%;
+    width: 100%;
+    height: 100%;
     filter: drop-shadow(0 0 5px #008fff25);
   }
   .environment {
@@ -574,7 +571,7 @@
   .page-heading {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
     margin-bottom: 21px;
   }
   .page-eyebrow {
@@ -616,176 +613,6 @@
     border-radius: 7px;
     background: linear-gradient(130deg, #071624c7, #04111cc7);
     overflow: hidden;
-  }
-  .welcome-panel {
-    position: relative;
-    display: flex;
-    align-items: center;
-    min-height: 179px;
-    padding: 16px 16px 16px 0;
-  }
-  .mascot-frame {
-    position: relative;
-    flex-shrink: 0;
-    width: 151px;
-    height: 157px;
-    overflow: hidden;
-    align-self: flex-end;
-    margin-bottom: -16px;
-  }
-  .mascot {
-    position: absolute;
-    bottom: -24px;
-    left: 8px;
-    display: block;
-    width: 148px;
-    height: 222px;
-    object-fit: contain;
-    filter: drop-shadow(0 0 10px #169bff10);
-  }
-  .mascot-aura {
-    position: absolute;
-    left: 14px;
-    right: 3px;
-    top: 32px;
-    bottom: 4px;
-    background: radial-gradient(ellipse, #124d724b, transparent 70%);
-  }
-  .mascot-orbit {
-    position: absolute;
-    left: 14px;
-    right: 10px;
-    bottom: 10px;
-    height: 35px;
-    border: 1px solid #146db664;
-    border-radius: 50%;
-    box-shadow:
-      0 0 15px #007fff18,
-      inset 0 0 12px #0085ff16;
-  }
-  .welcome-content {
-    position: relative;
-    flex: 1;
-    min-width: 0;
-    margin-left: 3px;
-  }
-  .welcome-content h2 {
-    margin: 0 0 8px;
-    font-size: 23px;
-    font-weight: 500;
-    letter-spacing: -0.65px;
-    white-space: nowrap;
-  }
-  .welcome-wave {
-    display: inline-block;
-    margin-left: 5px;
-    font-size: 20px;
-    color: #7bcaff;
-  }
-  .brand-promise {
-    margin: 0 0 6px;
-    color: #a4bbd0;
-    font-size: 12px;
-    letter-spacing: 0.2px;
-  }
-  .welcome-description {
-    font-size: 10px;
-    color: var(--muted);
-    margin: 0;
-  }
-  .welcome-details {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-top: 22px;
-  }
-  .local-time {
-    flex-shrink: 0;
-    padding-right: 16px;
-    border-right: 1px solid var(--border);
-  }
-  .local-time > span,
-  .review-status div > span {
-    display: block;
-    color: var(--muted);
-    font-size: 9px;
-  }
-  .local-time strong {
-    display: block;
-    font-variant-numeric: tabular-nums;
-    font-size: 16px;
-    font-weight: 400;
-    margin: 4px 0 2px;
-    letter-spacing: 0.4px;
-  }
-  .local-time small {
-    color: var(--subtle);
-    font-size: 9px;
-  }
-  .review-status {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-  }
-  .review-status-icon {
-    display: grid;
-    place-items: center;
-    width: 30px;
-    height: 34px;
-    border: 1px solid #645427;
-    border-radius: 5px;
-    color: var(--amber);
-    background: #24201452;
-  }
-  .review-status-icon .icon {
-    width: 18px;
-    height: 18px;
-  }
-  .review-status strong {
-    display: block;
-    margin: 4px 0;
-    color: var(--amber);
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 1px;
-  }
-  .review-status small {
-    color: var(--subtle);
-    font-size: 9px;
-  }
-  .summary-box {
-    align-self: stretch;
-    width: 236px;
-    flex-shrink: 0;
-    margin-left: 20px;
-    padding: 14px;
-    border: 1px solid #18334a;
-    border-radius: 5px;
-    background: #03121f85;
-  }
-  .summary-title {
-    display: flex;
-    gap: 7px;
-    align-items: center;
-    color: var(--cyan);
-    font-size: 9px;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-  }
-  .summary-title .icon {
-    width: 15px;
-    height: 15px;
-  }
-  .summary-box p {
-    margin: 12px 0;
-    color: #b5c8d9;
-    font-size: 11px;
-    line-height: 1.8;
-  }
-  .summary-box :is(.text-button, .button--quiet) {
-    float: right;
-    margin-top: 1px;
-    font-size: 10px;
   }
   .metrics-grid {
     display: grid;
@@ -1737,21 +1564,6 @@
     .overview-column {
       gap: 18px;
     }
-    .welcome-panel {
-      min-height: 195px;
-    }
-    .welcome-content h2 {
-      font-size: 27px;
-    }
-    .welcome-description {
-      font-size: 12px;
-    }
-    .summary-box {
-      width: 280px;
-    }
-    .summary-box p {
-      font-size: 12px;
-    }
     .metric-card {
       min-height: 116px;
     }
@@ -1810,39 +1622,6 @@
     .workspace {
       padding: 22px 20px 0;
     }
-    .summary-box {
-      width: 190px;
-      margin-left: 14px;
-      padding: 12px;
-    }
-    .summary-title {
-      font-size: 8px;
-      gap: 4px;
-    }
-    .summary-box p {
-      font-size: 10px;
-    }
-    .mascot-frame {
-      width: 125px;
-    }
-    .mascot {
-      width: 139px;
-      left: -1px;
-    }
-    .welcome-content h2 {
-      font-size: 20px;
-    }
-    .welcome-details {
-      gap: 11px;
-    }
-    .local-time {
-      padding-right: 11px;
-    }
-    .review-status small {
-      max-width: 135px;
-      display: block;
-      line-height: 1.5;
-    }
     .metric-card {
       padding: 13px 10px;
     }
@@ -1889,16 +1668,6 @@
     }
     .environment {
       display: none;
-    }
-    .welcome-panel {
-      flex-wrap: wrap;
-      padding-right: 13px;
-    }
-    .summary-box {
-      display: none;
-    }
-    .welcome-content h2 {
-      font-size: 22px;
     }
     .dashboard-grid {
       grid-template-columns: minmax(0, 1fr) 260px;
@@ -1949,8 +1718,8 @@
       font-size: 21px;
     }
     .brand-mark {
-      width: 30px;
-      height: 34px;
+      width: 48px;
+      height: 48px;
     }
     .new-mission {
       font-size: 10px;
@@ -1994,9 +1763,6 @@
     }
     .dashboard-grid {
       grid-template-columns: minmax(0, 1fr);
-    }
-    .welcome-panel {
-      flex-wrap: nowrap;
     }
     .metrics-grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -2065,8 +1831,8 @@
       letter-spacing: 2px;
     }
     .brand-mark {
-      width: 26px;
-      height: 30px;
+      width: 44px;
+      height: 44px;
     }
     .global-search {
       display: none;
@@ -2125,80 +1891,6 @@
     .demo-pill .status-dot {
       width: 4px;
       height: 4px;
-    }
-    .welcome-panel {
-      min-height: 175px;
-      padding: 16px 11px 16px 0;
-    }
-    .summary-box {
-      display: none;
-    }
-    .mascot-frame {
-      width: 100px;
-      height: 153px;
-    }
-    .mascot {
-      width: 128px;
-      height: 192px;
-      left: -19px;
-      bottom: -10px;
-    }
-    .mascot-orbit {
-      left: 2px;
-      right: 0;
-    }
-    .welcome-content {
-      margin-left: 0;
-    }
-    .welcome-content h2 {
-      font-size: 18px;
-      white-space: normal;
-      letter-spacing: -0.4px;
-    }
-    .welcome-wave {
-      font-size: 15px;
-      margin-left: 2px;
-    }
-    .brand-promise {
-      font-size: 10px;
-    }
-    .welcome-description {
-      font-size: 9px;
-      max-width: 190px;
-      line-height: 1.5;
-    }
-    .welcome-details {
-      gap: 9px;
-      margin-top: 15px;
-    }
-    .local-time {
-      padding-right: 9px;
-    }
-    .local-time strong {
-      font-size: 14px;
-    }
-    .local-time small {
-      font-size: 7px;
-    }
-    .review-status-icon {
-      width: 24px;
-      height: 29px;
-    }
-    .review-status-icon .icon {
-      width: 15px;
-      height: 15px;
-    }
-    .review-status {
-      gap: 6px;
-    }
-    .review-status strong {
-      font-size: 9px;
-    }
-    .review-status div > span {
-      font-size: 8px;
-    }
-    .review-status small {
-      display: none;
     }
     .metrics-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2366,13 +2058,6 @@
   }
   .panel-heading h2 {
     text-transform: uppercase;
-  }
-  .welcome-panel {
-    grid-column: auto;
-    gap: 0;
-  }
-  .mascot-frame {
-    display: block;
   }
   .mission-panel {
     border-color: var(--border);

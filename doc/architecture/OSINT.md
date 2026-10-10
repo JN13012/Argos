@@ -116,6 +116,37 @@ active validation
 Ces exemples fixent une frontière de design ; aucune capacité n'est déplacée
 dans le code pendant cette étape.
 
+## Sources et conditions de collecte
+
+La puissance d'Argos repose sur le croisement de nombreuses sources légitimes,
+la résolution d'identité et l'enrichissement. Elle ne repose pas sur le
+contournement des protections des plateformes. Les règles générales sont fixées
+par le [cadre du projet](../product/CADRE.md). Le tableau ci-dessous oriente le
+choix des connecteurs ; il reste révisable.
+
+| Famille | Approche cible | Exemples |
+| --- | --- | --- |
+| Registres | API publiques officielles ; source pivot en France | API Recherche d'entreprises (Discovery V0), SIRENE, codes NAF |
+| Cartes | API officielle avec clé, ou données ouvertes | Google Places API, OpenStreetMap (Overpass, ODbL) |
+| Moteurs de recherche | API officielle ou fournisseur sous contrat ; pas de scraping des pages de résultats | API de recherche web |
+| Sites web | Crawling borné : `robots.txt` bloquant en cas d'échec, budget de pages, délai, User-Agent identifié | `WebEnricher` de Discovery V0 |
+| Réseaux sociaux | Liens déclarés par l'entité ; API officielle si l'accès est accordé ; aucune collecte authentifiée | Pages d'entreprise |
+| LinkedIn | Pas de scraping automatisé ; lien de page entreprise déclaré ou consultation manuelle par l'utilisateur | Page entreprise |
+
+Points d'attention :
+
+- **Google Places** : les conditions limitent la conservation du contenu ; seul
+  le `place_id` est explicitement exempté. Vérifier les conditions en vigueur
+  avant tout stockage persistant.
+- **OpenStreetMap** : la licence ODbL impose l'attribution et le partage à
+  l'identique des bases dérivées publiées.
+- **LinkedIn** : les conditions d'utilisation interdisent l'extraction
+  automatisée. La CNIL a sanctionné KASPR de 240 000 € en 2024 pour avoir
+  collecté sur LinkedIn des coordonnées dont la visibilité avait été restreinte.
+- **Personnes physiques** : `discovery/people/` et `enrichment/professional/`
+  traitent des données personnelles. Ils exigent une finalité, une minimisation
+  et une durée de conservation documentées avant implémentation.
+
 ## Pipeline
 
 ```text

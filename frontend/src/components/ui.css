@@ -107,10 +107,6 @@
     width: 44px;
     height: 44px;
   }
-  .brand-logo--welcome {
-    width: 122px;
-    height: 122px;
-  }
   .panel {
     border: 1px solid var(--border);
     border-radius: var(--radius);
@@ -189,10 +185,6 @@
     .brand-logo--header {
       width: 36px;
       height: 36px;
-    }
-    .brand-logo--welcome {
-      width: 90px;
-      height: 90px;
     }
     .panel-heading {
       padding: 12px var(--space-4);

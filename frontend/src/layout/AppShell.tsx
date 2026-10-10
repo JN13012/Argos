@@ -100,7 +100,7 @@ export function AppShell({
           <Icon name="menu" />
         </button>
         <a className="brand" href="#main-content" aria-label="Argos, accueil">
-          <BrandLogo variant="header" />
+          <BrandLogo />
           <span>ARGOS</span>
         </a>
         <div className="environment">

@@ -8,6 +8,7 @@ Décisions produit actuellement validées.
 | --- | --- |
 | [VISION](../product/VISION.md) | Vision modulaire et principes produit |
 | [SCOPE](../product/SCOPE.md) | Scope actif et première verticale |
+| [CADRE](../product/CADRE.md) | Contexte académique, règles d'usage et conformité |
 
 ## ACTIVE DESIGN
 
