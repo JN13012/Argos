@@ -1,7 +1,8 @@
 # Argos OSINT — Principes du futur moteur
 
-Ce document décrit une direction de conception, sans implémentation actuelle
-ni schéma de données figé. La première verticale sera Business Discovery :
+Ce document décrit une direction de conception. Les modèles fondamentaux sont
+implémentés ; le moteur et le schéma de stockage restent à construire.
+La première verticale sera Business Discovery :
 [trouver les garages de Marseille](SCOPE.md).
 
 ## Pipeline

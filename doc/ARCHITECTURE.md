@@ -3,8 +3,8 @@
 ## Architecture actuelle
 
 Le dépôt contient la documentation de direction et une fondation Python minimale :
-un package importable, une entrée CLI et un test d'import. Aucun module métier ni
-workflow de CI n'est actif.
+un package importable, une entrée CLI, les modèles OSINT et leurs tests.
+Aucun moteur OSINT ni workflow de CI n'est actif.
 
 La fondation est construite sous :
 
@@ -13,10 +13,11 @@ argos/
 ├── __init__.py
 ├── __main__.py
 └── osint/
-    └── __init__.py
+    ├── __init__.py
+    └── models.py
 ```
 
-Cette fondation ne définit aucun contrat de données ni implémentation métier.
+Cette fondation définit les modèles fondamentaux OSINT, sans moteur métier.
 
 ## Direction future
 
