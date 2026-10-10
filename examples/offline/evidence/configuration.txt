@@ -1,3 +1,0 @@
-Synthetic configuration fixture.
-debug_mode=true
-environment=training-only
