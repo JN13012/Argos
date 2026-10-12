@@ -112,11 +112,13 @@ def test_entity_update_preserves_identity_creation_date_and_linked_records(
     assert storage.get_observations(entity.id) == [observation]
 
 
+@pytest.mark.parametrize("scheme", ["google_place_id", "siret"])
 def test_identifiers_keep_provenance_without_duplicates(
-    storage: SQLiteStorage, entity: Entity,
+    storage: SQLiteStorage, entity: Entity, scheme: str,
 ) -> None:
     storage.save_entity(entity)
-    identifier = Identifier(entity.id, "google_place_id", "example-place-id", "first")
+    value = "12345678900012" if scheme == "siret" else "example-place-id"
+    identifier = Identifier(entity.id, scheme, value, "first")
     other_source = replace(identifier, source="second")
 
     storage.add_identifier(identifier)
@@ -124,6 +126,38 @@ def test_identifiers_keep_provenance_without_duplicates(
     storage.add_identifier(identifier)
 
     assert storage.get_identifiers(entity.id) == [identifier, other_source]
+
+
+@pytest.mark.parametrize("source", ["fixture", "sirene"])
+def test_find_entity_by_siret(
+    storage: SQLiteStorage, entity: Entity, source: str,
+) -> None:
+    storage.save_entity(entity)
+    storage.add_identifier(Identifier(entity.id, "siret", "12345678900012", source))
+
+    assert storage.find_entity_by_identifier("siret", "12345678900012") == entity
+    assert storage.find_entity_by_identifier("siret", "12345678900013") is None
+    assert storage.find_entity_by_identifier("siren", "12345678900012") is None
+
+
+@pytest.mark.parametrize("source", ["sirene", "another_source"])
+def test_same_siret_cannot_belong_to_two_entities(
+    storage: SQLiteStorage, entity: Entity, source: str,
+) -> None:
+    other = replace(entity, id=uuid4(), display_name="Second établissement")
+    storage.save_entity(entity)
+    storage.save_entity(other)
+    identifier = Identifier(entity.id, "siret", "12345678900012", "sirene")
+    storage.add_identifier(identifier)
+
+    with pytest.raises(sqlite3.IntegrityError, match="SIRET already belongs to another entity"):
+        storage.add_identifier(replace(identifier, entity_id=other.id, source=source))
+
+    assert storage.find_entity_by_identifier("siret", identifier.value) == entity
+    assert storage.get_identifiers(entity.id) == [identifier]
+    assert storage.get_identifiers(other.id) == []
+    storage.add_identifier(replace(identifier, entity_id=other.id, value="12345678900013"))
+    assert storage.find_entity_by_identifier("siret", "12345678900013") == other
 
 
 def test_shared_siren_does_not_merge_establishments(
