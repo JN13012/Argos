@@ -39,6 +39,27 @@ CREATE TABLE IF NOT EXISTS identifiers (
     PRIMARY KEY (entity_id, scheme, value, source)
 );
 
+CREATE TRIGGER IF NOT EXISTS identifiers_siret_unique_insert
+BEFORE INSERT ON identifiers
+WHEN NEW.scheme = 'siret' AND EXISTS (
+    SELECT 1 FROM identifiers
+    WHERE scheme = 'siret' AND value = NEW.value AND entity_id <> NEW.entity_id
+)
+BEGIN
+    SELECT RAISE(ABORT, 'SIRET already belongs to another entity');
+END;
+
+CREATE TRIGGER IF NOT EXISTS identifiers_siret_unique_update
+BEFORE UPDATE OF entity_id, scheme, value ON identifiers
+WHEN NEW.scheme = 'siret' AND EXISTS (
+    SELECT 1 FROM identifiers
+    WHERE scheme = 'siret' AND value = NEW.value AND entity_id <> NEW.entity_id
+        AND rowid <> OLD.rowid
+)
+BEGIN
+    SELECT RAISE(ABORT, 'SIRET already belongs to another entity');
+END;
+
 CREATE TABLE IF NOT EXISTS observations (
     id TEXT PRIMARY KEY NOT NULL,
     entity_id TEXT NOT NULL REFERENCES entities(id),
@@ -164,7 +185,7 @@ class SQLiteStorage:
         return self.get_entity(UUID(row["entity_id"]))
 
     def add_identifier(self, identifier: Identifier) -> None:
-        """Keep identifiers and their provenance; repeated identical records are ignored."""
+        """Keep provenance and ignore duplicates; conflicting SIRETs raise IntegrityError."""
         with self._connection:
             self._connection.execute(
                 """
