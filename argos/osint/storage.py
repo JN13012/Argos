@@ -144,6 +144,25 @@ class SQLiteStorage:
             updated_at=datetime.fromisoformat(row["updated_at"]),
         )
 
+    def find_entity_by_identifier(
+        self,
+        scheme: str,
+        value: str,
+    ) -> Entity | None:
+        """Return an entity matching the exact identifier, regardless of source."""
+        row = self._connection.execute(
+            """
+            SELECT entity_id FROM identifiers
+            WHERE scheme = ? AND value = ?
+            ORDER BY entity_id
+            LIMIT 1
+            """,
+            (scheme, value),
+        ).fetchone()
+        if row is None:
+            return None
+        return self.get_entity(UUID(row["entity_id"]))
+
     def add_identifier(self, identifier: Identifier) -> None:
         """Keep identifiers and their provenance; repeated identical records are ignored."""
         with self._connection:
