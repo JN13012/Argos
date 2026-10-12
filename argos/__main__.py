@@ -1,10 +1,7 @@
-"""Minimal module entry point for Argos."""
+"""Module entry point for the Argos CLI."""
 
-
-def main() -> None:
-    print("Argos")
-    print("Current focus: OSINT")
+from .cli import main
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
