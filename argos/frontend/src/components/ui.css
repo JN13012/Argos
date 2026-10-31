@@ -1,0 +1,94 @@
+@layer components {
+  .brand-logo {
+    object-fit: contain;
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+  }
+  .panel {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: linear-gradient(145deg, #101c2b, #0b1521);
+    overflow: hidden;
+    box-shadow: 0 6px 28px #00000012;
+    min-width: 0;
+  }
+  .panel-heading {
+    min-height: 62px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    padding: 14px var(--space-6);
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .panel-heading h2 {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+  .panel-heading-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .panel-heading > .icon,
+  .panel-heading-label > .icon {
+    color: var(--subtle);
+    width: 18px;
+    height: 18px;
+  }
+  .modal {
+    color: var(--text);
+    background: var(--surface);
+    border: 1px solid #36516b;
+    border-radius: var(--radius);
+    padding: var(--space-8);
+    width: min(800px, calc(100% - 32px));
+    max-height: 85dvh;
+    box-shadow: 0 30px 120px #0009;
+  }
+  .modal::backdrop,
+  .chat-dialog::backdrop {
+    background: #030914cf;
+    backdrop-filter: blur(6px);
+  }
+  .modal-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-4);
+  }
+  .modal-heading h2 {
+    margin: 7px 0 0;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.35;
+  }
+  .modal-heading > .button {
+    flex-shrink: 0;
+  }
+  .about-dialog {
+    max-width: 600px;
+  }
+  .about-dialog p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.8;
+    margin: var(--space-6) 0;
+  }
+  @media (max-width: 700px) {
+    .panel-heading {
+      padding: 12px var(--space-4);
+      min-height: 54px;
+    }
+    .modal {
+      padding: var(--space-5);
+    }
+    .modal-heading h2 {
+      font-size: 20px;
+    }
+  }
+}

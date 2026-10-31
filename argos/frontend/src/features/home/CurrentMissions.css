@@ -1,0 +1,359 @@
+@layer features {
+  .current-missions {
+    grid-column: 1 / -1;
+    min-width: 0;
+    container-type: inline-size;
+  }
+  .current-missions-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+  }
+  .current-missions-heading h2 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  .current-missions-heading > span {
+    color: var(--subtle);
+    font-size: 11px;
+  }
+  .current-missions-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
+  .current-mission-card {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    /* Row 1 holds every card at the same height; an open card's tasks use row 2. */
+    grid-row: 1;
+    min-width: 0;
+    min-height: 306px;
+    padding: 0;
+    background: #0c121c;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: border-color 180ms ease;
+  }
+  .current-mission-card--open {
+    grid-row: 1 / span 2;
+    grid-template-rows: subgrid;
+  }
+  .current-mission-main {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  /* Closed cards count their bottom border in row 1; keep the same row height. */
+  .current-mission-card--open .current-mission-main {
+    margin-bottom: 1px;
+  }
+  .current-mission-card--red {
+    --mission-accent: var(--domain-red);
+    --mascot-x: 51%;
+  }
+  .current-mission-card--blue {
+    --mission-accent: var(--domain-blue);
+    --mascot-x: 8%;
+  }
+  .current-mission-card--osint {
+    --mission-accent: var(--domain-osint);
+    --mascot-x: 93%;
+  }
+  .current-mission-card:hover {
+    border-color: var(--mission-accent);
+  }
+  .current-mission-art {
+    position: absolute;
+    z-index: 0;
+    inset: 30px 0 auto;
+    width: 100%;
+    height: 260px;
+    opacity: 0.32;
+    pointer-events: none;
+    background-image: url("../../../assets/argos-mascot-board.png");
+    background-repeat: no-repeat;
+    background-size: 380% auto;
+    background-position: var(--mascot-x) 21%;
+    mask-image: linear-gradient(
+      transparent 14%,
+      #000 28%,
+      #000 74%,
+      transparent
+    );
+  }
+  .current-mission-card::after {
+    position: absolute;
+    z-index: 0;
+    inset: 0;
+    content: "";
+    pointer-events: none;
+    background: linear-gradient(90deg, #0c121c80, transparent 85%);
+  }
+  .current-mission-topline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    position: relative;
+    z-index: 1;
+    padding: 17px 16px 0;
+  }
+  .current-mission-domain {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--mission-accent);
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+  .current-mission-domain .icon {
+    width: 16px;
+    height: 16px;
+  }
+  .current-mission-state {
+    padding: 3px 6px;
+    border-radius: 5px;
+    background: #1b222e;
+    color: #adb8ca;
+    font-size: 10px;
+    white-space: nowrap;
+  }
+  .current-mission-copy {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+    padding: 14px 16px 12px;
+  }
+  .current-mission-card h3 {
+    margin: 0 0 8px;
+    min-height: 43px;
+    font-size: 15px;
+    line-height: 1.45;
+    font-weight: 500;
+    overflow-wrap: anywhere;
+    text-shadow: 0 1px 5px #0c121c;
+  }
+  .current-mission-target {
+    display: flex;
+    align-items: flex-start;
+    gap: 7px;
+    margin: 0;
+    color: #c0ccdd;
+    font-size: 11px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+  }
+  .current-mission-target .icon {
+    flex-shrink: 0;
+    width: 13px;
+    height: 13px;
+    margin-top: 2px;
+    color: var(--subtle);
+  }
+  .current-mission-agent-summary {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin: 8px 0;
+    font-size: 11px;
+    color: #c0ccdd;
+  }
+  .current-mission-agent-summary .icon {
+    width: 14px;
+    height: 14px;
+    color: var(--mission-accent);
+  }
+  .current-mission-phase {
+    margin: 6px 0 0;
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.6;
+  }
+  .current-mission-phase span {
+    color: var(--subtle);
+  }
+  .current-mission-overview {
+    display: grid;
+    gap: 8px;
+    margin-bottom: 10px;
+    font-size: 11px;
+    line-height: 1.6;
+  }
+  .current-mission-results {
+    padding-top: 10px;
+    border-top: 1px solid var(--border-soft);
+  }
+  .current-mission-results strong {
+    color: var(--text);
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .current-mission-severities {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 4px 16px;
+    margin: 7px 0 0;
+    color: var(--muted);
+  }
+  .current-mission-severities > div {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .current-mission-severities dd {
+    margin: 0;
+    font-variant-numeric: tabular-nums;
+  }
+  /* Same scale as SeverityBadge. */
+  .current-mission-severity--critical {
+    color: var(--red);
+    font-weight: 700;
+  }
+  .current-mission-severity--high {
+    color: var(--red);
+    font-weight: 600;
+  }
+  .current-mission-severity--medium {
+    color: var(--amber);
+    font-weight: 500;
+  }
+  .current-mission-severity--low {
+    color: var(--color-badge-blue-foreground);
+    font-weight: 500;
+  }
+  .current-mission-count--empty {
+    color: var(--subtle);
+    font-weight: 400;
+  }
+  .current-mission-impact {
+    margin: 7px 0 0;
+    color: var(--muted);
+  }
+  .current-mission-action,
+  .current-mission-progress {
+    margin: 0;
+  }
+  .current-mission-action {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--amber);
+  }
+  .current-mission-action .icon {
+    flex-shrink: 0;
+    width: 13px;
+    height: 13px;
+  }
+  .current-mission-progress {
+    color: var(--subtle);
+    font-size: 10px;
+  }
+  .current-task-copy {
+    flex: 1;
+    min-width: 0;
+  }
+  .current-task-copy p {
+    margin: 3px 0 0;
+    color: var(--muted);
+  }
+  .current-mission-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+    min-height: 44px;
+    margin-top: auto;
+    padding: 0;
+    border: 0;
+    border-top: 1px solid #28303ecc;
+    background: none;
+    color: var(--mission-accent);
+    font: inherit;
+    font-size: 12px;
+    text-align: left;
+    cursor: pointer;
+  }
+  .current-mission-toggle:focus-visible {
+    outline: 2px solid var(--mission-accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  .current-mission-toggle .icon {
+    flex-shrink: 0;
+    width: 14px;
+    height: 14px;
+  }
+  .current-mission-toggle[aria-expanded="true"] .icon {
+    transform: rotate(90deg);
+  }
+  .current-mission-tasks {
+    position: relative;
+    z-index: 1;
+    margin: -14px 0 0;
+    padding: 0 16px 14px;
+    list-style: none;
+  }
+  .current-mission-tasks[hidden] {
+    display: none;
+  }
+  .current-mission-tasks li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 7px 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-soft);
+    font-size: 11px;
+    line-height: 1.6;
+  }
+  .current-mission-tasks li:last-child {
+    border-bottom: 0;
+  }
+  .current-task-state {
+    flex-shrink: 0;
+    color: var(--subtle);
+    font-size: 11px;
+  }
+  .current-task-state--approval {
+    color: var(--amber);
+  }
+  .current-task-state--completed {
+    color: var(--green);
+  }
+  @container (max-width: 580px) {
+    .current-missions-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .current-mission-card,
+    .current-mission-card--open {
+      grid-row: auto;
+      grid-template-rows: none;
+    }
+    .current-mission-art {
+      inset: 15px 0 auto auto;
+      width: min(100%, 360px);
+    }
+    .current-mission-card h3 {
+      min-height: 0;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .current-mission-card {
+      transition: none;
+    }
+  }
+}

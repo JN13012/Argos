@@ -19,3 +19,5 @@ n'évalue pas les outils, leurs performances ou leurs licences actuelles.
 Les idées proposées sont des pistes d'étude, sans reprise de code, de skill ou
 d'asset de ces projets. Toute future réutilisation devra identifier le fichier,
 le commit, sa licence et les notices applicables, puis documenter la provenance.
+
++ Rajouter ClaudeRed

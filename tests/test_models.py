@@ -3,8 +3,7 @@ from datetime import UTC, datetime, timedelta, timezone
 from uuid import uuid4
 
 import pytest
-
-from argos.osint import (
+from argos.backend.intel.osint import (
     Coverage,
     CoverageStatus,
     Entity,

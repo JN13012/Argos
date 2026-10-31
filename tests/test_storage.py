@@ -6,8 +6,7 @@ from pathlib import Path
 from uuid import uuid4
 
 import pytest
-
-from argos.osint import (
+from argos.backend.intel.osint import (
     Coverage,
     CoverageStatus,
     Entity,
@@ -19,7 +18,7 @@ from argos.osint import (
     SearchScope,
     SearchStatus,
 )
-from argos.osint.storage import SQLiteStorage
+from argos.backend.intel.osint.storage import SQLiteStorage
 
 NOW = datetime(2026, 10, 10, 12, 0, 0, 123456, tzinfo=UTC)
 

@@ -8,10 +8,9 @@ from uuid import UUID, uuid4
 
 import httpx
 import pytest
-
 from argos import cli
-from argos.osint.connectors import SireneConnector
-from argos.osint.models import (
+from argos.backend.intel.osint.connectors import SireneConnector
+from argos.backend.intel.osint.models import (
     CoverageStatus,
     Entity,
     EntityType,
@@ -20,7 +19,7 @@ from argos.osint.models import (
     SearchScope,
     SearchStatus,
 )
-from argos.osint.storage import SQLiteStorage
+from argos.backend.intel.osint.storage import SQLiteStorage
 
 QUERY = (
     "periode(activitePrincipaleEtablissement:45.20A) AND codeCommuneEtablissement:13055"
@@ -48,6 +47,11 @@ def search_id(output: str) -> UUID:
     match = re.search(r"Search ID: ([0-9a-f-]+)", output)
     assert match is not None
     return UUID(match.group(1))
+
+
+@pytest.fixture(autouse=True)
+def isolated_working_directory(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.chdir(tmp_path)
 
 
 @pytest.fixture
@@ -226,6 +230,7 @@ def test_missing_api_key_fails_before_network_call(
     monkeypatch: pytest.MonkeyPatch,
     capsys: pytest.CaptureFixture[str],
 ) -> None:
+    monkeypatch.chdir(tmp_path)
     monkeypatch.delenv("INSEE_API_KEY", raising=False)
 
     def unexpected_request(*args: object, **kwargs: object) -> None:
@@ -276,3 +281,42 @@ def test_module_entrypoint_displays_help_without_running_discovery() -> None:
     assert result.returncode == 0
     for option in ("--activity", "--location", "--query", "--max-pages", "--db"):
         assert option in result.stdout
+
+
+@pytest.mark.parametrize("shell_key", [None, "shell-test-key"])
+def test_cli_loads_local_env_and_preserves_shell_key(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    capsys: pytest.CaptureFixture[str],
+    shell_key: str | None,
+) -> None:
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.delenv("PYTHON_DOTENV_DISABLED", raising=False)
+    (tmp_path / ".env").write_text("INSEE_API_KEY=file-test-key\n")
+    # Register the variable with monkeypatch so dotenv's mutation is also undone.
+    monkeypatch.setenv("INSEE_API_KEY", "shell-test-key")
+    if shell_key is None:
+        monkeypatch.delenv("INSEE_API_KEY")
+    expected_key = shell_key or "file-test-key"
+    requests = []
+
+    def respond(request: httpx.Request) -> httpx.Response:
+        requests.append(request)
+        assert request.headers["X-INSEE-Api-Key-Integration"] == expected_key
+        return httpx.Response(
+            200,
+            json={
+                "header": {"curseur": "*", "curseurSuivant": "*"},
+                "etablissements": [],
+            },
+        )
+
+    with httpx.Client(transport=httpx.MockTransport(respond)) as client:
+        monkeypatch.setattr(
+            cli, "SireneConnector", lambda: SireneConnector(client=client)
+        )
+        assert cli.main(arguments(tmp_path / "dotenv.sqlite3")) == 0
+    assert len(requests) == 1
+    captured = capsys.readouterr()
+    for key in ("file-test-key", "shell-test-key"):
+        assert key not in captured.out + captured.err

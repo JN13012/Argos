@@ -31,3 +31,11 @@ htmlcov/
 .vscode/
 .DS_Store
 Thumbs.db
+
+# Generated human-readable results
+/outputs/
+
+# Frontend generated files
+/argos/frontend/node_modules/
+/argos/frontend/dist/
+/argos/frontend/.vite/

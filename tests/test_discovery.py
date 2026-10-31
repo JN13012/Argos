@@ -8,10 +8,9 @@ from unittest.mock import Mock
 from uuid import uuid4
 
 import pytest
-
-from argos.osint.connectors import SireneConnector
-from argos.osint.discovery import DiscoveryEngine
-from argos.osint.models import (
+from argos.backend.intel.osint.connectors import SireneConnector
+from argos.backend.intel.osint.discovery import DiscoveryEngine
+from argos.backend.intel.osint.models import (
     CoverageStatus,
     Entity,
     EntityType,
@@ -20,7 +19,7 @@ from argos.osint.models import (
     SearchScope,
     SearchStatus,
 )
-from argos.osint.storage import SQLiteStorage
+from argos.backend.intel.osint.storage import SQLiteStorage
 
 SCOPE = SearchScope("garage automobile", "Marseille")
 QUERY = (

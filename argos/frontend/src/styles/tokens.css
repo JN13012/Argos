@@ -1,0 +1,41 @@
+@layer theme, tokens, base, components, utilities, layout, features;
+
+@layer tokens {
+  :root {
+    color-scheme: dark;
+    font-family:
+      "Segoe UI",
+      -apple-system,
+      BlinkMacSystemFont,
+      sans-serif;
+    font-synthesis: none;
+    --canvas: #090c12;
+    --surface: #10151e;
+    --surface-raised: #171e2a;
+    --border: #28303e;
+    --border-soft: #1e2633;
+    --text: #eef1f8;
+    --muted: #a8b2c4;
+    --subtle: #929eb2;
+    --cyan: #81baff;
+    --green: #71d5a3;
+    --amber: #e9c177;
+    --orange: #f7a66c;
+    --red: #ff8895;
+    --purple: #bf9eff;
+    --domain-red: #ef98a5;
+    --domain-blue: var(--cyan);
+    --domain-osint: var(--purple);
+    --radius: 14px;
+    --header-height: 54px;
+    --sidebar-width: 224px;
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 20px;
+    --space-6: 24px;
+    --space-8: 32px;
+    --space-10: 40px;
+  }
+}

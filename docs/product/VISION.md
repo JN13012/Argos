@@ -8,12 +8,14 @@ Argos
 ├── OSINT
 ├── Red
 ├── Defense
-├── Agents / Harness
+├── Agents / Harness (future direction)
 └── Interface
 ```
 
-OSINT constitue le domaine actif de conception. Red, Defense, Agents / Harness
-et Interface sont des directions futures, sans implémentation actuelle.
+OSINT constitue le domaine prioritaire dans les décisions actuelles. Les
+extensions ATTACK/PENTEST, INTEL, DEFEND et l'interface unifiée sont des
+évolutions proposées par l'architecture du monorepo ; cette organisation ne
+modifie pas à elle seule les décisions de gouvernance.
 
 ## Principes
 
@@ -27,6 +29,6 @@ et Interface sont des directions futures, sans implémentation actuelle.
 - **Extensibilité** : faire évoluer sources et analyses indépendamment, par
   étapes validées.
 
-Le dépôt contient actuellement de la documentation, sans application active.
+Le dépôt contient une première application et une fondation OSINT.
 Le [scope](SCOPE.md) fixe le prochain travail ; le [cadre](CADRE.md) définit
-l'usage prévu et l'[architecture](ARCHITECTURE.md) la direction minimale.
+l'usage prévu et l'[architecture](../architecture/ARCHITECTURE.md) la direction.

@@ -1,14 +1,23 @@
 """Terminal interface to the existing OSINT discovery engine."""
 
 import argparse
-import json
 import sqlite3
 import sys
+from pathlib import Path
+from uuid import UUID
 
-from .osint.connectors import SireneConnector
-from .osint.discovery import DiscoveryEngine
-from .osint.models import Coverage, Search, SearchScope, SearchStatus
-from .osint.storage import SQLiteStorage
+from dotenv import load_dotenv
+
+from .backend.intel.osint.connectors import SireneConnector
+from .backend.intel.osint.discovery import DiscoveryEngine
+from .backend.intel.osint.models import Coverage, Search, SearchScope, SearchStatus
+from .backend.intel.osint.reporting import (
+    format_address as _format_address,
+)
+from .backend.intel.osint.reporting import (
+    write_search_report,
+)
+from .backend.intel.osint.storage import SQLiteStorage
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -19,6 +28,7 @@ def build_parser() -> argparse.ArgumentParser:
     discover = osint_commands.add_parser(
         "discover", help="Discover Sirene establishments"
     )
+    discover.set_defaults(action="discover")
     discover.add_argument("--activity", required=True, help="Search scope activity")
     discover.add_argument("--location", required=True, help="Search scope location")
     discover.add_argument("--query", required=True, help="Explicit Sirene query")
@@ -28,38 +38,25 @@ def build_parser() -> argparse.ArgumentParser:
     discover.add_argument(
         "--db", default=".argos/osint/argos.sqlite3", help="SQLite database path"
     )
+    discover.add_argument(
+        "--output-dir", default="outputs", help="Readable reports directory"
+    )
+    discover.add_argument("--name", help="Readable research name for the output folder")
+    report = osint_commands.add_parser(
+        "report", help="Export a saved search without API calls"
+    )
+    report.set_defaults(action="report")
+    report.add_argument(
+        "--search-id", type=UUID, required=True, help="Saved search UUID"
+    )
+    report.add_argument(
+        "--db", default=".argos/osint/argos.sqlite3", help="SQLite database path"
+    )
+    report.add_argument(
+        "--output-dir", default="outputs", help="Readable reports directory"
+    )
+    report.add_argument("--name", help="Readable research name for the output folder")
     return parser
-
-
-def _format_address(value: str) -> str:
-    """Render the stored address JSON without exposing source field names."""
-    try:
-        address = json.loads(value)
-    except ValueError:
-        return value
-    if not isinstance(address, dict):
-        return value
-    parts = []
-    for keys in (
-        ("complementAdresseEtablissement",),
-        (
-            "numeroVoieEtablissement",
-            "indiceRepetitionEtablissement",
-            "typeVoieEtablissement",
-            "libelleVoieEtablissement",
-        ),
-        ("distributionSpecialeEtablissement",),
-        (
-            "codePostalEtablissement",
-            "libelleCommuneEtablissement",
-            "libelleCommuneEtrangerEtablissement",
-        ),
-        ("libellePaysEtrangerEtablissement",),
-    ):
-        part = " ".join(str(address[key]) for key in keys if address.get(key))
-        if part:
-            parts.append(part)
-    return ", ".join(parts) or value
 
 
 def _print_search(storage: SQLiteStorage, search: Search, coverage: Coverage) -> None:
@@ -110,18 +107,33 @@ def _print_search(storage: SQLiteStorage, search: Search, coverage: Coverage) ->
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     try:
-        scope = SearchScope(args.activity, args.location)
+        if args.action == "report" and not Path(args.db).is_file():
+            raise ValueError("Saved search database does not exist")
         with SQLiteStorage(args.db) as storage:
-            engine = DiscoveryEngine(storage, SireneConnector())
-            search = engine.discover_sirene(
-                scope=scope,
-                query=args.query,
-                max_pages=args.max_pages,
-            )
+            if args.action == "report":
+                search = storage.get_search(args.search_id)
+                if search is None:
+                    raise ValueError("Saved search not found")
+            else:
+                load_dotenv(dotenv_path=Path.cwd() / ".env", override=False)
+                scope = SearchScope(args.activity, args.location)
+                engine = DiscoveryEngine(storage, SireneConnector())
+                search = engine.discover_sirene(
+                    scope=scope,
+                    query=args.query,
+                    max_pages=args.max_pages,
+                )
             coverage = storage.get_coverage(search.id, "sirene")
             if coverage is None:
                 raise ValueError("Search coverage is missing")
-            _print_search(storage, search, coverage)
+            if args.action == "discover":
+                _print_search(storage, search, coverage)
+            report = write_search_report(
+                storage, search, coverage, args.output_dir, name=args.name
+            )
+            print(f"Report: {report}")
+            if args.action == "report":
+                return 0
             for error in coverage.errors:
                 print(f"Error: {error.splitlines()[0]}", file=sys.stderr)
             return int(bool(coverage.errors) or search.status is SearchStatus.FAILED)

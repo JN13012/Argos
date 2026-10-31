@@ -1,0 +1,46 @@
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+@source "../";
+
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-foreground: var(--text);
+  --color-muted: var(--muted);
+  --color-subtle: var(--subtle);
+  --color-border: var(--border);
+  --color-accent: var(--cyan);
+  --color-positive: var(--green);
+  --color-warning: var(--amber);
+  --color-critical: var(--red);
+  --color-osint: var(--purple);
+  --radius-panel: var(--radius);
+}
+
+@theme {
+  --color-action: #79c6ff;
+  --color-action-foreground: #061525;
+  --color-action-hover: #a1d8ff;
+  --color-action-disabled: #14314c;
+  --color-action-disabled-foreground: #aec7dd;
+  --color-action-disabled-border: #244563;
+  --color-secondary-action: #122a40;
+  --color-secondary-action-foreground: #c5e6ff;
+  --color-secondary-action-border: #2b4d6b;
+  --color-secondary-action-hover: #183c59;
+  --color-secondary-action-hover-border: #497a9f;
+  --color-link-hover: #b3e0ff;
+  --color-badge: #182434;
+  --color-badge-foreground: #b1bdce;
+  --color-badge-border: #304157;
+  --color-badge-blue: #142c44;
+  --color-badge-blue-foreground: #93cfff;
+  --color-badge-blue-border: #29537b;
+  --color-badge-warning: #2a2319;
+  --color-badge-warning-border: #614c2b;
+  --color-badge-positive: #142c23;
+  --color-badge-positive-border: #2c5747;
+  --color-badge-critical: #321e29;
+  --color-badge-critical-border: #683543;
+}

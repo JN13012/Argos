@@ -1,7 +1,6 @@
 import httpx
 import pytest
-
-from argos.osint.connectors import SireneConnector
+from argos.backend.intel.osint.connectors import SireneConnector
 
 QUERY = "periode(etatAdministratifEtablissement:A) AND codeCommuneEtablissement:13055"
 

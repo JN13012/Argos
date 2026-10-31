@@ -2,14 +2,20 @@
 name = "argos"
 version = "0.1.0"
 description = "Modular OSINT and cybersecurity platform"
-requires-python = ">=3.14,<3.15"
+requires-python = ">=3.12"
 dependencies = [
-    "httpx>=0.28,<0.29",
+    "fastapi>=0.115,<1",
+    "httpx>=0.28,<1",
+    "pydantic>=2.10,<3",
+    "pydantic-settings>=2.7,<3",
+    "python-dotenv>=1.2.4",
+    "uvicorn[standard]>=0.34,<1",
 ]
 
 [dependency-groups]
 dev = [
     "pytest>=9,<10",
+    "ruff>=0.11,<1",
 ]
 
 [build-system]
@@ -18,3 +24,15 @@ build-backend = "uv_build"
 
 [tool.uv.build-backend]
 module-root = ""
+source-exclude = ["/argos/frontend"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "argos/backend/tests"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+src = ["argos", "tests"]
+
+[tool.ruff.lint]
+select = ["B", "E", "F", "I", "UP"]
