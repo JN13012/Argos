@@ -1,20 +1,29 @@
-# ARGOS
+# Argos
 
-ARGOS is a modular OSINT and cybersecurity platform with traceable information,
-local-first development and optional AI assistance.
+A modular cybersecurity platform for SMEs with no security team. The goal: audit, monitor and get security fixed, with human validation at every step.
 
-## Current implementation
+**Status: early development.** The OSINT foundation works. The AI agents and the audit modules are designed, not built, and nothing here performs active attacks.
 
-The existing OSINT CLI provides bounded SIRENE discovery, SQLite persistence
-and readable reports. A FastAPI health endpoint and a minimal React application
-are available as the initial web/API foundation. Neither provides an active
-offensive capability. The governance documents continue to identify OSINT as
-the current product priority; the broader monorepo structure is an architectural
-evolution and does not change those decisions.
+## What works today
 
-OSINT services and models are organized under
-`argos.backend.intel.osint`. The historical `argos.osint` import path remains
-available as a compatibility layer; the CLI entry point stays `argos.cli`.
+- **Company discovery:** bounded searches in INSEE's public SIRENE database, from a command-line tool.
+- **Traceability:** every data point keeps its source and date, in SQLite.
+- **Reports:** readable Markdown reports stating the scope, the coverage and whether a search was partial.
+- **Web foundation:** a FastAPI health endpoint and a minimal React application.
+- **Tests:** 111 Python tests with pytest.
+
+```mermaid
+flowchart LR
+  A[CLI: osint discover] --> B[SIRENE connector]
+  B --> C[(SQLite: observations, source, date)]
+  C --> D[Markdown report]
+```
+
+## Where it is going
+
+The [agentic architecture](docs/architecture/AGENTIC_CORE.md) describes the agent core being designed: loop, planning, memory, context, tools, evaluation and safety. It is a design document, with a status for each subsystem.
+
+The rule stays the same at every stage: the AI assists, and core capabilities keep working without it.
 
 ## Documentation
 
@@ -25,6 +34,7 @@ available as a compatibility layer; the CLI entry point stays `argos.cli`.
 - [Roadmap](docs/product/ROADMAP.md)
 - [References](docs/product/REFERENCES.md)
 - [Architecture](docs/architecture/ARCHITECTURE.md)
+- [Agentic architecture](docs/architecture/AGENTIC_CORE.md)
 - [Repository architecture](docs/architecture/README.md)
 - [Frontend documentation](docs/development/frontend/PLAN_FRONTEND.md)
 
