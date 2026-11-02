@@ -122,7 +122,7 @@ def test_revocation_prevents_second_scan():
         uuid4(), "127.0.0.1"
     )
     assert result.state is JobState.FAILED
-    assert result.error == "Simulated scan failure"
+    assert result.error == "Mission approval is invalid"
     assert len(manager.calls) == 1
     assert len(result.phases) == 1
     assert "approval" in result.error
@@ -134,6 +134,7 @@ def test_initial_failure_has_no_followup():
         uuid4(), "127.0.0.1"
     )
     assert result.state is JobState.FAILED
+    assert result.error == "Simulated scan failure"
     assert len(manager.calls) == 1
     assert len(result.phases) == 1
 
