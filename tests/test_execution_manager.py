@@ -150,3 +150,79 @@ def test_unknown_job_and_capacity(tmp_path):
                     mission_id, "127.0.0.1", ScanPlanner().initial()
                 )
             wait_state(manager, job_id, JobState.FAILED)
+
+
+def test_revocation_stops_running_scan(tmp_path):
+    runner, mission_id = approved(tmp_path)
+    started = threading.Event()
+
+    class Hanging:
+        returncode = None
+
+        def __init__(self, *args, **kwargs):
+            started.set()
+
+        def poll(self):
+            return self.returncode
+
+        def terminate(self):
+            self.returncode = -15
+
+        def wait(self, timeout=None):
+            return self.returncode
+
+    with patch(
+        "argos.backend.attack.pentest.execution_manager.subprocess.Popen",
+        Hanging,
+    ):
+        with ExecutionManager(
+            runner, concurrency=1, poll_seconds=0.01
+        ) as manager:
+            job_id = manager.submit(
+                mission_id, "127.0.0.1", ScanPlanner().initial()
+            )
+            assert started.wait(2)
+            with MissionStore(runner.database_path) as store:
+                assert store.revoke(mission_id)
+            snapshot = wait_state(manager, job_id, JobState.CANCELLED)
+            assert "revoked" in snapshot.error
+            with EvidenceStore(runner.database_path) as evidence:
+                saved = evidence.get_verified(job_id)
+                assert saved is not None
+                assert saved.record.state == "cancelled"
+
+
+def test_timeout_reaps_process_and_records_evidence(tmp_path):
+    runner, mission_id = approved(tmp_path)
+
+    class Hanging:
+        returncode = None
+
+        def __init__(self, *args, **kwargs):
+            pass
+
+        def poll(self):
+            return self.returncode
+
+        def terminate(self):
+            self.returncode = -15
+
+        def wait(self, timeout=None):
+            return self.returncode
+
+    with patch(
+        "argos.backend.attack.pentest.execution_manager.subprocess.Popen",
+        Hanging,
+    ):
+        with ExecutionManager(
+            runner, concurrency=1, timeout_seconds=1, poll_seconds=0.01
+        ) as manager:
+            job_id = manager.submit(
+                mission_id, "127.0.0.1", ScanPlanner().initial()
+            )
+            snapshot = wait_state(manager, job_id, JobState.TIMED_OUT)
+            assert snapshot.error == "Scan timeout"
+            with EvidenceStore(runner.database_path) as evidence:
+                saved = evidence.get_verified(job_id)
+                assert saved is not None
+                assert saved.record.state == "timed_out"
