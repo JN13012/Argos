@@ -7,6 +7,7 @@ from unittest.mock import patch
 
 import pytest
 from argos.backend.attack.pentest.authorized_execution import AuthorizedNmapRunner
+from argos.backend.attack.pentest.evidence_store import EvidenceStore
 from argos.backend.attack.pentest.execution_manager import (
     ExecutionManager,
     JobState,
@@ -89,6 +90,12 @@ def test_lifecycle_completed_and_result(tmp_path):
             snap = wait_state(manager, job_id, JobState.COMPLETED)
             assert snap.started_at and snap.finished_at
             assert manager.result(job_id).observation.target == "127.0.0.1"
+            with EvidenceStore(runner.database_path) as evidence:
+                saved = evidence.get_verified(job_id)
+                assert saved is not None
+                assert saved.record.state == "completed"
+                assert saved.record.stdout_xml == xml
+                assert saved.record.arguments[-1] == "127.0.0.1"
 
 
 def test_cancel_terminates_running_job(tmp_path):
