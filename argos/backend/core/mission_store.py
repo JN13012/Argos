@@ -60,6 +60,13 @@ class MissionStore:
                 excluded INTEGER NOT NULL CHECK(excluded IN (0, 1)),
                 PRIMARY KEY(mission_id, network, excluded)
             );
+            CREATE TABLE IF NOT EXISTS pentest_approvals (
+                mission_id TEXT PRIMARY KEY
+                    REFERENCES pentest_missions(id),
+                reviewer TEXT NOT NULL,
+                expires_at TEXT NOT NULL,
+                signature TEXT NOT NULL
+            );
             CREATE TABLE IF NOT EXISTS pentest_actions (
                 mission_id TEXT NOT NULL REFERENCES pentest_missions(id),
                 action TEXT NOT NULL,
@@ -155,6 +162,67 @@ class MissionStore:
             "SELECT id FROM pentest_missions ORDER BY rowid"
         ).fetchall()
         return tuple(UUID(row["id"]) for row in rows)
+
+    def activate_reviewed(
+        self, mission_id: UUID, approval: "SignedApproval",
+        verifier: "ApprovalVerifier",
+    ) -> None:
+        """Only a verifiable, exact-scope grant can activate a stored draft."""
+        record = self.get(mission_id)
+        if record is None or record.mission.state is not MissionState.DRAFT:
+            raise PermissionError("Mission cannot be activated")
+        if not verifier.verify(record, approval):
+            raise PermissionError("Review approval is invalid or expired")
+        with self._db:
+            self._db.execute(
+                """
+                INSERT INTO pentest_approvals
+                (mission_id, reviewer, expires_at, signature)
+                VALUES (?, ?, ?, ?)
+                """,
+                (
+                    str(mission_id), approval.reviewer,
+                    approval.expires_at.isoformat(), approval.signature,
+                ),
+            )
+            cursor = self._db.execute(
+                """
+                UPDATE pentest_missions SET state = ?
+                WHERE id = ? AND state = ?
+                """,
+                (
+                    MissionState.ACTIVE.value, str(mission_id),
+                    MissionState.DRAFT.value,
+                ),
+            )
+            if cursor.rowcount != 1:
+                raise PermissionError("Mission state changed before activation")
+
+    def get_reviewed(
+        self, mission_id: UUID, verifier: "ApprovalVerifier"
+    ) -> MissionRecord:
+        """Re-read persisted state and verify signature on every request."""
+        record = self.get(mission_id)
+        if record is None or not record.mission.is_active():
+            raise PermissionError("Missing or inactive mission")
+        row = self._db.execute(
+            """
+            SELECT reviewer, expires_at, signature
+            FROM pentest_approvals WHERE mission_id = ?
+            """,
+            (str(mission_id),),
+        ).fetchone()
+        if row is None:
+            raise PermissionError("Mission has no signed approval")
+        from .approvals import SignedApproval
+
+        signed = SignedApproval(
+            mission_id, row["reviewer"],
+            datetime.fromisoformat(row["expires_at"]), row["signature"],
+        )
+        if not verifier.verify(record, signed):
+            raise PermissionError("Mission approval is no longer valid")
+        return record
 
     def revoke(self, mission_id: UUID) -> bool:
         """Revocation is irreversible in this MVP."""
