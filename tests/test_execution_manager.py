@@ -1,6 +1,5 @@
 """Lifecycle tests use fake subprocesses; they never scan a real host."""
 
-import subprocess
 import threading
 import time
 from datetime import UTC, datetime, timedelta
