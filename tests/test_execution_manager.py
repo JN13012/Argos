@@ -20,7 +20,6 @@ from argos.backend.core.policy import Action
 from argos.backend.core.scope import TargetScope
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 
-
 def approved(tmp_path):
     key = Ed25519PrivateKey.generate()
     record = MissionRecord(
