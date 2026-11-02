@@ -9,7 +9,14 @@ __pycache__/
 .mypy_cache/
 .ruff_cache/
 .coverage
+.coverage.*
+/coverage.xml
 htmlcov/
+
+# Python packaging
+/build/
+/dist/
+*.egg-info/
 
 # Argos runtime
 .argos/
