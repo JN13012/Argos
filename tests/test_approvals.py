@@ -111,6 +111,7 @@ def test_invalid_secret_and_overlong_grant_denied() -> None:
             record.mission.expires_at + timedelta(seconds=1), SIGNING_KEY,
         )
 
+
 def test_legacy_hmac_signature_is_rejected() -> None:
     record = draft()
     legacy = replace(sign(record), signature="0" * 64)
