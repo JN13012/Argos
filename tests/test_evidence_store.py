@@ -5,7 +5,6 @@ from datetime import UTC, datetime, timedelta
 from uuid import uuid4
 
 import pytest
-
 from argos.backend.attack.pentest.evidence_store import (
     EvidenceIntegrityError,
     EvidenceStore,
