@@ -6,7 +6,6 @@ from datetime import UTC, datetime, timedelta
 from unittest.mock import patch
 
 import pytest
-from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 
 from argos.backend.attack.pentest.authorized_execution import AuthorizedNmapRunner
 from argos.backend.attack.pentest.execution_manager import (
@@ -19,6 +18,7 @@ from argos.backend.core.mission_store import MissionRecord, MissionStore
 from argos.backend.core.missions import Mission
 from argos.backend.core.policy import Action
 from argos.backend.core.scope import TargetScope
+from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 
 
 def approved(tmp_path):
@@ -75,6 +75,9 @@ def test_lifecycle_completed_and_result(tmp_path):
 
         def poll(self):
             return 0
+
+        def wait(self, timeout=None):
+            return self.returncode
 
     with patch(
         "argos.backend.attack.pentest.execution_manager.subprocess.Popen",
