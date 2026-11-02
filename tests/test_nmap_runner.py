@@ -12,7 +12,9 @@ from argos.backend.core.scope import TargetScope
 
 def active_lab() -> Mission:
     return replace(
-        Mission.draft("Local lab", "lab-mandate", datetime.now(UTC) + timedelta(hours=1)),
+        Mission.draft(
+            "Local lab", "lab-mandate", datetime.now(UTC) + timedelta(hours=1)
+        ),
         state=MissionState.ACTIVE,
     )
 
@@ -36,9 +38,15 @@ def test_non_loopback_refused_before_subprocess() -> None:
 
 
 def test_local_scan_uses_fixed_non_shell_args_and_parses_xml() -> None:
-    xml = b'<nmaprun><host><address addr="127.0.0.1" addrtype="ipv4"/><ports><port protocol="tcp" portid="22"><state state="open"/></port></ports></host></nmaprun>'
+    xml = (
+        b'<nmaprun><host><address addr="127.0.0.1" addrtype="ipv4"/>'
+        b'<ports><port protocol="tcp" portid="22">'
+        b'<state state="open"/></port></ports></host></nmaprun>'
+    )
     with patch("argos.backend.attack.pentest.nmap_runner.subprocess.run") as run:
-        run.return_value = CompletedProcess(args=[], returncode=0, stdout=xml, stderr=b"")
+        run.return_value = CompletedProcess(
+            args=[], returncode=0, stdout=xml, stderr=b""
+        )
         executed = NmapRunner("/usr/bin/nmap").execute(
             active_lab(), TargetScope(("127.0.0.1/32",)),
             "127.0.0.1", ScanPlanner().initial(), mandate_verified=True,

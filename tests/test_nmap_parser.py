@@ -26,7 +26,11 @@ def test_reject_unexpected_target() -> None:
 
 def test_reject_doctype_and_large_xml() -> None:
     with pytest.raises(NmapParseError):
-        parse_nmap_xml(b'<!DOCTYPE x [<!ENTITY e SYSTEM "file:///etc/passwd">]><nmaprun/>', "127.0.0.1")
+        parse_nmap_xml(
+            b'<!DOCTYPE x [<!ENTITY e SYSTEM "file:///etc/passwd">]>'
+            b"<nmaprun/>",
+            "127.0.0.1",
+        )
     with pytest.raises(NmapParseError):
         parse_nmap_xml(b"x" * 2_000_001, "127.0.0.1")
 

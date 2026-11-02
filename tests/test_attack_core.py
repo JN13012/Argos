@@ -9,13 +9,20 @@ from argos.backend.core.scope import TargetScope
 
 def mission() -> Mission:
     return replace(
-        Mission.draft("Lab test", "signed-lab-mandate", datetime.now(UTC) + timedelta(hours=1)),
+        Mission.draft(
+            "Lab test", "signed-lab-mandate", datetime.now(UTC) + timedelta(hours=1)
+        ),
         state=MissionState.ACTIVE,
     )
 
 
 def test_missing_mandate_fails_closed() -> None:
-    result = evaluate(mission(), TargetScope(("127.0.0.1/32",)), "127.0.0.1", Action.TCP_CONNECT_SCAN)
+    result = evaluate(
+        mission(),
+        TargetScope(("127.0.0.1/32",)),
+        "127.0.0.1",
+        Action.TCP_CONNECT_SCAN,
+    )
     assert not result.allowed
     assert "verified" in result.reason
 
@@ -43,7 +50,15 @@ def test_excluded_address_denied() -> None:
     ).allowed
 
 
-@pytest.mark.parametrize("state", [MissionState.DRAFT, MissionState.PAUSED, MissionState.REVOKED, MissionState.COMPLETED])
+@pytest.mark.parametrize(
+    "state",
+    [
+        MissionState.DRAFT,
+        MissionState.PAUSED,
+        MissionState.REVOKED,
+        MissionState.COMPLETED,
+    ],
+)
 def test_inactive_mission_denied(state: MissionState) -> None:
     assert not evaluate(
         replace(mission(), state=state), TargetScope(("127.0.0.1/32",)),
