@@ -6,7 +6,6 @@ from datetime import UTC, datetime, timedelta
 from unittest.mock import patch
 
 import pytest
-
 from argos.backend.attack.pentest.authorized_execution import AuthorizedNmapRunner
 from argos.backend.attack.pentest.execution_manager import (
     ExecutionManager,
@@ -19,6 +18,7 @@ from argos.backend.core.missions import Mission
 from argos.backend.core.policy import Action
 from argos.backend.core.scope import TargetScope
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
+
 
 def approved(tmp_path):
     key = Ed25519PrivateKey.generate()
