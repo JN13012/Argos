@@ -13,7 +13,6 @@ from argos.backend.core.missions import Mission, MissionState
 from argos.backend.core.policy import Action
 from argos.backend.core.scope import TargetScope
 
-
 KEY = b"offline-reviewer-key-with-at-least-32-bytes"
 
 
