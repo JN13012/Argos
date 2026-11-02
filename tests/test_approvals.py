@@ -4,7 +4,6 @@ from dataclasses import replace
 from datetime import UTC, datetime, timedelta
 
 import pytest
-
 from argos.backend.core.approvals import (
     ApprovalVerifier,
     issue_offline_approval,

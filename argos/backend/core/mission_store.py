@@ -11,11 +11,15 @@ import sqlite3
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
+from typing import TYPE_CHECKING
 from uuid import UUID
 
 from .missions import Mission, MissionState
 from .policy import Action
 from .scope import TargetScope
+
+if TYPE_CHECKING:
+    from .approvals import ApprovalVerifier, SignedApproval
 
 
 @dataclass(frozen=True)
@@ -164,8 +168,8 @@ class MissionStore:
         return tuple(UUID(row["id"]) for row in rows)
 
     def activate_reviewed(
-        self, mission_id: UUID, approval: "SignedApproval",
-        verifier: "ApprovalVerifier",
+        self, mission_id: UUID, approval: SignedApproval,
+        verifier: ApprovalVerifier,
     ) -> None:
         """Only a verifiable, exact-scope grant can activate a stored draft."""
         record = self.get(mission_id)
@@ -199,7 +203,7 @@ class MissionStore:
                 raise PermissionError("Mission state changed before activation")
 
     def get_reviewed(
-        self, mission_id: UUID, verifier: "ApprovalVerifier"
+        self, mission_id: UUID, verifier: ApprovalVerifier
     ) -> MissionRecord:
         """Re-read persisted state and verify signature on every request."""
         record = self.get(mission_id)
