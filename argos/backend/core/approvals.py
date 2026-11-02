@@ -1,19 +1,26 @@
-"""Offline-reviewed, HMAC-authenticated mission grants.
+"""Ed25519-reviewed mission approvals with public-key-only verification.
 
-The signing secret belongs to a separate trusted reviewer workflow. Never
-accept a signing secret, approval assertion or verification override over HTTP.
-A signature establishes review within this deployment, not legal permission
-to assess a third party.
+Approval issuance is an offline, trusted reviewer operation. The execution
+runtime must receive only the public key, never the private signing key.
+A signature establishes reviewer authenticity, not legal target ownership.
 """
 
-import hashlib
-import hmac
 import json
+import re
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from uuid import UUID
 
+from cryptography.exceptions import InvalidSignature
+from cryptography.hazmat.primitives.asymmetric.ed25519 import (
+    Ed25519PrivateKey,
+    Ed25519PublicKey,
+)
+
 from .mission_store import MissionRecord
+
+_SIGNATURE_PREFIX = "ed25519-v1:"
+_DOMAIN_SEPARATOR = b"ARGOS-PENTEST-APPROVAL/v1\x00"
 
 
 @dataclass(frozen=True)
@@ -39,16 +46,17 @@ def _payload(
         "reviewer": reviewer,
         "approval_expiry": expires_at.isoformat(),
     }
-    return json.dumps(body, sort_keys=True, separators=(",", ":")).encode()
+    data = json.dumps(body, sort_keys=True, separators=(",", ":")).encode()
+    return _DOMAIN_SEPARATOR + data
 
 
 class ApprovalVerifier:
-    """Validate grant authenticity and exact scope binding at each execution."""
+    """Verify grants using only the Ed25519 public key."""
 
-    def __init__(self, secret: bytes) -> None:
-        if len(secret) < 32:
-            raise ValueError("Approval secret requires at least 32 bytes")
-        self._secret = secret
+    def __init__(self, public_key: Ed25519PublicKey) -> None:
+        if not isinstance(public_key, Ed25519PublicKey):
+            raise TypeError("An Ed25519 public key is required")
+        self._public_key = public_key
 
     def verify(
         self,
@@ -59,40 +67,49 @@ class ApprovalVerifier:
     ) -> bool:
         instant = at or datetime.now(UTC)
         if (
-            approval.mission_id != record.mission.id
+            instant.tzinfo is None
+            or approval.mission_id != record.mission.id
             or not approval.reviewer.strip()
             or approval.expires_at.tzinfo is None
             or approval.expires_at <= instant
             or approval.expires_at > record.mission.expires_at
             or record.mission.expires_at <= instant
+            or not approval.signature.startswith(_SIGNATURE_PREFIX)
         ):
             return False
-        expected = hmac.new(
-            self._secret,
-            _payload(record, approval.reviewer, approval.expires_at),
-            hashlib.sha256,
-        ).hexdigest()
-        return hmac.compare_digest(expected, approval.signature)
+        signature_hex = approval.signature[len(_SIGNATURE_PREFIX):]
+        if re.fullmatch(r"[0-9a-f]{128}", signature_hex) is None:
+            return False
+        try:
+            self._public_key.verify(
+                bytes.fromhex(signature_hex),
+                _payload(record, approval.reviewer, approval.expires_at),
+            )
+        except InvalidSignature:
+            return False
+        return True
 
 
 def issue_offline_approval(
     record: MissionRecord,
     reviewer: str,
     expires_at: datetime,
-    secret: bytes,
+    private_key: Ed25519PrivateKey,
 ) -> SignedApproval:
-    """Reviewer-side utility: DO NOT call from the runtime or expose via API.
+    """Reviewer-side only: do not expose this function via the ARGOS API.
 
-    Approval issuance is a separate operational trust boundary. Reviewers must
-    verify ownership, authorization documents and action scope independently.
+    The reviewer must independently confirm written authorization and scope.
+    No code can establish the legitimacy of an engagement from a signature.
     """
-    if len(secret) < 32:
-        raise ValueError("Approval secret requires at least 32 bytes")
+    if not isinstance(private_key, Ed25519PrivateKey):
+        raise TypeError("A private signing key is required")
     if not reviewer.strip() or expires_at.tzinfo is None:
-        raise ValueError("Approval reviewer and timezone-aware expiry required")
+        raise ValueError("Reviewer and timezone-aware expiry are required")
+    if expires_at <= datetime.now(UTC):
+        raise ValueError("Approval expiry must be in the future")
     if expires_at > record.mission.expires_at:
         raise ValueError("Approval must not outlive the mission")
-    signature = hmac.new(
-        secret, _payload(record, reviewer, expires_at), hashlib.sha256
-    ).hexdigest()
+    signature = _SIGNATURE_PREFIX + private_key.sign(
+        _payload(record, reviewer, expires_at)
+    ).hex()
     return SignedApproval(record.mission.id, reviewer, expires_at, signature)

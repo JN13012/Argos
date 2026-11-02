@@ -18,8 +18,9 @@ from argos.backend.core.mission_store import MissionRecord, MissionStore
 from argos.backend.core.missions import Mission
 from argos.backend.core.policy import Action
 from argos.backend.core.scope import TargetScope
+from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 
-KEY = b"a-separate-trusted-reviewer-signing-secret-123"
+SIGNING_KEY = Ed25519PrivateKey.generate()
 
 
 def approved_db(tmp_path):
@@ -32,10 +33,10 @@ def approved_db(tmp_path):
         TargetScope(("192.168.56.10/32",)),
         frozenset({Action.TCP_CONNECT_SCAN, Action.SERVICE_IDENTIFICATION}),
     )
-    verifier = ApprovalVerifier(KEY)
+    verifier = ApprovalVerifier(SIGNING_KEY.public_key())
     approval = issue_offline_approval(
         record, "authorized-reviewer",
-        datetime.now(UTC) + timedelta(hours=1), KEY,
+        datetime.now(UTC) + timedelta(hours=1), SIGNING_KEY,
     )
     with MissionStore(db) as store:
         store.create(record)
@@ -101,7 +102,7 @@ def test_verifier_with_wrong_secret_fails(tmp_path) -> None:
     with pytest.raises(ScanExecutionError, match="approval"):
         AuthorizedNmapRunner(
             db,
-            ApprovalVerifier(b"different-trusted-signing-secret-of-adequate-length"),
+            ApprovalVerifier(Ed25519PrivateKey.generate().public_key()),
             executable="nmap",
         ).execute(mission_id, "192.168.56.10", ScanPlanner().initial())
 
