@@ -2,7 +2,6 @@
 
 import threading
 from datetime import UTC, datetime
-from types import SimpleNamespace
 from uuid import uuid4
 
 from argos.backend.attack.pentest.adaptive_orchestrator import (
@@ -13,7 +12,7 @@ from argos.backend.attack.pentest.evidence_store import (
     ScanEvidence,
     VerifiedEvidence,
 )
-from argos.backend.attack.pentest.execution_manager import JobState
+from argos.backend.attack.pentest.execution_manager import JobSnapshot, JobState
 from argos.backend.attack.pentest.models import PortObservation, ScanObservation
 from argos.backend.attack.pentest.nmap_runner import ExecutedScan
 
@@ -58,7 +57,11 @@ class FakeManager:
         return job
 
     def get(self, job_id):
-        return SimpleNamespace(state=self.jobs[job_id][0])
+        state, mission, target, _plan, _scan = self.jobs[job_id]
+        return JobSnapshot(
+            job_id, mission, target, state, datetime.now(UTC), None, None,
+            "Simulated scan failure" if state is JobState.FAILED else None,
+        )
 
     def result(self, job_id):
         return self.jobs[job_id][4]
@@ -119,6 +122,7 @@ def test_revocation_prevents_second_scan():
         uuid4(), "127.0.0.1"
     )
     assert result.state is JobState.FAILED
+    assert result.error == "Simulated scan failure"
     assert len(manager.calls) == 1
     assert len(result.phases) == 1
     assert "approval" in result.error
