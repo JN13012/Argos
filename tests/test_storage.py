@@ -37,8 +37,12 @@ def entity() -> Entity:
 @pytest.fixture
 def search() -> Search:
     return Search(
-        uuid4(), SearchScope("garages", "Marseille"), "garages à Marseille",
-        NOW, None, SearchStatus.RUNNING,
+        uuid4(),
+        SearchScope("garages", "Marseille"),
+        "garages à Marseille",
+        NOW,
+        None,
+        SearchStatus.RUNNING,
     )
 
 
@@ -60,11 +64,16 @@ def coverage(search: Search) -> Coverage:
 
 
 def test_all_records_survive_database_reopening(
-    tmp_path: Path, entity: Entity, search: Search, coverage: Coverage,
+    tmp_path: Path,
+    entity: Entity,
+    search: Search,
+    coverage: Coverage,
 ) -> None:
     path = tmp_path / ".argos" / "argos.sqlite3"
     identifier = Identifier(entity.id, "siret", "12345678900012", "fixture")
-    observation = Observation(uuid4(), entity.id, "name", "Garage d'Argos", "fixture", NOW)
+    observation = Observation(
+        uuid4(), entity.id, "name", "Garage d'Argos", "fixture", NOW
+    )
     result = SearchResult(search.id, entity.id, "fixture", NOW)
 
     with SQLiteStorage(path) as database:
@@ -90,11 +99,14 @@ def test_all_records_survive_database_reopening(
 
 
 def test_entity_update_preserves_identity_creation_date_and_linked_records(
-    storage: SQLiteStorage, entity: Entity,
+    storage: SQLiteStorage,
+    entity: Entity,
 ) -> None:
     storage.save_entity(entity)
     identifier = Identifier(entity.id, "domain", "example.test", "fixture")
-    observation = Observation(uuid4(), entity.id, "name", entity.display_name, "fixture", NOW)
+    observation = Observation(
+        uuid4(), entity.id, "name", entity.display_name, "fixture", NOW
+    )
     storage.add_identifier(identifier)
     storage.add_observation(observation)
     updated = replace(
@@ -106,14 +118,18 @@ def test_entity_update_preserves_identity_creation_date_and_linked_records(
 
     storage.save_entity(updated)
 
-    assert storage.get_entity(entity.id) == replace(updated, created_at=entity.created_at)
+    assert storage.get_entity(entity.id) == replace(
+        updated, created_at=entity.created_at
+    )
     assert storage.get_identifiers(entity.id) == [identifier]
     assert storage.get_observations(entity.id) == [observation]
 
 
 @pytest.mark.parametrize("scheme", ["google_place_id", "siret"])
 def test_identifiers_keep_provenance_without_duplicates(
-    storage: SQLiteStorage, entity: Entity, scheme: str,
+    storage: SQLiteStorage,
+    entity: Entity,
+    scheme: str,
 ) -> None:
     storage.save_entity(entity)
     value = "12345678900012" if scheme == "siret" else "example-place-id"
@@ -129,7 +145,9 @@ def test_identifiers_keep_provenance_without_duplicates(
 
 @pytest.mark.parametrize("source", ["fixture", "sirene"])
 def test_find_entity_by_siret(
-    storage: SQLiteStorage, entity: Entity, source: str,
+    storage: SQLiteStorage,
+    entity: Entity,
+    source: str,
 ) -> None:
     storage.save_entity(entity)
     storage.add_identifier(Identifier(entity.id, "siret", "12345678900012", source))
@@ -141,7 +159,9 @@ def test_find_entity_by_siret(
 
 @pytest.mark.parametrize("source", ["sirene", "another_source"])
 def test_same_siret_cannot_belong_to_two_entities(
-    storage: SQLiteStorage, entity: Entity, source: str,
+    storage: SQLiteStorage,
+    entity: Entity,
+    source: str,
 ) -> None:
     other = replace(entity, id=uuid4(), display_name="Second établissement")
     storage.save_entity(entity)
@@ -149,18 +169,23 @@ def test_same_siret_cannot_belong_to_two_entities(
     identifier = Identifier(entity.id, "siret", "12345678900012", "sirene")
     storage.add_identifier(identifier)
 
-    with pytest.raises(sqlite3.IntegrityError, match="SIRET already belongs to another entity"):
+    with pytest.raises(
+        sqlite3.IntegrityError, match="SIRET already belongs to another entity"
+    ):
         storage.add_identifier(replace(identifier, entity_id=other.id, source=source))
 
     assert storage.find_entity_by_identifier("siret", identifier.value) == entity
     assert storage.get_identifiers(entity.id) == [identifier]
     assert storage.get_identifiers(other.id) == []
-    storage.add_identifier(replace(identifier, entity_id=other.id, value="12345678900013"))
+    storage.add_identifier(
+        replace(identifier, entity_id=other.id, value="12345678900013")
+    )
     assert storage.find_entity_by_identifier("siret", "12345678900013") == other
 
 
 def test_shared_siren_does_not_merge_establishments(
-    storage: SQLiteStorage, entity: Entity,
+    storage: SQLiteStorage,
+    entity: Entity,
 ) -> None:
     other = replace(entity, id=uuid4(), display_name="Second établissement")
     storage.save_entity(entity)
@@ -178,12 +203,16 @@ def test_shared_siren_does_not_merge_establishments(
 
 
 def test_observations_preserve_conflicts_and_reject_overwrites(
-    storage: SQLiteStorage, entity: Entity,
+    storage: SQLiteStorage,
+    entity: Entity,
 ) -> None:
     storage.save_entity(entity)
     first = Observation(uuid4(), entity.id, "name", "Garage du Port", "first", NOW)
     second = replace(
-        first, id=uuid4(), value="Garage de la Mer", source="second",
+        first,
+        id=uuid4(),
+        value="Garage de la Mer",
+        source="second",
         observed_at=NOW + timedelta(hours=1),
     )
     storage.add_observation(second)
@@ -195,11 +224,15 @@ def test_observations_preserve_conflicts_and_reject_overwrites(
     assert storage.get_observations(entity.id) == [first, second]
 
 
-def test_search_can_be_saved_then_completed(storage: SQLiteStorage, search: Search) -> None:
+def test_search_can_be_saved_then_completed(
+    storage: SQLiteStorage, search: Search
+) -> None:
     storage.save_search(search)
     assert storage.get_search(search.id) == search
     completed = replace(
-        search, status=SearchStatus.COMPLETED, completed_at=NOW + timedelta(minutes=5),
+        search,
+        status=SearchStatus.COMPLETED,
+        completed_at=NOW + timedelta(minutes=5),
     )
 
     storage.save_search(completed)
@@ -211,20 +244,26 @@ def test_search_can_be_saved_then_completed(storage: SQLiteStorage, search: Sear
 
 
 def test_search_results_reuse_global_entities_and_preserve_each_source(
-    storage: SQLiteStorage, entity: Entity, search: Search,
+    storage: SQLiteStorage,
+    entity: Entity,
+    search: Search,
 ) -> None:
     other_search = replace(search, id=uuid4())
     storage.save_entity(entity)
     storage.save_search(search)
     storage.save_search(other_search)
     first = SearchResult(search.id, entity.id, "first", NOW)
-    other_source = replace(first, connector="second", discovered_at=NOW + timedelta(minutes=1))
+    other_source = replace(
+        first, connector="second", discovered_at=NOW + timedelta(minutes=1)
+    )
     other_result = replace(first, search_id=other_search.id)
     storage.add_search_result(first)
     storage.add_search_result(other_source)
     storage.add_search_result(other_result)
     storage.add_search_result(replace(first, discovered_at=NOW + timedelta(minutes=2)))
-    updated = replace(entity, display_name="Updated global name", updated_at=NOW + timedelta(hours=1))
+    updated = replace(
+        entity, display_name="Updated global name", updated_at=NOW + timedelta(hours=1)
+    )
     storage.save_entity(updated)
 
     assert storage.get_search_results(search.id) == [first, other_source]
@@ -233,23 +272,33 @@ def test_search_results_reuse_global_entities_and_preserve_each_source(
 
 
 def test_coverage_updates_are_isolated_by_search_and_source(
-    storage: SQLiteStorage, search: Search, coverage: Coverage,
+    storage: SQLiteStorage,
+    search: Search,
+    coverage: Coverage,
 ) -> None:
     other_search = replace(search, id=uuid4())
     storage.save_search(search)
     storage.save_search(other_search)
     other_source = replace(
-        coverage, connector="other", status=CoverageStatus.FAILED,
-        truncated=False, errors=["Source unavailable"],
+        coverage,
+        connector="other",
+        status=CoverageStatus.FAILED,
+        truncated=False,
+        errors=["Source unavailable"],
     )
     other_report = replace(coverage, search_id=other_search.id)
     storage.save_coverage(coverage)
     storage.save_coverage(other_source)
     storage.save_coverage(other_report)
     completed = replace(
-        coverage, status=CoverageStatus.COMPLETE_FOR_SOURCE, pages_processed=3,
-        records_seen=12, entities_created=8, pagination_exhausted=True,
-        truncated=False, errors=[],
+        coverage,
+        status=CoverageStatus.COMPLETE_FOR_SOURCE,
+        pages_processed=3,
+        records_seen=12,
+        entities_created=8,
+        pagination_exhausted=True,
+        truncated=False,
+        errors=[],
     )
 
     storage.save_coverage(completed)
@@ -271,16 +320,23 @@ def test_missing_records_return_none_or_empty_lists(storage: SQLiteStorage) -> N
 
 
 def test_references_must_exist_and_failed_writes_leave_storage_usable(
-    storage: SQLiteStorage, entity: Entity, search: Search, coverage: Coverage,
+    storage: SQLiteStorage,
+    entity: Entity,
+    search: Search,
+    coverage: Coverage,
 ) -> None:
     storage.save_entity(entity)
     storage.save_search(search)
     missing_id = uuid4()
 
     with pytest.raises(sqlite3.IntegrityError):
-        storage.add_identifier(Identifier(missing_id, "siret", "12345678900012", "fixture"))
+        storage.add_identifier(
+            Identifier(missing_id, "siret", "12345678900012", "fixture")
+        )
     with pytest.raises(sqlite3.IntegrityError):
-        storage.add_observation(Observation(uuid4(), missing_id, "name", "Unknown", "fixture", NOW))
+        storage.add_observation(
+            Observation(uuid4(), missing_id, "name", "Unknown", "fixture", NOW)
+        )
     with pytest.raises(sqlite3.IntegrityError):
         storage.add_search_result(SearchResult(search.id, missing_id, "fixture", NOW))
     with pytest.raises(sqlite3.IntegrityError):
@@ -297,7 +353,8 @@ def test_references_must_exist_and_failed_writes_leave_storage_usable(
 
 
 def test_mutated_models_are_validated_before_writing(
-    storage: SQLiteStorage, entity: Entity,
+    storage: SQLiteStorage,
+    entity: Entity,
 ) -> None:
     original = replace(entity)
     storage.save_entity(entity)

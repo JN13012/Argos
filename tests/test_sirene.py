@@ -13,12 +13,14 @@ def api_key(monkeypatch: pytest.MonkeyPatch) -> None:
 def test_search_sends_official_request_and_preserves_json() -> None:
     payload = {
         "header": {"statut": 200, "message": "OK", "total": 1, "nombre": 1},
-        "etablissements": [{
-            "siret": "12345678900012",
-            "siren": "123456789",
-            "adresseEtablissement": {"codeCommuneEtablissement": "13055"},
-            "periodesEtablissement": [{"etatAdministratifEtablissement": "A"}],
-        }],
+        "etablissements": [
+            {
+                "siret": "12345678900012",
+                "siren": "123456789",
+                "adresseEtablissement": {"codeCommuneEtablissement": "13055"},
+                "periodesEtablissement": [{"etatAdministratifEtablissement": "A"}],
+            }
+        ],
     }
 
     def handler(request: httpx.Request) -> httpx.Response:
@@ -48,7 +50,9 @@ def test_valid_empty_page_without_optional_metadata() -> None:
 
 @pytest.mark.parametrize("status", [400, 401, 403, 404, 406, 414, 429, 500, 503])
 def test_http_errors_are_reported(status: int) -> None:
-    transport = httpx.MockTransport(lambda request: httpx.Response(status, text="API error"))
+    transport = httpx.MockTransport(
+        lambda request: httpx.Response(status, text="API error")
+    )
 
     with httpx.Client(transport=transport) as client:
         with pytest.raises(httpx.HTTPStatusError) as raised:
@@ -60,7 +64,8 @@ def test_http_errors_are_reported(status: int) -> None:
 
 @pytest.mark.parametrize("key", [None, "", "   "])
 def test_missing_api_key_prevents_network_call(
-    monkeypatch: pytest.MonkeyPatch, key: str | None,
+    monkeypatch: pytest.MonkeyPatch,
+    key: str | None,
 ) -> None:
     if key is None:
         monkeypatch.delenv("INSEE_API_KEY")
@@ -84,13 +89,21 @@ def test_cursor_can_be_used_for_next_page_and_signals_completion() -> None:
         assert request.url.params["q"] == QUERY
         assert request.url.params["nombre"] == "1"
         assert request.headers["X-INSEE-Api-Key-Integration"] == "test-api-key"
-        return httpx.Response(200, json={
-            "header": {
-                "statut": 200, "total": 1, "nombre": 1 if cursor == "*" else 0,
-                "curseur": cursor, "curseurSuivant": "next+/=",
+        return httpx.Response(
+            200,
+            json={
+                "header": {
+                    "statut": 200,
+                    "total": 1,
+                    "nombre": 1 if cursor == "*" else 0,
+                    "curseur": cursor,
+                    "curseurSuivant": "next+/=",
+                },
+                "etablissements": [{"siret": "12345678900012"}]
+                if cursor == "*"
+                else [],
             },
-            "etablissements": [{"siret": "12345678900012"}] if cursor == "*" else [],
-        })
+        )
 
     with httpx.Client(transport=httpx.MockTransport(handler)) as client:
         connector = SireneConnector(client=client)
@@ -98,7 +111,9 @@ def test_cursor_can_be_used_for_next_page_and_signals_completion() -> None:
         assert first["header"]["total"] == 1
         assert first["header"]["curseur"] != first["header"]["curseurSuivant"]
         last = connector.search_establishments(
-            QUERY, page_size=1, cursor=first["header"]["curseurSuivant"],
+            QUERY,
+            page_size=1,
+            cursor=first["header"]["curseurSuivant"],
         )
 
     assert cursors == ["*", "next+/="]
