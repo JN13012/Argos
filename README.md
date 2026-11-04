@@ -75,18 +75,20 @@ No exploitation, credential attacks or intrusive scripts are in scope. The engin
 ## Architecture
 
 ```mermaid
-flowchart LR
+flowchart TB
   subgraph INTEL["INTEL · OSINT"]
+    direction LR
     CLI[CLI: osint discover] --> SIR[SIRENE connector] --> OBS[(SQLite: observations,<br>source, date)] --> REP[Markdown report]
   end
   subgraph CORE["CORE · shared controls"]
+    direction LR
     MIS[Mission + scope] --> SIG[Ed25519 signed grant] --> POL[Policy decision + audit]
   end
   subgraph ATTACK["ATTACK · pentest P1"]
+    direction LR
     PLAN[Scan planner] --> EXE[Execution manager:<br>limits, revocation] --> NMAP[Nmap, allowlisted] --> EVI[(Evidence store,<br>SHA-256)] --> ADA[Adaptive phase 2] --> REC[Recon report]
   end
-  POL --> PLAN
-  EXE -. recheck grant .-> SIG
+  CORE -- authorizes and rechecks every scan --> ATTACK
 ```
 
 ### The agentic core (designed)
