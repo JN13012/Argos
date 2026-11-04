@@ -18,7 +18,8 @@
 </p>
 
 <p align="center">
-  <a href="docs/presentation/ARGOS-presentation.pdf"><b>Project presentation (PDF, 12 slides, in French)</b></a> ·
+  <a href="docs/presentation/ARGOS-presentation.pdf"><b>Project presentation (PDF, 12 slides)</b></a>
+  (<a href="docs/presentation/ARGOS-presentation-fr.pdf">version française</a>) ·
   <a href="#what-works-today">What works today</a> ·
   <a href="#architecture">Architecture</a> ·
   <a href="#getting-started">Getting started</a>
@@ -35,6 +36,15 @@ ARGOS answers with one platform covering four areas — **OSINT**, **offensive s
 | SME | Managed service provider | Security expert |
 | --- | --- | --- |
 | *"I want to know how to protect myself at the lowest cost."* | *"I want to sell and strengthen my security services."* | *"I want to automate the repetitive work and keep technical control."* |
+
+On the offensive side, ARGOS aims to cover the main fields of a pentest engagement:
+
+| Field | Scope |
+| --- | --- |
+| **Web and API** | Web applications and APIs: discovery, authentication, access control, injections |
+| **Network and infrastructure** | Hosts, exposed services, network segmentation, misconfigurations |
+| **Active Directory** | Enumeration, attack paths, Kerberos and delegation weaknesses |
+| **AI security** | LLM applications and AI agents: prompt injection, jailbreaks, tool abuse, data leakage |
 
 The rule at every stage: **the AI assists, deterministic code decides what is allowed, and a human approves.** Core capabilities keep working without an LLM.
 
@@ -53,9 +63,11 @@ ARGOS is under active development. Each capability below is implemented and cove
 - **Traceability:** every data point keeps its source and collection date, in SQLite.
 - Readable **Markdown reports** stating the scope, the coverage and whether a search was partial.
 
-### ATTACK P1 — authorized reconnaissance engine
+### ATTACK P1 — authorized pentest engine
 
-A pentest engine where ARGOS, not the operator, chooses and runs bounded Nmap scans. Safety is enforced by code, not by prompts:
+The execution framework every offensive tool will run through: ARGOS, not the operator, chooses and runs bounded actions inside a signed mission. **Nmap is the first integrated tool**, for network reconnaissance. Many more will follow for web, infrastructure, Active Directory and AI security testing, each one behind the same mission, allowlist and evidence controls.
+
+Safety is enforced by code, not by prompts:
 
 - **Missions with a signed grant:** a mission has a validity window, explicit target scope and allowed actions. The grant is signed with **Ed25519** and verified before submission, before launch, and about every 250 ms while the scan runs. Revocation or expiry stops the scan.
 - **No shell, no free-form commands:** Nmap options come from an allowlist and run as argument arrays, with time, concurrency and output-size limits.
@@ -64,7 +76,7 @@ A pentest engine where ARGOS, not the operator, chooses and runs bounded Nmap sc
 - **Honest reports:** open ports are observations, never presented as confirmed vulnerabilities. Suggested investigations are hints, not executable actions.
 - **Audit trail** of every policy decision and job event.
 
-No exploitation, credential attacks or intrusive scripts are in scope. The engine is a backend library for now: it is not yet exposed through the API or the web interface. Its [known limitations](docs/product/PENTEST_P135_HARDENING.md#security-limitations-not-production-ready) are documented, and it is not production-ready.
+This first increment does no exploitation, credential attacks or intrusive scripts. The engine is a backend library for now: it is not yet exposed through the API or the web interface. Its [known limitations](docs/product/PENTEST_P135_HARDENING.md#security-limitations-not-production-ready) are documented, and it is not production-ready.
 
 ### Engineering
 
@@ -86,7 +98,7 @@ flowchart TB
   end
   subgraph ATTACK["ATTACK · pentest P1"]
     direction LR
-    PLAN[Scan planner] --> EXE[Execution manager:<br>limits, revocation] --> NMAP[Nmap, allowlisted] --> EVI[(Evidence store,<br>SHA-256)] --> ADA[Adaptive phase 2] --> REC[Recon report]
+    PLAN[Scan planner] --> EXE[Execution manager:<br>limits, revocation] --> NMAP[Tool runner: Nmap today,<br>more tools next] --> EVI[(Evidence store,<br>SHA-256)] --> ADA[Adaptive phase 2] --> REC[Recon report]
   end
   CORE -- authorizes and rechecks every scan --> ATTACK
 ```
@@ -110,12 +122,12 @@ A reliable agent for long security missions needs more than a prompt. The [agent
 | --- | --- | --- |
 | Foundations | Done | Market research, architecture, traceable SIRENE OSINT, reports |
 | ATTACK P1 | Done | Signed missions, bounded Nmap execution, evidence, adaptive recon, CI |
-| Agent V0 | In progress | Agent loop, tools under policy, API and interface connected to the backend, lab tests |
-| Full product | Next | Defensive and GRC, advanced OSINT and threat intelligence, multi-agent, evaluated learning, cloud or local deployment |
+| Agent V0 | In progress | Agent loop, more tools under the same policy, API and interface connected to the backend, lab tests |
+| Full product | Next | Web, infrastructure and Active Directory pentest; AI security for LLM applications and agents; defensive and GRC; advanced OSINT and threat intelligence; multi-agent and evaluated learning; cloud or local deployment |
 
 ## The presentation
 
-The [full deck (PDF, in French)](docs/presentation/ARGOS-presentation.pdf) explains the vision, the agentic design, the market and the business model.
+The [full deck (PDF)](docs/presentation/ARGOS-presentation.pdf) ([version française](docs/presentation/ARGOS-presentation-fr.pdf)) explains the vision, the agentic design, the market and the business model.
 
 <details>
 <summary><b>Browse all 12 slides</b></summary>
@@ -130,7 +142,7 @@ The [full deck (PDF, in French)](docs/presentation/ARGOS-presentation.pdf) expla
 | ![09 Competition](docs/presentation/slides/09.jpg) | ![10 Business plan](docs/presentation/slides/10.jpg) |
 | ![11 Interface mock-up](docs/presentation/slides/11.jpg) | ![12 Closing](docs/presentation/slides/12.jpg) |
 
-The interface on slide 11 is a design mock-up; the web application in this repository does not show these screens yet.
+The interface on slide 11 is a design mock-up (in French); the web application in this repository does not show these screens yet.
 
 </details>
 
